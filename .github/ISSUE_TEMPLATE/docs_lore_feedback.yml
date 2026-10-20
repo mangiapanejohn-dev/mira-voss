@@ -1,0 +1,24 @@
+name: Docs or lore feedback
+description: Report broken docs, confusing wording, or an established-canon inconsistency
+title: "docs: "
+labels: [documentation]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options: [Documentation, Story continuity, Image / identity consistency, Accessibility, Broken link]
+    validations:
+      required: true
+  - type: input
+    id: reference
+    attributes:
+      label: Page or file
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What should be corrected?
+    validations:
+      required: true

@@ -1,0 +1,47 @@
+name: CLI bug report
+description: Report a reproducible installation or runtime problem (do not share secrets)
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not submit API keys, tokens, credentials, local private files, or secrets. Redact logs before attaching."
+  - type: input
+    id: version
+    attributes:
+      label: Mira version
+      placeholder: "e.g., 1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: OS
+      options: [macOS, Windows, Linux, Other]
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Node.js / npm version
+      placeholder: "node -v / npm -v"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. ... 2. ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Redacted logs (optional)
+      description: Remove credentials, usernames, file paths, and personal data.
