@@ -272,8 +272,10 @@
 .install-command { display: flex; align-items: stretch; max-width: 560px; margin: 28px 0 22px; border: 1px solid var(--gold-deep); background: rgba(1, 10, 19, .85); }
 .install-command code { flex: 1; padding: 18px 20px; overflow-x: auto; font-size: 16px; white-space: nowrap; }
 .install-command code::before { content: '$ '; color: var(--gold-deep); }
-.copy-button { min-width: 96px; padding: 0 18px; border-left: 1px solid var(--gold-deep); color: var(--gold); font: 700 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; transition: background-color .3s, color .3s; }
-.copy-button:hover { background: rgba(200, 170, 110, .12); color: var(--gold-pale); }
+.copy-button { position: relative; isolation: isolate; overflow: hidden; min-width: 96px; padding: 0 18px; border-left: 1px solid var(--gold-deep); color: var(--gold); font: 700 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; transition: color .4s ease .05s; }
+.copy-button::before { content: ''; position: absolute; z-index: -1; left: -15%; right: -15%; bottom: 0; height: 150%; background: var(--gold); border-radius: 50% 50% 0 0 / 20% 20% 0 0; transform: translateY(101%); transition: transform .6s cubic-bezier(.22, 1, .36, 1); }
+.copy-button:hover::before, .copy-button:focus-visible::before { transform: none; }
+.copy-button:hover, .copy-button:focus-visible { color: #0a1428; }
 
 /* Abilities, laid out as on a champion page: tabs on the left, a framed plate on the right,
    the ability's name and text centred under the plate. Tabs play through on their own. */

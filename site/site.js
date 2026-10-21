@@ -374,4 +374,12 @@
     $$('[data-art-prev]', group).forEach(b => b.addEventListener('click', () => step(-1)));
     $$('[data-art-next]', group).forEach(b => b.addEventListener('click', () => step(1)));
   });
+  /* ---------- A soft light follows the pointer across gold buttons ---------- */
+  if (!reduced) document.addEventListener('pointermove', e => {
+    const b = e.target.closest && e.target.closest('.btn-gold');
+    if (!b) return;
+    const r = b.getBoundingClientRect();
+    b.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    b.style.setProperty('--my', `${e.clientY - r.top}px`);
+  }, { passive: true });
 })();

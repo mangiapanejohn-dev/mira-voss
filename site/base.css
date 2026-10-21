@@ -109,25 +109,40 @@ p { margin: 0 0 1.1em; }
 .menu-open .menu a { opacity: 1; transform: none; transition-delay: calc(.18s + var(--i) * .06s); }
 .menu-open { overflow: hidden; }
 
-/* ---------- Buttons: the League CTA ----------
-   Primary: flat gold, navy text, a 1px ornamental frame 3px outside. Secondary: a gold outline.
-   Colour changes are quick (.25s / .3s ease-in-out), as on leagueoflegends.com. */
-.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 36px; color: var(--gold-pale); font: 600 15px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; background: rgba(1, 10, 19, .35); border: 1px solid var(--gold); transition: color .25s ease-in-out, background-color .3s ease-in-out, border-color .3s ease-in-out; }
-.btn:hover { color: #0a1428; background-color: var(--gold); }
-.btn svg { width: 18px; height: 18px; flex: none; transition: transform .3s ease-in-out; }
-.btn:hover svg { transform: translateX(3px); }
-.btn-gold { color: #0a1428; background-color: var(--gold); border-color: var(--gold); outline: 1px solid rgba(240, 230, 210, .75); outline-offset: 3px; transition: color .25s ease-in-out, background-color .3s ease-in-out, outline-color .3s ease-in-out; }
-.btn-gold:hover { color: #0a1428; background-color: #d3bb8b; border-color: #d3bb8b; outline-color: #fff; }
-.btn:focus-visible { outline: 2px solid #fff; outline-offset: 5px; }
+/* ---------- Buttons: the League CTA, with Mira's tide ----------
+   Primary: flat gold, navy text, a 1px ornamental frame 3px outside. On hover the frame
+   breathes outward, a soft light follows the pointer and the arrow passes through.
+   Secondary: a gold outline that fills from below like a rising tide, with a curved
+   waterline, and drains when the pointer leaves. */
+.btn { --rise: cubic-bezier(.22, 1, .36, 1); position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 36px; color: var(--gold-pale); font: 600 15px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; background: rgba(1, 10, 19, .35); border: 1px solid var(--gold); transition: color .4s ease .05s, border-color .4s ease, transform .2s ease; -webkit-tap-highlight-color: transparent; }
+.btn::before { content: ''; position: absolute; z-index: -1; left: -12%; right: -12%; bottom: 0; height: 150%; background: var(--gold); border-radius: 50% 50% 0 0 / 18% 18% 0 0; transform: translateY(101%); transition: transform .65s var(--rise); }
+.btn:hover::before, .btn:focus-visible::before { transform: translateY(0); }
+.btn:hover, .btn:focus-visible { color: #0a1428; }
+.btn:active { transform: translateY(1px) scale(.985); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn:hover svg, .btn:focus-visible svg { animation: arrow-pass .55s var(--rise); }
+@keyframes arrow-pass { 0% { transform: none; opacity: 1; } 42% { transform: translateX(14px); opacity: 0; } 43% { transform: translateX(-14px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+
+.btn-gold { color: #0a1428; background-color: var(--gold); border-color: var(--gold); outline: 1px solid rgba(240, 230, 210, .7); outline-offset: 3px; transition: color .3s ease, background-color .45s ease, border-color .45s ease, outline-color .45s ease, outline-offset .55s var(--rise), box-shadow .55s ease, transform .2s ease; }
+.btn-gold::before { inset: 0; height: auto; border-radius: 0; transform: none; opacity: 0; background: radial-gradient(180px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 250, 236, .6), rgba(255, 250, 236, 0) 70%); transition: opacity .45s ease; }
+.btn-gold:hover, .btn-gold:focus-visible { color: #0a1428; background-color: #d9c18f; border-color: #d9c18f; outline-color: #fff; outline-offset: 6px; box-shadow: 0 10px 28px -12px rgba(214, 180, 112, .65); }
+.btn-gold:hover::before, .btn-gold:focus-visible::before { opacity: 1; transform: none; }
+.btn:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
 .btn-small { min-height: 38px; padding: 0 18px; font-size: 13px; letter-spacing: .06em; border-radius: 4px; }
-.btn-row { display: flex; flex-wrap: wrap; gap: 18px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 20px; }
 .blade-light .btn { color: #0a1428; background: transparent; }
-.blade-light .btn:hover { background: #0a1428; color: #fff; border-color: #0a1428; }
-.blade-light .btn-gold { background: var(--gold); outline-color: rgba(10, 20, 40, .35); }
-.text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold); font: 600 13px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; transition: color .25s ease-in-out; }
-.text-link svg { width: 16px; height: 16px; transition: transform .3s ease-in-out; }
-.text-link:hover svg { transform: translateX(3px); }
-.text-link:hover { color: #d3bb8b; }
+.blade-light .btn::before { background: #0a1428; }
+.blade-light .btn:hover, .blade-light .btn:focus-visible { color: #fff; }
+.blade-light .btn-gold { background-color: var(--gold); outline-color: rgba(10, 20, 40, .35); }
+.blade-light .btn-gold:hover { color: #0a1428; outline-color: #0a1428; }
+
+/* Text links: the nav's underline, drawn in from the left */
+.text-link { position: relative; display: inline-flex; align-items: center; gap: 8px; padding-bottom: 4px; color: var(--gold); font: 600 13px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; transition: color .35s ease; }
+.text-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, currentColor 70%, rgba(200, 170, 110, 0)); transform: scaleX(0); transform-origin: right center; transition: transform .5s cubic-bezier(.22, 1, .36, 1); }
+.text-link:hover::after, .text-link:focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+.text-link svg { width: 16px; height: 16px; transition: transform .45s cubic-bezier(.22, 1, .36, 1); }
+.text-link:hover svg, .text-link:focus-visible svg { transform: translateX(4px); }
+.text-link:hover { color: #e9d7a8; }
 
 /* Inline meta separated by 4px gold diamonds, the champion page's separator */
 .diamonds { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 0; padding: 0; list-style: none; }
