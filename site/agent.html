@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" class="no-js" data-theme="night">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#010a13" />
+  <title>The Agent — Mira Voss</title>
+  <meta name="description" content="Mira Voss is a closed-source terminal agent distributed on npm. What she does in your project, how to install her, and how to start." />
+  <link rel="canonical" href="https://mangiapanejohn-dev.github.io/mira-voss/agent.html" />
+  <meta property="og:title" content="The Agent — Mira Voss" />
+  <meta property="og:image" content="https://mangiapanejohn-dev.github.io/mira-voss/assets/mira-rovell-splash-v2.png" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;1,700;1,800&family=Source+Sans+3:wght@400;600;700&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="pages.css" />
+  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}}catch(e){}})(document.documentElement)</script>
+  <script src="data/library.js" defer></script>
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-out" viewBox="0 0 24 24"><path d="M8 5h11v11M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-ask" viewBox="0 0 32 32"><path d="M5 5h22v16H15l-6 6v-6H5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13 11a3 3 0 1 1 4.5 2.6c-.9.5-1.5 1-1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="18.4" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-read" viewBox="0 0 32 32"><path d="M3 7c5-1.6 9-1 13 2 4-3 8-3.6 13-2v18c-5-1.6-9-1-13 2-4-3-8-3.6-13-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 9v18" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 32 32"><path d="M21 4l7 7L12 27H5v-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 8l7 7" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-run" viewBox="0 0 32 32"><rect x="3" y="5" width="26" height="22" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12l5 4-5 4M15 21h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-report" viewBox="0 0 32 32"><path d="M7 3h13l6 6v20H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 17l3.5 3.5L22 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Mira Voss, home"><img src="assets/mira-logo-cutout.webp" alt="" width="42" height="35" /><span>Mira Voss</span></a>
+    <nav class="topnav" aria-label="Main">
+      <a href="mira.html">Mira</a>
+      <a href="stories.html">Stories</a>
+      <a href="world.html">Rovelle</a>
+      <a href="agent.html" aria-current="page">The Agent</a>
+    </nav>
+    <a class="btn btn-small" href="#install">Install</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span><span></span></button>
+  </header>
+  <nav class="menu" id="menu" aria-label="Main">
+    <a href="index.html"><small>Start</small>Home</a>
+    <a href="mira.html"><small>Her life</small>Mira</a>
+    <a href="stories.html"><small>Read</small>Stories</a>
+    <a href="world.html"><small>The world</small>Rovelle</a>
+    <a href="agent.html"><small>Install</small>The Agent</a>
+  </nav>
+
+  <main id="main">
+    <section class="masthead page-head agent-head" data-masthead id="install" aria-labelledby="page-title">
+      <div class="masthead-art" aria-hidden="true"><img class="halftone" src="assets/mira-logo-cutout.webp" alt="" fetchpriority="high" /></div>
+      <div class="masthead-shade" aria-hidden="true"></div>
+      <div class="halftone-field" style="--size: 86vmin; right: -6vmin; top: 4%; --op: .14" aria-hidden="true"></div>
+      <div class="masthead-body">
+        <p class="supertitle intro" style="--d: 0">The terminal agent · npm v1.0.0</p>
+        <h1 class="page-title champion-name misreg" id="page-title" data-text="Mira, at work" aria-label="Mira, at work"><span data-letters aria-hidden="true">Mira, at work</span></h1>
+        <p class="masthead-bio intro" style="--d: 3">Mira Voss is also a terminal agent you install from npm. Start her in a folder and she works there: she reads, edits, runs commands and shows you what she has done, within her configuration and the permissions you give her.</p>
+        <div class="install-command intro" style="--d: 4">
+          <code id="npm-command">npm install -g mira-voss</code>
+          <button class="copy-button" type="button" data-copy="#npm-command"><span data-copy-label>Copy</span></button>
+        </div>
+        <div class="btn-row intro" style="--d: 5">
+          <a class="btn btn-gold" href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/install.md">Installation guide <svg aria-hidden="true"><use href="#i-out" /></svg></a>
+          <a class="btn" href="https://www.npmjs.com/package/mira-voss">View on npm <svg aria-hidden="true"><use href="#i-out" /></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="blade" aria-labelledby="abilities-title">
+      <div class="atmos atmos-ember" aria-hidden="true"></div>
+      <div class="blade-inner abilities">
+        <div data-tabs data-abilities>
+          <p class="supertitle reveal">In your project</p>
+          <h2 class="blade-title misreg" id="abilities-title" data-text="Abilities">Abilities</h2>
+          <div style="height: 40px"></div>
+          <div class="ability-keys reveal" role="tablist" aria-label="Abilities">
+            <button class="ability-key" role="tab" id="key-p" aria-controls="ability-panel" aria-selected="true" data-key="p" data-slot="Passive" data-name="Asks before she changes things"><svg aria-hidden="true"><use href="#i-ask" /></svg><span class="key-letter">P</span></button>
+            <button class="ability-key" role="tab" id="key-q" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="q" data-slot="Q" data-name="Reads the project"><svg aria-hidden="true"><use href="#i-read" /></svg><span class="key-letter">Q</span></button>
+            <button class="ability-key" role="tab" id="key-w" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="w" data-slot="W" data-name="Edits files"><svg aria-hidden="true"><use href="#i-edit" /></svg><span class="key-letter">W</span></button>
+            <button class="ability-key" role="tab" id="key-e" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="e" data-slot="E" data-name="Runs commands"><svg aria-hidden="true"><use href="#i-run" /></svg><span class="key-letter">E</span></button>
+            <button class="ability-key" role="tab" id="key-r" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="r" data-slot="Ultimate" data-name="Shows her work"><svg aria-hidden="true"><use href="#i-report" /></svg><span class="key-letter">R</span></button>
+          </div>
+          <div class="ability-panel reveal" id="ability-panel" role="tabpanel" aria-labelledby="key-p" data-ability-panel>
+            <span data-key aria-hidden="true">P</span>
+            <span class="label" data-slot>Passive</span>
+            <h3 data-name>Asks before she changes things</h3>
+            <p data-text>In the default mode, Mira asks for your approval before she makes changes to your project. You read each request and decide.</p>
+          </div>
+          <template data-for="p">In the default mode, Mira asks for your approval before she makes changes to your project. You read each request and decide.</template>
+          <template data-for="q">Start <code>mira</code> in a folder and she can read the files there, so she works from what your project actually contains.</template>
+          <template data-for="w">She makes the edits a task needs directly in your files, instead of handing you snippets to paste.</template>
+          <template data-for="e">She runs terminal commands, such as builds, tests and scripts, and reads what they print.</template>
+          <template data-for="r">She shows you what she has done, so you can check her work before you rely on it.</template>
+        </div>
+        <aside class="install-card frame reveal" aria-labelledby="fiction-title">
+          <div class="frame-inner">
+            <span class="label">Product and fiction</span>
+            <h3 id="fiction-title" style="margin-top: 10px">The story is not the spec</h3>
+            <p style="margin-top: 16px">The stories give Mira a face and a voice. They do not describe the software. No line of fiction grants a permission, bypasses a review, guarantees a result, or tells you which model is running. What the CLI does is defined by its code, its model and provider, your configuration and the permissions you set.</p>
+            <a class="text-link" href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/product-vs-fiction.md">Product vs. fiction <svg aria-hidden="true"><use href="#i-out" /></svg></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="blade blade-dark" aria-labelledby="start-title">
+      <div class="atmos atmos-lights" aria-hidden="true"></div>
+      <div class="blade-inner">
+        <div class="blade-head">
+          <p class="supertitle reveal">First launch</p>
+          <h2 class="blade-title misreg" id="start-title" data-text="Getting started">Getting started</h2>
+        </div>
+        <ol class="steps" data-stagger>
+          <li class="reveal"><h3>Install</h3><p>Use Node.js 22 or newer, then run <code>npm install -g mira-voss</code>.</p></li>
+          <li class="reveal"><h3>Start her</h3><p>Open a terminal in the folder you want to work in and run <code>mira</code>. <code>mobius</code> works too.</p></li>
+          <li class="reveal"><h3>Sign in</h3><p>Follow the prompts. The <a class="text-link" href="https://www.npmjs.com/package/mira-voss">npm page</a> lists the current account and API-key options.</p></li>
+          <li class="reveal"><h3>Start small</h3><p>Give her a bounded task first. In the default mode, read each permission request before you accept it.</p></li>
+          <li class="reveal"><h3>If something fails</h3><p>Run <code>mira doctor</code>. Remove private paths and keys before you report a problem.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="blade" aria-labelledby="faq-title">
+      <div class="atmos atmos-storm" aria-hidden="true"></div>
+      <div class="blade-inner">
+        <div class="blade-head">
+          <p class="supertitle reveal">Questions</p>
+          <h2 class="blade-title misreg" id="faq-title" data-text="FAQ">FAQ</h2>
+        </div>
+        <div class="faq reveal">
+          <details><summary>Is Mira open source?</summary><div class="answer"><p>No. The CLI runtime is proprietary. The public GitHub repository hosts documentation, the stories, her visual identity and this website, not the CLI's implementation.</p></div></details>
+          <details><summary>How do I install or update her?</summary><div class="answer"><p><code>npm install -g mira-voss</code> installs her, and <code>npm install -g mira-voss@latest</code> updates. If <code>mira</code> is not found afterwards, check that npm's global directory is on your <code>PATH</code>. See the <a href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/install.md">installation guide</a>.</p></div></details>
+          <details><summary>Which platforms are supported?</summary><div class="answer"><p>The optional prebuilt kernel used for ChatGPT plan sign-in ships for macOS on Apple silicon in this release. The <a href="https://www.npmjs.com/package/mira-voss">npm package page</a> describes the other sign-in options and current platform details.</p></div></details>
+          <details><summary>Why does a terminal agent have a backstory?</summary><div class="answer"><p>The character gives the product its visual and narrative identity. She is not a claim about the software's consciousness, autonomy, capabilities or security.</p></div></details>
+          <details><summary>Is MØBIUS a city?</summary><div class="answer"><p>No. Rovelle is Mira's hometown. MØBIUS is the research station in the north where she works after the first book. Earlier drafts that used MØBIUS as a city are not canon.</p></div></details>
+          <details><summary>Where do I report a problem?</summary><div class="answer"><p>Use the <a href="https://github.com/mangiapanejohn-dev/mira-voss/issues/new/choose">issue templates</a> on GitHub. Include your OS, Node.js and Mira versions, and redact credentials and private paths. Security issues go through <a href="https://github.com/mangiapanejohn-dev/mira-voss/security/advisories/new">private vulnerability reporting</a>.</p></div></details>
+          <details><summary>May I reuse the art or the stories?</summary><div class="answer"><p>Not automatically. Public visibility does not grant permission to republish or commercially reuse them. See the <a href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/NOTICE.md">notice</a>.</p></div></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="64" height="53" loading="lazy" /><span>Mira Voss</span></a>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a>
+        <a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
+      </nav>
+      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime.<br />© 2026 Mira Voss project. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

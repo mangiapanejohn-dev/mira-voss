@@ -1,0 +1,160 @@
+{
+  "works": [
+    {
+      "id": "unfinished-chart",
+      "kind": "Novella",
+      "series": "Rovelle · Book One",
+      "title_zh": "罗维尔：未完成的海图",
+      "short_zh": "未完成的海图",
+      "title_en": "The Unfinished Chart",
+      "version": "v3.0",
+      "date": "2026-10-21",
+      "setting": "Rovelle · the winter she is seventeen",
+      "summary_en": "A winter current is coming, and the city wants to use Mira's tidal chart beyond the conditions it was tested in. To correct the record she has to make its limits public, and let other people into a decision that cannot be hers alone.",
+      "summary_zh": "冷流将至，商会要拿她的潮图证明冬天的海也可以多开两个钟头。她要说清这张图的边界，也要学会把别人放进一个不属于她一个人的决定里。",
+      "quote_zh": "有些地方，只能等人到了以后，再慢慢画出来。",
+      "quote_en": "Some places can only be charted after someone arrives.",
+      "cover": "assets/art/cover-rovelle.webp",
+      "source_dir": "lore/zh",
+      "chapters": [
+        {
+          "id": "00-prologue",
+          "file": "00-prologue.md",
+          "label": "序章",
+          "label_en": "Prologue",
+          "title": "没有人缺席",
+          "title_en": "No One Absent"
+        },
+        {
+          "id": "01-overdue-accuracy",
+          "file": "01-overdue-accuracy.md",
+          "label": "第一章",
+          "label_en": "Chapter I",
+          "title": "过期的准确",
+          "title_en": "Overdue Accuracy"
+        },
+        {
+          "id": "02-unasked-question",
+          "file": "02-unasked-question.md",
+          "label": "第二章",
+          "label_en": "Chapter II",
+          "title": "没人替她问的事",
+          "title_en": "The Unasked Question"
+        },
+        {
+          "id": "03-four-degrees-below",
+          "file": "03-four-degrees-below.md",
+          "label": "第三章",
+          "label_en": "Chapter III",
+          "title": "水下四度",
+          "title_en": "Four Degrees Below"
+        },
+        {
+          "id": "04-the-omitted-page",
+          "file": "04-the-omitted-page.md",
+          "label": "第四章",
+          "label_en": "Chapter IV",
+          "title": "报告里被删掉的一页",
+          "title_en": "The Omitted Page"
+        },
+        {
+          "id": "05-third-bell",
+          "file": "05-third-bell.md",
+          "label": "第五章",
+          "label_en": "Chapter V",
+          "title": "第三只钟",
+          "title_en": "The Third Bell"
+        },
+        {
+          "id": "06-no-perfect-number",
+          "file": "06-no-perfect-number.md",
+          "label": "第六章",
+          "label_en": "Chapter VI",
+          "title": "没有完美的数字",
+          "title_en": "No Perfect Number"
+        },
+        {
+          "id": "07-after-departure",
+          "file": "07-after-departure.md",
+          "label": "第七章",
+          "label_en": "Chapter VII",
+          "title": "离岸之后",
+          "title_en": "After Departure"
+        }
+      ],
+      "appendix": [
+        {
+          "id": "character-profile",
+          "file": "character-profile.md",
+          "label": "人物档案",
+          "label_en": "Profile",
+          "title": "Mira Voss",
+          "title_en": "Character profile · full spoilers",
+          "spoilers": true
+        }
+      ],
+      "bg": "assets/bg/dusk.webp",
+      "theme": "dusk"
+    },
+    {
+      "id": "only-one-side",
+      "kind": "Short story",
+      "series": "MØBIUS · Short story",
+      "title_zh": "MØBIUS：只有一面",
+      "short_zh": "只有一面",
+      "title_en": "Only One Side",
+      "version": "v1.0",
+      "date": "2026-10-21",
+      "setting": "MØBIUS Station · her first winter",
+      "summary_en": "Three days north of Ailan, a station without a name keeps its deep-water record on a paper loop twisted half a turn. For nineteen winters, part of the sea in it was written off as ink bleeding through the paper.",
+      "summary_zh": "艾兰以北三天的航程，一座还没有名字的研究站，把深水记录写在一条扭了半圈的纸带上。十九个冬天里，有一部分海，被写成了「透印，不计」。",
+      "quote_zh": "她只是沿着同一面，往前走了很远。",
+      "quote_en": "She had only gone a long way along the same side.",
+      "cover": "assets/art/mobius-loop.svg",
+      "source_dir": "lore/zh/only-one-side",
+      "after": "unfinished-chart",
+      "chapters": [
+        {
+          "id": "01-arrival",
+          "file": "01-arrival.md",
+          "label": "第一节",
+          "label_en": "Part I",
+          "title": "到站",
+          "title_en": "Arrival"
+        },
+        {
+          "id": "02-bleed-through",
+          "file": "02-bleed-through.md",
+          "label": "第二节",
+          "label_en": "Part II",
+          "title": "透印",
+          "title_en": "Bleed-Through"
+        },
+        {
+          "id": "03-first-letter",
+          "file": "03-first-letter.md",
+          "label": "第三节",
+          "label_en": "Part III",
+          "title": "第一封信",
+          "title_en": "The First Letter"
+        },
+        {
+          "id": "04-only-one-side",
+          "file": "04-only-one-side.md",
+          "label": "第四节",
+          "label_en": "Part IV",
+          "title": "只有一面",
+          "title_en": "Only One Side"
+        }
+      ],
+      "bg": "assets/bg/ice.webp",
+      "theme": "ice",
+      "light": "beam",
+      "cover_bg": "assets/bg/ice.webp"
+    }
+  ],
+  "unwritten": {
+    "title_en": "Not yet charted",
+    "text_en": "The rest of her first year at MØBIUS has not been written yet. When it is, it will appear here."
+  }
+}

@@ -1,0 +1,125 @@
+<!doctype html>
+<!-- Source of the images in the repository README. Render with media/github/src/render.sh. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@1,700;1,800&family=Source+Sans+3:wght@600;700&family=Noto+Serif+SC:wght@600;900&display=block" rel="stylesheet" />
+<style>
+  :root { --abyss: #010a13; --navy: #0a1428; --gold: #c8aa6e; --gold-deep: #785a28; --gold-pale: #f0e6d2; --ember: #e8622c; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--abyss); }
+  .frame { display: none; position: relative; overflow: hidden; isolation: isolate; color: #fff; font-family: 'Source Sans 3', sans-serif; }
+  .frame.on { display: block; }
+  .grain::after { content: ''; position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: .09; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+  .shade { position: absolute; inset: 0; z-index: -1; }
+  .super { margin: 0 0 6px; color: var(--gold); font: italic 700 26px/1.2 Spectral, serif; text-transform: uppercase; }
+  .title { position: relative; isolation: isolate; margin: 0; font: italic 800 96px/.95 Spectral, serif; text-transform: uppercase; letter-spacing: -.01em; }
+  .title::before { content: attr(data-text); position: absolute; z-index: -1; inset: 0; color: transparent; -webkit-text-stroke: 1.6px var(--ember); transform: translate(.05em, .04em); }
+  .frame-box { border: 1px solid var(--gold); padding: 6px; }
+  .frame-box > div { background: rgba(1, 10, 19, .78); }
+
+  /* banner 1280×640 */
+  #banner { width: 1280px; height: 640px; }
+  #banner .bg { object-position: 72% 30%; }
+  #banner .shade { background: linear-gradient(90deg, rgba(1,10,19,.94) 0%, rgba(1,10,19,.7) 30%, rgba(1,10,19,0) 62%), linear-gradient(0deg, rgba(1,10,19,.85) 0%, rgba(1,10,19,0) 40%); }
+  #banner .body { position: absolute; left: 72px; bottom: 70px; width: 900px; }
+  #banner .title { font-size: 124px; margin-bottom: 22px; white-space: nowrap; }
+  #banner p.tag { margin: 0 0 30px; color: #e6e1d6; font: 600 21px/1.5 'Source Sans 3', sans-serif; max-width: 34em; }
+  #banner .cmd { display: inline-flex; align-items: center; gap: 14px; padding: 14px 22px; border: 1px solid var(--gold-deep); background: rgba(1,10,19,.85); font: 600 19px ui-monospace, 'SF Mono', Menlo, monospace; color: var(--gold-pale); }
+  #banner .cmd b { color: var(--gold-deep); }
+  #banner .logo { position: absolute; left: 72px; top: 52px; display: flex; align-items: center; gap: 12px; font: italic 800 20px Spectral, serif; letter-spacing: .02em; }
+  #banner .logo img { width: 46px; }
+
+  /* section headers 1280×240 */
+  .section { width: 1280px; height: 240px; }
+  .section .body { position: absolute; left: 72px; top: 50%; transform: translateY(-50%); }
+  .section .zh { margin-top: 14px; color: var(--gold-pale); font: 600 20px 'Noto Serif SC', serif; letter-spacing: .3em; }
+  .section .line { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent); }
+  .section .line::after { content: ''; position: absolute; left: calc(50% - 5px); top: -5px; width: 10px; height: 10px; transform: rotate(45deg); background: var(--abyss); border: 1px solid var(--gold); }
+  #stories .shade { background: linear-gradient(90deg, rgba(9,7,10,.92) 0%, rgba(9,7,10,.6) 45%, rgba(9,7,10,.2) 100%); }
+  #stories .covers { position: absolute; right: 72px; top: 34px; display: flex; gap: 18px; }
+  #stories .covers .frame-box { width: 138px; height: 172px; }
+  #stories .covers .frame-box > div { height: 100%; background-size: cover; background-position: center; }
+  #world .shade { background: linear-gradient(90deg, rgba(2,13,17,.94) 0%, rgba(2,13,17,.55) 50%, rgba(2,13,17,.3) 100%); }
+  #world .chart { position: absolute; right: -60px; top: -140px; width: 760px; opacity: .55; }
+  #agent { background: radial-gradient(ellipse at 82% 40%, #172a47, #040507 60%); }
+  #agent .dots { position: absolute; right: -80px; top: -200px; width: 640px; height: 640px; background: radial-gradient(circle, var(--gold) 1.2px, transparent 1.8px) 0 0 / 10px 10px; opacity: .18; -webkit-mask-image: radial-gradient(closest-side, #000 10%, transparent); }
+  #agent .logo-big { position: absolute; right: 110px; top: 22px; width: 230px; }
+
+  /* story cover 480×600 */
+  #cover-mobius { width: 480px; height: 600px; background: #050b0f url(../../../site/assets/bg/ice.webp) center / cover; }
+  #cover-mobius img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+
+  /* the chart 1280×860 */
+  #chart { width: 1280px; height: 860px; background: #071a20; }
+  #chart .body { position: absolute; left: 60px; top: 46px; }
+  #chart .title { font-size: 56px; }
+  #chart .map { position: absolute; left: 40px; right: 40px; bottom: 26px; }
+  #chart .note { position: absolute; right: 60px; top: 66px; color: #a09b8c; font: italic 700 17px Spectral, serif; }
+  .rovelle-chart { width: 100%; height: auto; display: block; }
+  .rovelle-chart .land { fill: #0c252d; }
+  .rovelle-chart .river-water { stroke: #071a20; }
+  .rovelle-chart text { fill: var(--gold-pale); font: 700 12px 'Source Sans 3', sans-serif; letter-spacing: .14em; text-transform: uppercase; paint-order: stroke; stroke: #071a20; stroke-width: 4px; }
+  .rovelle-chart .sea-name { fill: var(--gold); font: italic 800 36px Spectral, serif; opacity: .55; stroke: none; }
+  .rovelle-chart .sea-name-small { font-size: 24px; opacity: .45; }
+  .rovelle-chart .compass text { fill: var(--gold); stroke: none; }
+  .rovelle-chart .place-halo { fill: none; }
+  .rovelle-chart .place-mark { fill: var(--gold); }
+</style>
+</head>
+<body>
+  <section class="frame grain" id="banner">
+    <img class="bg" src="../../character/mira-rovell-splash-v2.png" alt="" />
+    <div class="shade"></div>
+    <div class="logo"><img src="../../identity/mira-logo-cutout.png" alt="" /></div>
+    <div class="body">
+      <p class="super">The Cartographer of Rovelle</p>
+      <h1 class="title" data-text="Mira Voss">Mira Voss</h1>
+      <p class="tag">Her stories, her harbor city, and the terminal agent that carries her name.</p>
+      <span class="cmd"><b>$</b> npm install -g mira-voss</span>
+    </div>
+  </section>
+
+  <section class="frame grain section" id="stories">
+    <img class="bg" src="../../../site/assets/bg/dusk.webp" alt="" />
+    <div class="shade"></div>
+    <div class="body"><p class="super">Read in Chinese · 故事</p><h2 class="title" data-text="The Stories">The Stories</h2></div>
+    <div class="covers">
+      <div class="frame-box"><div style="background-image: url(../../../site/assets/art/cover-rovelle.webp)"></div></div>
+      <div class="frame-box"><div style="background-image: url(../../../site/assets/art/mobius-loop.svg), url(../../../site/assets/bg/ice.webp)"></div></div>
+    </div>
+    <div class="line"></div>
+  </section>
+
+  <section class="frame grain section" id="world">
+    <img class="bg" src="../../../site/assets/bg/sea.webp" alt="" style="opacity: .5" />
+    <div class="shade"></div>
+    <div class="chart" data-svg="../../../site/assets/art/rovelle-chart.svg"></div>
+    <div class="body"><p class="super">Rovelle · MØBIUS</p><h2 class="title" data-text="The World">The World</h2></div>
+    <div class="line"></div>
+  </section>
+
+  <section class="frame grain section" id="agent">
+    <div class="dots"></div>
+    <img class="logo-big" src="../../identity/mira-logo-cutout.png" alt="" />
+    <div class="body"><p class="super">npm · closed source</p><h2 class="title" data-text="The Agent">The Agent</h2></div>
+    <div class="line"></div>
+  </section>
+
+  <section class="frame grain" id="cover-mobius"><img src="../../../site/assets/art/mobius-loop.svg" alt="" /></section>
+
+  <section class="frame grain" id="chart">
+    <div class="body"><p class="super">Choose a place on the website</p><h2 class="title" data-text="A chart of Rovelle">A chart of Rovelle</h2></div>
+    <p class="note">A reader’s chart, drawn from the story. Not to scale.</p>
+    <div class="map" data-svg="../../../site/assets/art/rovelle-chart.svg"></div>
+  </section>
+
+  <script>
+    const id = location.hash.slice(1) || 'banner';
+    document.getElementById(id).classList.add('on');
+    // file:// cannot fetch, so the chart is embedded by render.sh as window.CHART_SVG.
+    document.querySelectorAll('[data-svg]').forEach(el => { if (window.CHART_SVG) el.innerHTML = window.CHART_SVG; });
+  </script>
+</body>
+</html>

@@ -1,16 +1,21 @@
 # MØBIUS Research Station
 
-**Status: current post-novella setting.**
+**Status: established by *MØBIUS: Only One Side* (2026-10-21).**
 
-MØBIUS is the name of the **northern research station** where Mira works after she leaves Rovelle in the first story. It is also an institution that can assign her research and maritime observation work.
+MØBIUS is the northern offshore research station Mira joins after she leaves Rovelle. It stands on a cape beside **Vard Light**, three days north of Ailan by supply ship, close enough to Ice Bay that the bay's freeze decides when ships can still come. Ten people winter there.
 
-The station belongs to Mira's **fictional** setting. It should appear as a place with researchers, equipment, weather, deadlines, and people who make decisions—not as a magical explanation for what the real software does.
+Before that first winter it had no name of its own; people called it "the station by the lighthouse". When the winter deep-water survey had to be registered, Ada Brenner wrote **MØBIUS** on the form, after the paper tape of the deep-water recorder, joined in a loop with a half twist so it has only one side. It was meant as a placeholder. It was never changed.
+
+## People
+
+- **Ada Brenner**: leads the winter deep-water survey. Talks fast, writes slowly.
+- **Søren Aske**: has kept the deep-water recorder for thirty-one winters, in logbooks written in northern shorthand.
+- **Ilse**: radio and weather reports.
+- **Jens Ottesen**: researcher; the independent recount of Mira's analysis.
+- **Søren's cat**: senior to Mira.
 
 ## Continuity boundary
 
-- **Rovelle** remains her birthplace and the city central to *The Unfinished Chart*.
-- **MØBIUS** is **not** the city from an abandoned early draft, and that old ring-gate setting is not current canon.
-- The existing novella depicts Mira's departure **toward** a northern station; identifying it as MØBIUS is a later explicit continuation, not a retroactive rewrite of the original chapters.
-- The name does not claim any association with a real-life research institution.
-
-The station's exact layout, internal hierarchy, and her day-to-day assignments are intentionally left open until a future canonical story establishes them. Public docs must not invent them as facts.
+- **Rovelle** remains Mira's birthplace and the setting of *The Unfinished Chart*.
+- MØBIUS is a **station**, not the city from an abandoned early draft; the ring-gate setting is not canon.
+- It is a fictional place with researchers, instruments, weather and deadlines. It is not a magical explanation for what the real software does, and the name claims no association with a real institution.

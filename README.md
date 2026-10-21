@@ -1,59 +1,89 @@
-<div align="center">
+<p align="center">
+  <a href="https://mangiapanejohn-dev.github.io/mira-voss/"><img src="media/github/banner.jpg" alt="Mira Voss, the Cartographer of Rovelle: a girl with a short black-and-white bob at a harbor railing in a storm" width="100%" /></a>
+</p>
 
-<img src="media/identity/mira-original-logo.jpg" alt="Original Mira Voss logo: left-facing profile with a short black-and-white bob and orange accents" width="156" />
+<p align="center">
+  <a href="https://mangiapanejohn-dev.github.io/mira-voss/"><b>Website</b></a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="https://mangiapanejohn-dev.github.io/mira-voss/stories.html"><b>Read the stories</b></a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="https://mangiapanejohn-dev.github.io/mira-voss/world.html"><b>Rovelle</b></a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#install"><b>Install</b></a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="https://www.npmjs.com/package/mira-voss"><b>npm</b></a>
+</p>
 
-# Mira Voss
+<p align="center">
+  <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm version" src="https://img.shields.io/npm/v/mira-voss?style=flat-square&label=npm&color=c8aa6e&labelColor=0a1428" /></a>
+  <img alt="Node.js 22 or newer" src="https://img.shields.io/badge/node-22%2B-c8aa6e?style=flat-square&labelColor=0a1428" />
+  <img alt="Closed-source runtime" src="https://img.shields.io/badge/runtime-closed%20source-e8622c?style=flat-square&labelColor=0a1428" />
+  <a href="https://mangiapanejohn-dev.github.io/mira-voss/stories.html"><img alt="Two stories, in Chinese" src="https://img.shields.io/badge/stories-2%20%C2%B7%20%E4%B8%AD%E6%96%87-c8aa6e?style=flat-square&labelColor=0a1428" /></a>
+</p>
 
-**A presence in the terminal. A story beyond it.**
+<br />
 
-The official public home for the Mira Voss CLI, its character art, and the world of Rovelle.
+<p align="center"><i>有些地方，只能等人到了以后，再慢慢画出来。</i><br /><sub>Some places can only be charted after someone arrives. — <i>The Unfinished Chart</i>, Chapter VII</sub></p>
 
-[Install](#install) · [The product](#the-product) · [The character](#the-character) · [Read the story](lore/zh/README.md) · [Public website](https://mangiapanejohn-dev.github.io/mira-voss/)
+<br />
 
-</div>
+Mira Voss is seventeen, a tidal researcher from **Rovelle**, a harbor city that trusts its charts a little too early. She can read the deep sea from scraps of evidence; letting anyone else into the work is taking her longer. Her story is written in Chinese and published here in full.
 
----
+She is also the name and face of **Mira Voss**, a closed-source terminal agent distributed on npm. This repository is her public home: the stories, the world, the art and the documentation. It does not contain the agent's runtime.
 
-<div align="center">
-<img src="media/character/mira-rovell-splash-v2.png" alt="Mira Voss looking across Rovelle's stormy harbor, her short black-and-white hair and dark coat lit against the evening sky" width="900" />
-</div>
-
-## The product
-
-Mira Voss is a proprietary AI agent for work in the terminal. The published CLI can read and edit files, run commands, and report its work in the directory where you start it. Its actual behavior depends on the installed release, selected model, configuration, and permissions. The [npm package](https://www.npmjs.com/package/mira-voss) is the product distribution; this GitHub repository contains its public documentation and creative materials.
+<a id="install"></a>
 
 ## Install
-
-Use Node.js **22 or newer**, as recommended by the published package documentation:
 
 ```bash
 npm install -g mira-voss
 ```
 
-Then run `mira` in the directory where you want to work. `mobius` is an alternate executable name. The current published package is **v1.0.0**. See the [installation guide](docs/install.md) for verification, first launch, updates, and platform notes.
+Then run `mira` (or `mobius`) in the folder you want to work in and follow the sign-in prompts. Node.js 22 or newer is recommended. Updates, platform notes and troubleshooting are in the [installation guide](docs/install.md); the [quickstart](docs/quickstart.md) walks through a first session.
 
-## The character
+<br />
 
-Mira grew up in **Rovelle**, a harbor city where a convincing chart could still leave out a dangerous current. At seventeen, her gift for reading incomplete observations puts her work at the center of a public decision. She must explain where her model stops, listen to the people who will bear the risk, and learn what precision cannot settle between friends and family.
+<a href="https://mangiapanejohn-dev.github.io/mira-voss/stories.html"><img src="media/github/stories.jpg" alt="The Stories" width="100%" /></a>
 
-*Rovelle: The Unfinished Chart* closes as she leaves for the northern research station later named **MØBIUS**. The original Chinese novella is preserved here in full: a [prologue and seven chapters](lore/zh/README.md), alongside the [v2.0 character profile](lore/zh/character-profile.md), [canon notes](lore/canon.md), and an [English introduction](lore/the-unfinished-chart.md).
-
-The original [profile logo](media/identity/mira-original-logo.jpg) is the visual identity reference. The [earlier approved key art](media/character/mira-approved-key-art.png) is preserved unchanged from the supplied project archive. The new [Rovelle splash illustration](media/character/mira-rovell-splash-v2.png) places Mira at the harbor while keeping her face and short black-and-white hair recognizable.
-
-## Explore
-
-| Area | What you will find |
+| | |
 | :-- | :-- |
-| [Documentation](docs/README.md) | Installation, first launch, FAQs, and product scope |
-| [Story and canon](lore/README.md) | Rovelle, Mira, MØBIUS Research Station, and the complete Chinese novella |
-| [Visual identity](media/README.md) | Original logo, approved art, and design guidance |
-| [Public website](https://mangiapanejohn-dev.github.io/mira-voss/) | A visual introduction to the product and character |
-| [Feedback](https://github.com/mangiapanejohn-dev/mira-voss/issues/new/choose) | Bug reports, feature requests, and documentation or lore corrections |
+| <a href="https://mangiapanejohn-dev.github.io/mira-voss/read.html?work=unfinished-chart"><img src="site/assets/art/cover-rovelle.webp" alt="The Grey Sea breaking on Rovelle's harbor wall at dusk" width="190" /></a> | **The Unfinished Chart** · 《罗维尔：未完成的海图》<br /><sub>ROVELLE · BOOK ONE · PROLOGUE + 7 CHAPTERS · v3.0</sub><br /><br />A winter current is coming, and the city wants to use Mira's tidal chart beyond the conditions it was tested in. To correct the record she has to make its limits public, and let other people into a decision that cannot be hers alone.<br /><br />[Read online](https://mangiapanejohn-dev.github.io/mira-voss/read.html?work=unfinished-chart) · [Chinese text](lore/zh/README.md) · [Character profile](lore/zh/character-profile.md) |
+| <a href="https://mangiapanejohn-dev.github.io/mira-voss/read.html?work=only-one-side"><img src="media/github/cover-mobius.jpg" alt="A paper tape loop with a half twist, drawn in gold over a cold northern sky" width="190" /></a> | **Only One Side** · 《MØBIUS：只有一面》<br /><sub>MØBIUS · SHORT STORY · 4 PARTS · v1.0 · NEW</sub><br /><br />Three days north of Ailan, a station without a name keeps its deep-water record on a paper loop twisted half a turn. For nineteen winters, part of the sea in it was written off as ink bleeding through the paper.<br /><br />[Read online](https://mangiapanejohn-dev.github.io/mira-voss/read.html?work=only-one-side) · [Chinese text](lore/zh/only-one-side/README.md) |
 
-## Rights and scope
+New stories are added to [`lore/catalog.json`](lore/catalog.json). The website's library and reader are built from it by [`scripts/build-stories.mjs`](scripts/build-stories.mjs).
 
-**Mira is closed source.** This repository does not publish the CLI runtime, its private source code, or an open-source license. The documentation, story, and images are public to view; public visibility does not grant permission to reuse them. Read the [rights notice](NOTICE.md) and [contribution guide](CONTRIBUTING.md).
+<br />
 
-Mira's fictional biography gives the product its visual and narrative identity. It does not promise software capabilities, autonomy, or security properties. See [Product vs. Fiction](docs/product-vs-fiction.md).
+<a href="https://mangiapanejohn-dev.github.io/mira-voss/world.html"><img src="media/github/world.jpg" alt="The World" width="100%" /></a>
 
-© 2026 Mira Voss project. All rights reserved.
+Rovelle is built between a headland and two rivers, facing the Grey Sea. It records its tides, checks its instruments, and rings three bells when the water turns: the first warns, the second restricts the channels, the third closes them. Three days north of Ailan, on a cape beside Vard Light, stands the research station that came to be called **MØBIUS**.
+
+<a href="https://mangiapanejohn-dev.github.io/mira-voss/world.html"><img src="media/github/chart.jpg" alt="A reader's chart of Rovelle: Cape Ward, the Pilot Station, North Reef, Channel Six, the Outer and Inner Harbors, the Old Salt Docks, the South Flats and the Tide Office" width="100%" /></a>
+
+[Rovelle](lore/rovelle.md) · [MØBIUS Station](lore/mobius-station.md) · [Mira Voss](lore/mira-voss.md) · [Canon and continuity](lore/canon.md)
+
+<br />
+
+<a href="https://mangiapanejohn-dev.github.io/mira-voss/agent.html"><img src="media/github/agent.jpg" alt="The Agent" width="100%" /></a>
+
+| Key | Ability | |
+| :-: | :-- | :-- |
+| **P** | Asks before she changes things | In the default mode, she asks for your approval before changing your project. |
+| **Q** | Reads the project | Started in a folder, she reads the files there. |
+| **W** | Edits files | She makes the edits a task needs directly in your files. |
+| **E** | Runs commands | Builds, tests and scripts, and she reads what they print. |
+| **R** | Shows her work | She shows you what she has done, so you can check it. |
+
+What the CLI actually does is defined by its code, its model and provider, your configuration and the permissions you set. The stories give Mira a face and a voice; they do not describe the software. See [product vs. fiction](docs/product-vs-fiction.md) and the [FAQ](docs/faq.md).
+
+<br />
+
+## In this repository
+
+| Path | What it holds |
+| :-- | :-- |
+| [`lore/`](lore/README.md) | The stories in Chinese, the world in English, and the canon notes |
+| [`site/`](site/README.md) | The website at [mangiapanejohn-dev.github.io/mira-voss](https://mangiapanejohn-dev.github.io/mira-voss/) |
+| [`media/`](media/README.md) | The original logo, the approved art, the scenery and these README images |
+| [`docs/`](docs/README.md) | Installation, quickstart, FAQ, product scope |
+| [`scripts/`](scripts/build-stories.mjs) | The story build for the website |
+
+Report a problem through the [issue templates](https://github.com/mangiapanejohn-dev/mira-voss/issues/new/choose); security issues go through [private vulnerability reporting](https://github.com/mangiapanejohn-dev/mira-voss/security/advisories/new).
+
+## Rights
+
+**Mira Voss is closed source.** This repository publishes no runtime code and no open-source license. The stories, art and documentation are public to read, not to reuse; see the [notice](NOTICE.md). Mira Voss, Rovelle and MØBIUS Station are fiction.
+
+<p align="center"><sub>© 2026 Mira Voss project. All rights reserved.</sub></p>

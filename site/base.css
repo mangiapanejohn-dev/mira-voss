@@ -1,0 +1,202 @@
+/* Mira Voss — shared styles for every page.
+   Structure and palette follow the League of Legends champion and Universe pages:
+   deep navy, hextech gold, italic display capitals, thin gold frames.
+   The motifs are Mira's own: the halftone and offset orange contour of her original
+   logo, the isobaths of a sea chart, and the tide. */
+@property --dot { syntax: '<length>'; inherits: false; initial-value: 0px; }
+
+:root {
+  color-scheme: dark;
+  --abyss: #010a13;
+  --navy: #0a1428;
+  --navy-raised: #0f1d33;
+  --navy-line: #1e2d45;
+  --gold: #c8aa6e;
+  --gold-deep: #785a28;
+  --gold-pale: #f0e6d2;
+  --gold-line: rgba(200, 170, 110, .22);
+  --ember: #e8622c;
+  --text: #cdd0d4;
+  --muted: #a09b8c;
+  --display: 'Spectral', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+  --serif-zh: 'Noto Serif SC', 'Songti SC', 'STSong', serif;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-io: cubic-bezier(.7, 0, .3, 1);
+  --edge: clamp(20px, 5vw, 88px);
+  --bar: 72px;
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'%3E%3Cpath d='M0 52C120 30 240 22 360 34s240 44 360 44 240-40 360-46 240 22 360 30v66H0z' fill='%23010a13'/%3E%3Cpath d='M0 52C120 30 240 22 360 34s240 44 360 44 240-40 360-46 240 22 360 30' fill='none' stroke='%23c8aa6e' stroke-opacity='.55' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--bar) + 20px); }
+body { margin: 0; min-height: 100vh; background: var(--navy); color: var(--text); font: 400 17px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: .9em; color: var(--gold-pale); }
+p { margin: 0 0 1.1em; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+::selection { background: var(--gold-deep); color: #fff; }
+[hidden] { display: none !important; }
+:lang(zh-Hans) { font-family: var(--serif-zh); }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip-link { position: fixed; z-index: 300; top: -80px; left: 16px; padding: 12px 18px; background: var(--gold); color: var(--abyss); font-weight: 700; }
+.skip-link:focus { top: 12px; }
+
+/* ---------- Type ---------- */
+.supertitle { margin: 0 0 8px; color: var(--gold); font: italic 700 clamp(17px, .9vw + 10px, 26px)/1.2 var(--display); text-transform: uppercase; letter-spacing: .01em; }
+.blade-title { margin: 0; color: #fff; font: italic 800 clamp(42px, 3.2vw + 22px, 80px)/1 var(--display); text-transform: uppercase; letter-spacing: -.005em; text-wrap: balance; }
+.label { display: block; color: var(--gold); font: 700 12px/1.3 var(--sans); letter-spacing: .18em; text-transform: uppercase; }
+.lede { max-width: 38em; font-size: clamp(17px, .3vw + 15px, 19px); color: var(--text); }
+.zh-title { font: 600 clamp(18px, .5vw + 15px, 22px)/1.5 var(--serif-zh); color: var(--gold-pale); letter-spacing: .14em; }
+
+/* The offset orange contour from Mira's original logo, behind large display type. */
+.misreg { position: relative; isolation: isolate; }
+.misreg::before { content: attr(data-text); position: absolute; z-index: -1; inset: 0; color: transparent; -webkit-text-stroke: 1.4px var(--ember); transform: translate(.05em, .04em); opacity: .95; pointer-events: none; transition: transform 1.6s var(--ease-out) .5s, opacity 1s var(--ease-out) .5s; }
+.js .misreg:not(.is-in)::before { transform: translate(0, 0); opacity: 0; }
+
+/* ---------- Layout ---------- */
+.blade { position: relative; padding: clamp(88px, 11vh, 150px) 0; overflow: clip; }
+.blade-inner { position: relative; z-index: 1; max-width: 1560px; margin: 0 auto; padding: 0 var(--edge); }
+.blade-head { margin-bottom: clamp(36px, 5vh, 64px); }
+.blade-head .lede { margin-top: 22px; }
+.blade-dark { background: var(--abyss); }
+.blade-raised { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-raised) 100%); }
+.blade + .blade::before { content: ''; position: absolute; z-index: 2; top: 0; left: 50%; width: min(560px, 70%); height: 1px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--gold-line) 20%, var(--gold) 50%, var(--gold-line) 80%, transparent); }
+.blade + .blade::after { content: ''; position: absolute; z-index: 2; top: -5px; left: calc(50% - 5px); width: 10px; height: 10px; transform: rotate(45deg); background: var(--navy); border: 1px solid var(--gold); }
+
+/* ---------- Gold frame (champion page meta boxes) ---------- */
+.frame { position: relative; border: 1px solid var(--gold); padding: 7px; }
+.frame-inner { position: relative; height: 100%; background: rgba(10, 20, 40, .78); }
+
+/* ---------- Top bar ---------- */
+.topbar { position: fixed; z-index: 60; inset: 0 0 auto; height: var(--bar); display: flex; align-items: center; gap: 44px; padding: 0 var(--edge); border-bottom: 1px solid transparent; transition: background-color .5s var(--ease-out), border-color .5s var(--ease-out); }
+.topbar::before { content: ''; position: absolute; z-index: -1; inset: 0 0 -40px; background: linear-gradient(180deg, rgba(1, 10, 19, .7), transparent); pointer-events: none; transition: opacity .5s; }
+.topbar.is-solid { background: rgba(1, 10, 19, .9); border-bottom-color: var(--gold-line); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.topbar.is-solid::before { opacity: 0; }
+.brand { display: flex; align-items: center; gap: 12px; color: #fff; font: italic 800 20px/1 var(--display); text-transform: uppercase; letter-spacing: .02em; white-space: nowrap; }
+.brand img { width: 42px; height: auto; transition: transform .7s var(--ease-out); }
+.brand:hover img { transform: rotate(-8deg) scale(1.08); }
+.topnav { display: flex; gap: 34px; margin-right: auto; }
+.topnav a { position: relative; padding: 10px 0; color: var(--gold-pale); font: 700 12.5px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; opacity: .78; transition: opacity .25s; }
+.topnav a::after { content: ''; position: absolute; left: 50%; bottom: 0; width: 7px; height: 7px; background: var(--gold); transform: translate(-50%, 8px) rotate(45deg) scale(0); transition: transform .45s var(--ease-out); }
+.topnav a:hover { opacity: 1; }
+.topnav a[aria-current='page'] { opacity: 1; color: #fff; }
+.topnav a:hover::after, .topnav a[aria-current='page']::after { transform: translate(-50%, 8px) rotate(45deg) scale(1); }
+.menu-toggle { display: none; width: 44px; height: 44px; margin-right: -10px; position: relative; }
+.menu-toggle span { position: absolute; left: 11px; right: 11px; height: 1.5px; background: var(--gold-pale); transition: transform .5s var(--ease-out), top .5s var(--ease-out); }
+.menu-toggle span:first-child { top: 17px; }
+.menu-toggle span:last-child { top: 26px; }
+.menu-open .menu-toggle span:first-child { top: 21.5px; transform: rotate(45deg); }
+.menu-open .menu-toggle span:last-child { top: 21.5px; transform: rotate(-45deg); }
+
+/* Full-screen menu on small screens */
+.menu { position: fixed; z-index: 55; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: calc(var(--bar) + 24px) var(--edge) 40px; background: var(--abyss); clip-path: circle(0 at calc(100% - 42px) 30px); visibility: hidden; transition: clip-path .7s var(--ease-io), visibility 0s .7s; }
+.menu-open .menu { clip-path: circle(150% at calc(100% - 42px) 30px); visibility: visible; transition: clip-path .8s var(--ease-io), visibility 0s; }
+.menu a { display: flex; align-items: baseline; gap: 18px; padding: 10px 0; border-bottom: 1px solid var(--navy-line); color: #fff; font: italic 800 clamp(34px, 9vw, 52px)/1.1 var(--display); text-transform: uppercase; opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .7s var(--ease-out); }
+.menu a small { color: var(--gold); font: 700 12px/1 var(--sans); letter-spacing: .16em; }
+.menu-open .menu a { opacity: 1; transform: none; transition-delay: calc(.18s + var(--i) * .06s); }
+.menu-open { overflow: hidden; }
+
+/* ---------- Buttons ---------- */
+.btn { position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 52px; padding: 0 28px; overflow: hidden; color: var(--gold-pale); font: 700 13px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; background: rgba(1, 10, 19, .6); border: 1px solid transparent; border-image: linear-gradient(180deg, var(--gold), var(--gold-deep)) 1; transition: color .3s, background-color .3s, box-shadow .5s var(--ease-out); }
+.btn::before { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(105deg, transparent 30%, rgba(240, 230, 210, .2) 50%, transparent 70%); transform: translateX(-110%); transition: transform .9s var(--ease-out); }
+.btn:hover::before { transform: translateX(110%); }
+.btn:hover { background-color: rgba(30, 35, 40, .9); box-shadow: inset 0 0 24px rgba(200, 170, 110, .2); }
+.btn svg { width: 18px; height: 18px; flex: none; transition: transform .5s var(--ease-out); }
+.btn:hover svg { transform: translateX(4px); }
+.btn-gold { color: var(--abyss); background: linear-gradient(180deg, #dcc391, var(--gold) 46%, #a3834a); border-image: none; border-color: #ead6a6; }
+.btn-gold:hover { color: var(--abyss); background-color: transparent; box-shadow: 0 0 0 1px rgba(240, 230, 210, .55), 0 10px 30px -6px rgba(200, 170, 110, .45); }
+.btn-gold::before { background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%); }
+.btn-small { min-height: 40px; padding: 0 18px; font-size: 12px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.text-link { display: inline-flex; align-items: center; gap: 10px; color: var(--gold); font: 700 12.5px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.text-link svg { width: 16px; height: 16px; transition: transform .45s var(--ease-out); }
+.text-link:hover svg { transform: translateX(4px); }
+.text-link:hover { color: var(--gold-pale); }
+
+/* ---------- Page moods: each page has its own water and light ---------- */
+[data-theme='dusk'] { --navy: #130f14; --navy-raised: #1d1519; --navy-line: #35272c; --abyss: #09070a; --gold-line: rgba(214, 160, 110, .22); }
+[data-theme='ink'] { --navy: #0c0f15; --navy-raised: #151a23; --navy-line: #272d38; --abyss: #05070a; }
+[data-theme='chart'] { --navy: #071a20; --navy-raised: #0c252d; --navy-line: #183943; --abyss: #020d11; }
+[data-theme='night'] { --navy: #0a0c10; --navy-raised: #12151b; --navy-line: #232832; --abyss: #040507; }
+[data-theme='ice'] { --navy: #0b161c; --navy-raised: #12212a; --navy-line: #213641; --abyss: #050b0f; }
+
+/* Film grain over everything, so no surface is a flat digital fill */
+body::after { content: ''; position: fixed; z-index: 45; inset: 0; pointer-events: none; opacity: .075; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* ---------- Atmospheres: sections lit by pieces of the original art ---------- */
+.atmos { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+.atmos::before { content: ''; position: absolute; inset: -6%; background: var(--atmos-img) var(--atmos-pos, center) / cover no-repeat; opacity: var(--atmos-op, .5); animation: drift 40s ease-in-out infinite alternate; }
+.atmos::after { content: ''; position: absolute; inset: 0; background: var(--atmos-shade, linear-gradient(180deg, var(--navy) 0%, transparent 28%, transparent 72%, var(--navy) 100%)); }
+.blade-dark > .atmos::after { background: var(--atmos-shade, linear-gradient(180deg, var(--abyss) 0%, transparent 28%, transparent 72%, var(--abyss) 100%)); }
+@keyframes drift { from { transform: scale(1.03) translate3d(-1.5%, 0, 0); } to { transform: scale(1.1) translate3d(1.5%, -1.2%, 0); } }
+.atmos-storm { --atmos-img: url(assets/bg/storm.webp); --atmos-op: .6; }
+.atmos-dusk { --atmos-img: url(assets/bg/dusk.webp); --atmos-op: .5; --atmos-pos: center 70%; }
+.atmos-lights { --atmos-img: url(assets/bg/lights.webp); --atmos-op: .4; }
+.atmos-sea { --atmos-img: url(assets/bg/sea.webp); --atmos-op: .22; --atmos-pos: center 60%; }
+.atmos-ice { --atmos-img: url(assets/bg/ice.webp); --atmos-op: .75; }
+.atmos-ember { --atmos-img: url(assets/bg/ember.webp); --atmos-op: .32; }
+.atmos-left::after { background: linear-gradient(90deg, transparent 0%, var(--navy) 62%), linear-gradient(180deg, var(--navy) 0%, transparent 25%, transparent 75%, var(--navy) 100%); }
+.atmos-right::after { background: linear-gradient(270deg, transparent 0%, var(--navy) 62%), linear-gradient(180deg, var(--navy) 0%, transparent 25%, transparent 75%, var(--navy) 100%); }
+
+/* Vard Light: a beam that sweeps every twelve seconds, as in the story */
+.beam { position: absolute; z-index: 0; left: var(--beam-x, 86%); top: var(--beam-y, 14%); width: 260vmax; height: 260vmax; pointer-events: none; transform: translate(-50%, -50%); background: conic-gradient(from 0deg, transparent 0 338deg, rgba(255, 244, 220, .05) 346deg, rgba(255, 246, 226, .2) 355deg, rgba(255, 246, 226, .06) 359deg, transparent 360deg); -webkit-mask-image: radial-gradient(closest-side, #000, rgba(0, 0, 0, .45) 30%, transparent 62%); mask-image: radial-gradient(closest-side, #000, rgba(0, 0, 0, .45) 30%, transparent 62%); mix-blend-mode: screen; animation: sweep 12s linear infinite; }
+.beam::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px; border-radius: 50%; background: #fff6e2; box-shadow: 0 0 18px 6px rgba(255, 238, 200, .55), 0 0 60px 20px rgba(255, 238, 200, .18); }
+@keyframes sweep { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* The halftone of her logo, used as a soft field of dots */
+.halftone-field { position: absolute; z-index: 0; pointer-events: none; width: var(--size, 70vmin); aspect-ratio: 1; background: radial-gradient(circle, var(--dot-color, var(--gold)) 1.15px, transparent 1.7px) 0 0 / 9px 9px; opacity: var(--op, .2); -webkit-mask-image: radial-gradient(closest-side, #000 10%, transparent); mask-image: radial-gradient(closest-side, #000 10%, transparent); }
+
+/* ---------- Isobaths (sea-chart lines) ---------- */
+.isobaths-bg { position: absolute; inset: 0; pointer-events: none; }
+.isobaths-bg svg { width: 100%; height: 100%; }
+.isobaths-bg path { fill: none; stroke: var(--gold); stroke-width: 1; opacity: .12; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 3.4s var(--ease-out) calc(var(--i, 0) * 60ms); }
+.isobaths-bg path.major { opacity: .24; stroke-width: 1.3; }
+.isobaths-bg.is-drawn path { stroke-dashoffset: var(--stop, 0); }
+
+/* ---------- Halftone reveal: images print themselves in dots ---------- */
+.js .halftone { --dot: 0px; -webkit-mask-image: radial-gradient(circle at center, #000 var(--dot), transparent calc(var(--dot) + .7px)); mask-image: radial-gradient(circle at center, #000 var(--dot), transparent calc(var(--dot) + .7px)); -webkit-mask-size: 7px 7px; mask-size: 7px 7px; transition: --dot 1.8s var(--ease-out); }
+.js .halftone.is-in { --dot: 5.4px; }
+.js .halftone.is-printed { -webkit-mask-image: none; mask-image: none; }
+
+/* ---------- Scroll reveal ---------- */
+.js .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s var(--ease-out) var(--rd, 0s), transform 1.2s var(--ease-out) var(--rd, 0s); }
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ---------- Footer ---------- */
+.site-footer { position: relative; background: var(--abyss); border-top: 1px solid var(--gold-line); }
+.footer-inner { max-width: 1560px; margin: 0 auto; padding: 64px var(--edge) 48px; display: grid; grid-template-columns: auto 1fr; gap: 28px 64px; align-items: start; }
+.footer-brand { display: flex; align-items: center; gap: 16px; color: #fff; font: italic 800 30px/1 var(--display); text-transform: uppercase; }
+.footer-brand img { width: 64px; height: auto; }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 14px 32px; justify-content: flex-end; padding-top: 14px; }
+.footer-nav a { color: var(--gold-pale); font: 700 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; opacity: .8; }
+.footer-nav a:hover { opacity: 1; color: var(--gold); }
+.footer-legal { grid-column: 1 / -1; margin: 0; padding-top: 26px; border-top: 1px solid var(--navy-line); color: var(--muted); font-size: 13.5px; line-height: 1.7; }
+
+/* ---------- The tide: page transitions ----------
+   On leaving, dark water with a gold crest rises over the page; on arrival it drains away. */
+html::after { content: ''; position: fixed; z-index: 250; left: 0; right: 0; top: -90px; height: calc(100vh + 90px); pointer-events: none; background: var(--wave) 0 0 / 1440px 90px repeat-x, linear-gradient(var(--abyss), var(--abyss)) 0 88px / 100% 100% no-repeat; transform: translateY(calc(100vh + 90px)); transition: transform .7s var(--ease-io); }
+html.tide-cover::after { transform: translateY(0); pointer-events: auto; animation: tide-roll 1.6s linear infinite; }
+html.tide-in::after { transform: translateY(0); transition: none; }
+html.tide-out::after { animation: tide-roll 1.6s linear infinite; transition-duration: .9s; }
+@keyframes tide-roll { to { background-position: 1440px 0, 0 88px; } }
+
+@media (max-width: 960px) {
+  :root { --bar: 62px; }
+  .topnav { display: none; }
+  .topbar { gap: 14px; }
+  .brand { margin-right: auto; font-size: 18px; }
+  .brand img { width: 36px; }
+  .menu-toggle { display: block; }
+  .topbar .btn-small { display: none; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-nav { justify-content: flex-start; padding-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
+  html::after { display: none; }
+}

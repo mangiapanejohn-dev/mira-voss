@@ -1,18 +1,21 @@
 # The world of Mira Voss
 
-*Rovelle: The Unfinished Chart* establishes Mira's history, relationships, and the fictional world behind her name. These materials are separate from the closed-source software product.
+Mira's story is written in Chinese first. These pages describe her world in English and keep track of what the stories have established. They are separate from the closed-source software product.
 
-## Begin here
+## The stories
 
-- [Mira Voss](mira-voss.md) — a character portrait, not a product persona specification
-- [Rovelle](rovelle.md) — a harbor city shaped by the sea and uncertain measurements
-- [MØBIUS Research Station](mobius-station.md) — the northern station in the period after the novella
-- [Canon and continuity](canon.md) — what is established and what remains unwritten
-- [English story synopsis](the-unfinished-chart.md) — a spoiler-aware introduction
-- [《未完成的海图》中文原著](zh/README.md) — prologue and seven complete chapters
+| Story | Setting | Text |
+| :-- | :-- | :-- |
+| *Rovelle: The Unfinished Chart* — Book One, v3.0 | Rovelle, the winter she is seventeen | [Chinese original](zh/README.md) · [read online](https://mangiapanejohn-dev.github.io/mira-voss/read.html?work=unfinished-chart) |
+| *MØBIUS: Only One Side* — short story, v1.0 | MØBIUS Station, her first winter | [Chinese original](zh/only-one-side/README.md) · [read online](https://mangiapanejohn-dev.github.io/mira-voss/read.html?work=only-one-side) |
 
-## Reading order
+New stories are added to [`catalog.json`](catalog.json); the website's library and reader are built from it.
 
-The first story takes place in Rovelle. **The terminal-era portrayal begins after its ending**, when Mira has departed for the northern research station. The station's name, MØBIUS, is a later canonical clarification; it is not the name of Rovelle, nor a return to an abandoned ring-gate setting.
+## The world
 
-*Character and story baseline: `Rovelle: The Unfinished Chart`, stable worldbook v2.0 (2026-10-19), with later explicit MØBIUS station naming.*
+- [Mira Voss](mira-voss.md): a character portrait, not a product persona specification
+- [Rovelle](rovelle.md): a harbor city shaped by the sea and uncertain measurements
+- [MØBIUS Research Station](mobius-station.md): the northern station, and how it got its name
+- [Canon and continuity](canon.md): what is established and what remains unwritten
+- [English introduction to Book One](the-unfinished-chart.md)
+- [Character profile (Chinese, full spoilers)](zh/character-profile.md)
