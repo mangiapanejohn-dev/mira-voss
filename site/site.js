@@ -190,14 +190,23 @@
       const nodes = [...el.childNodes];
       el.textContent = '';
       let i = 0;
+      const letter = ch => {
+        const s = document.createElement('span');
+        s.className = 'ink';
+        s.textContent = ch;
+        s.style.setProperty('--i', i++);
+        return s;
+      };
       nodes.forEach(node => {
         if (node.nodeType === 1 && node.tagName === 'BR') { el.append(document.createElement('br')); return; }
-        [...node.textContent].forEach(ch => {
-          const s = document.createElement('span');
-          s.className = 'ink';
-          s.textContent = ch;
-          s.style.setProperty('--i', i++);
-          el.append(s);
+        // A Latin word stays whole on its line; Chinese may break between any two characters.
+        (node.textContent.match(/\s+|[\u2e80-\u9fff\u3000-\u303f\uff00-\uffef]|[^\s\u2e80-\u9fff\u3000-\u303f\uff00-\uffef]+/g) || []).forEach(token => {
+          if (!token.trim()) { el.append(' '); return; }
+          if (token.length === 1) { el.append(letter(token)); return; }
+          const word = document.createElement('span');
+          word.className = 'ink-word';
+          [...token].forEach(ch => word.append(letter(ch)));
+          el.append(word);
         });
       });
     };
@@ -206,21 +215,35 @@
   });
   // cascade: children of a list arrive one after another
   $$('[data-cascade]').forEach(list => [...list.children].forEach((child, i) => child.style.setProperty('--ci', i)));
+  // Chrome measures a target through its own clip-path, so an element that starts clipped to
+  // nothing never counts as seen: those are watched through their parent, which is never clipped.
+  const clipped = '[data-reveal="mask"], [data-reveal="wipe"], [data-reveal="unfold"]';
+  const direct = new Set();
+  const proxied = new Map();
+  const arrive = el => {
+    el.classList.add(el.matches('[data-isobaths]') ? 'is-drawn' : 'is-in');
+    if (el.matches('[data-tilt]')) setTimeout(() => el.classList.add('is-settled'), 1600);
+    if (el.classList.contains('halftone')) {
+      const done = () => el.classList.add('is-printed');
+      el.addEventListener('transitionend', done, { once: true });
+      setTimeout(done, 2200);
+    }
+  };
   const seen = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      const el = entry.target;
-      el.classList.add(el.matches('[data-isobaths]') ? 'is-drawn' : 'is-in');
-      if (el.matches('[data-tilt]')) setTimeout(() => el.classList.add('is-settled'), 1600);
-      if (el.classList.contains('halftone')) {
-        const done = () => el.classList.add('is-printed');
-        el.addEventListener('transitionend', done, { once: true });
-        setTimeout(done, 2200);
-      }
-      seen.unobserve(el);
+      const target = entry.target;
+      if (direct.has(target)) arrive(target);
+      (proxied.get(target) || []).forEach(arrive);
+      seen.unobserve(target);
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: .12 });
-  const watch = el => seen.observe(el);
+  const watch = el => {
+    const parent = el.parentElement;
+    if (!el.matches(clipped) || !parent) direct.add(el);
+    else proxied.set(parent, [...(proxied.get(parent) || []), el]);
+    seen.observe(el.matches(clipped) && parent ? parent : el);
+  };
   $$('[data-stagger]').forEach(group => $$('.reveal, [data-reveal]', group).forEach((el, i) => el.style.setProperty('--rd', `${i * 80}ms`)));
   $$('.reveal, .halftone, [data-reveal], [data-ink], [data-cascade], .misreg:not([data-masthead] .misreg)').forEach(watch);
   if (reduced || !('CSS' in window && CSS.registerProperty)) $$('.halftone').forEach(el => el.classList.add('is-in', 'is-printed'));
@@ -431,8 +454,13 @@
     if (!savedChapter || (saved.ratio < .02 && savedChapter === savedWork.chapters[0])) return;
     el.hidden = false;
     $$('a', el).concat(el.matches('a') ? [el] : []).forEach(a => { a.href = `read.html?work=${savedWork.id}&chapter=${savedChapter.id}&resume=1`; });
-    $$('[data-continue-work]', el).forEach(n => { n.textContent = savedWork.short_zh; });
-    $$('[data-continue-chapter]', el).forEach(n => { n.textContent = `${savedChapter.label} · ${savedChapter.title}`; });
+    const paint = () => {
+      const zh = lang() === 'zh';
+      $$('[data-continue-work]', el).forEach(n => { n.textContent = zh ? savedWork.short_zh : savedWork.title_en; });
+      $$('[data-continue-chapter]', el).forEach(n => { n.textContent = zh ? `${savedChapter.label} · ${savedChapter.title}` : `${savedChapter.label_en} · ${savedChapter.title_en}`; });
+    };
+    paint();
+    document.addEventListener('lang:change', paint);
     $$('[data-continue-progress]', el).forEach(n => n.style.setProperty('--p', saved.ratio));
   });
 

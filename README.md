@@ -10,7 +10,7 @@
   <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm version" src="https://img.shields.io/npm/v/mira-voss?style=flat-square&label=npm&color=c8aa6e&labelColor=0a1428" /></a>
   <img alt="Node.js 22 or newer" src="https://img.shields.io/badge/node-22%2B-c8aa6e?style=flat-square&labelColor=0a1428" />
   <img alt="Closed-source runtime" src="https://img.shields.io/badge/runtime-closed%20source-e8622c?style=flat-square&labelColor=0a1428" />
-  <a href="https://mangiapanejohn-dev.github.io/mira-voss/stories.html"><img alt="Two stories, in Chinese" src="https://img.shields.io/badge/stories-2%20%C2%B7%20%E4%B8%AD%E6%96%87-c8aa6e?style=flat-square&labelColor=0a1428" /></a>
+  <a href="https://mangiapanejohn-dev.github.io/mira-voss/stories.html"><img alt="Two stories, in English and Chinese" src="https://img.shields.io/badge/stories-2%20%C2%B7%20English%20%C2%B7%20%E4%B8%AD%E6%96%87-c8aa6e?style=flat-square&labelColor=0a1428" /></a>
 </p>
 
 <br />
@@ -19,7 +19,7 @@
 
 <br />
 
-Mira Voss is seventeen, a tidal researcher from **Rovelle**, a harbor city that trusts its charts a little too early. She can read the deep sea from scraps of evidence; letting anyone else into the work is taking her longer. Her story is written in Chinese and published here in full.
+Mira Voss is seventeen, a tidal researcher from **Rovelle**, a harbor city that trusts its charts a little too early. She can read the deep sea from scraps of evidence; letting anyone else into the work is taking her longer. Her story is written in Chinese, translated into English, and published here in full in both.
 
 She is also the name and face of **Mira Voss**, a closed-source terminal agent distributed on npm. This repository is her public home: the stories, the world, the art and the documentation. It does not contain the agent's runtime.
 
@@ -74,7 +74,7 @@ What the CLI actually does is defined by its code, its model and provider, your 
 
 | Path | What it holds |
 | :-- | :-- |
-| [`lore/`](lore/README.md) | The stories in Chinese, the world in English, and the canon notes |
+| [`lore/`](lore/README.md) | The stories in Chinese and in English translation, the world, and the canon notes |
 | [`site/`](site/README.md) | The website at [mangiapanejohn-dev.github.io/mira-voss](https://mangiapanejohn-dev.github.io/mira-voss/) |
 | [`media/`](media/README.md) | The original logo, the approved art, the scenery and these README images |
 | [`docs/`](docs/README.md) | Installation, quickstart, FAQ, product scope |

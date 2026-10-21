@@ -1,5 +1,6 @@
 /* Mira Voss — the story reader: one chapter per page, progress remembered.
-   The interface follows the site's language; the stories are Chinese originals. */
+   The interface and the text follow the site's language. A chapter not yet translated
+   is shown in the Chinese original, and says so. */
 (() => {
   'use strict';
   const library = window.MIRA_LIBRARY || [];
@@ -20,7 +21,7 @@
     en: {
       minutes: n => `About ${n} min`, min: n => `${n} min`,
       next: kind => (kind === 'Short story' ? 'Next part' : 'Next chapter'), nextStory: 'Next story',
-      spoilers: c => c.title_en, original: 'Chinese original · an English translation is not yet available',
+      spoilers: c => c.title_en, original: 'Not yet translated · this is the Chinese original',
       failed: 'This chapter could not be loaded. Reload the page, or read the original on GitHub.',
     },
     zh: {
@@ -47,6 +48,12 @@
   const prev = chapter.kind === 'chapter' ? story[story.indexOf(chapter) - 1] : story[story.length - 1];
   const appendix = chapters.find(c => c.kind === 'appendix' && c !== chapter);
   const label = c => (lang() === 'zh' ? c.label : c.label_en);
+  const title = c => (lang() === 'zh' ? c.title : c.title_en);
+  const minutes = c => (lang() === 'zh' ? c.minutes : c.minutes_en ?? c.minutes);
+  const english = () => (window.MIRA_TEXT_EN || {})[work.id]?.[chapter.id];
+  // The text shown: the translation on the English page, when this chapter has one.
+  const showsEnglish = () => lang() === 'en' && !!english();
+  let loaded = false;
 
   /* ---------- Opening ---------- */
   if (work.theme) root.dataset.theme = work.theme;
@@ -55,17 +62,8 @@
   const art = HERO[chapter.id] || HERO[work.id] || { src: work.cover };
   const heroImg = $('[data-hero-img]');
   if (art.art) hero.dataset.art = art.art;
-  if (work.light === 'beam') {
-    const beam = document.createElement('div');
-    beam.className = 'beam';
-    beam.style.cssText = '--beam-x: 50%; --beam-y: 6%';
-    beam.setAttribute('aria-hidden', 'true');
-    hero.prepend(beam);
-  }
   if (art.focus) hero.style.setProperty('--focus', art.focus);
   heroImg.src = art.src;
-  $('[data-title]').textContent = chapter.title;
-  $('[data-title-en]').textContent = chapter.title_en;
   $('[data-version]').textContent = `${work.version} · ${work.date}`;
   const showHero = () => { requestAnimationFrame(() => hero.classList.add('is-ready')); setTimeout(() => hero.classList.add('is-ready'), 120); };
   (heroImg.decode ? heroImg.decode() : Promise.resolve()).catch(() => {}).then(() => setTimeout(showHero, root.classList.contains('tide-out') ? 240 : 0));
@@ -82,7 +80,7 @@
       const li = document.createElement('li');
       const a = document.createElement('a');
       a.href = url(w.id, c.id);
-      a.innerHTML = '<span class="n"></span><span class="t" lang="zh-Hans"></span><span class="m"></span>';
+      a.innerHTML = '<span class="n"></span><span class="t"></span><span class="m"></span>';
       if (w === work && c === chapter) a.setAttribute('aria-current', 'page');
       tocLinks.push({ a, c });
       li.append(a);
@@ -133,7 +131,6 @@
     appendixLink.href = url(work.id, appendix.id);
     $('.end-links').insertBefore(appendixLink, $('[data-source]'));
   }
-  $('[data-source]').href = `https://github.com/mangiapanejohn-dev/mira-voss/blob/main/${chapter.source}`;
 
   /* ---------- Every piece of interface text, in the current language ---------- */
   const paintContents = () => {
@@ -141,36 +138,46 @@
     contents.querySelectorAll('.toc-work').forEach(block => {
       const w = library.find(x => x.id === block.dataset.work);
       block.querySelector('h2').textContent = zh ? w.title_zh : w.title_en;
-      block.querySelector('.zh').textContent = zh ? w.title_en : w.title_zh;
+      block.querySelector('.zh').textContent = zh ? w.title_en : '';
+      block.querySelector('.zh').hidden = !zh;
     });
     tocLinks.forEach(({ a, c }) => {
       a.querySelector('.n').textContent = label(c);
-      a.querySelector('.t').textContent = c.kind === 'appendix' ? tr().spoilers(c) : c.title;
-      a.querySelector('.m').textContent = tr().min(c.minutes);
+      a.querySelector('.t').textContent = c.kind === 'appendix' ? tr().spoilers(c) : title(c);
+      a.querySelector('.t').lang = zh ? 'zh-Hans' : 'en';
+      a.querySelector('.m').textContent = tr().min(minutes(c));
     });
   };
   const paint = () => {
     const zh = lang() === 'zh';
-    document.title = `${chapter.title} · ${work.short_zh} · Mira Voss`;
+    document.title = zh ? `${chapter.title} · ${work.short_zh} · Mira Voss` : `${chapter.title_en} · ${work.title_en} · Mira Voss`;
     $('[data-bar-work]').textContent = zh ? work.short_zh : work.title_en;
-    $('[data-bar-chapter]').textContent = chapter.kind === 'appendix' ? label(chapter) : `${label(chapter)} · ${chapter.title}`;
+    $('[data-bar-chapter]').textContent = chapter.kind === 'appendix' ? label(chapter) : `${label(chapter)} · ${title(chapter)}`;
     $('[data-series]').textContent = zh ? `${work.series_zh} · ${work.title_zh}` : `${work.series} · ${work.title_en}`;
-    $('[data-label]').textContent = chapter.label;
-    $('[data-label-en]').textContent = chapter.label_en;
-    $('[data-minutes]').textContent = tr().minutes(chapter.minutes);
+    $('[data-label]').textContent = label(chapter);
+    $('[data-label-en]').textContent = zh ? chapter.label_en : '';
+    $('[data-label-en]').hidden = !zh;
+    const h1 = $('[data-title]');
+    h1.textContent = title(chapter);
+    h1.lang = zh ? 'zh-Hans' : 'en';
+    $('[data-title-en]').textContent = zh ? chapter.title_en : '';
+    $('[data-title-en]').hidden = !zh;
+    $('[data-minutes]').textContent = tr().minutes(minutes(chapter));
     $('[data-hero-note]').textContent = tr().original;
-    $('[data-hero-note]').hidden = zh;
+    $('[data-hero-note]').hidden = zh || !loaded || !!english();
+    $('[data-source]').href = `https://github.com/mangiapanejohn-dev/mira-voss/blob/main/${showsEnglish() ? chapter.source_en : chapter.source}`;
     paintContents();
     if (next) {
       $('[data-next-label]').textContent = `${tr().next(work.kind)} · ${label(next)}`;
-      $('[data-next-title]').textContent = next.title;
-      $('[data-next-en]').textContent = next.title_en;
+      $('[data-next-title]').textContent = title(next);
+      $('[data-next-en]').textContent = zh ? next.title_en : '';
     } else if (showNextWork) {
       $('[data-next-label]').textContent = `${tr().nextStory} · ${zh ? nextWork.series_zh : nextWork.series}`;
-      $('[data-next-title]').textContent = nextWork.title_zh;
-      $('[data-next-en]').textContent = nextWork.title_en;
+      $('[data-next-title]').textContent = zh ? nextWork.title_zh : nextWork.title_en;
+      $('[data-next-en]').textContent = zh ? nextWork.title_en : '';
     }
-    if (prev) $('[data-prev-title]').textContent = `${label(prev)} · ${prev.title}`;
+    $('[data-next-en]').hidden = !zh;
+    if (prev) $('[data-prev-title]').textContent = `${label(prev)} · ${title(prev)}`;
     if (appendixLink) appendixLink.textContent = tr().spoilers(appendix);
   };
   paint();
@@ -203,18 +210,34 @@
     clearTimeout(saveTimer);
     saveTimer = setTimeout(() => store.set('mira-reading-v3', { work: work.id, chapter: chapter.id, ratio: r, at: Date.now() }), 300);
   };
-  const render = () => {
-    const html = (window.MIRA_TEXT || {})[work.id]?.[chapter.id];
-    if (!html) { prose.textContent = tr().failed; return; }
+  const io = 'IntersectionObserver' in window && !reduced
+    ? new IntersectionObserver(entries => entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -6% 0px' })
+    : null;
+  // Fills the page with the chapter in the current language; arrive: false shows every block at once.
+  const fill = (arrive = true) => {
+    const html = showsEnglish() ? english() : (window.MIRA_TEXT || {})[work.id]?.[chapter.id];
+    if (!html) { prose.textContent = tr().failed; return []; }
     prose.innerHTML = html;
+    prose.lang = showsEnglish() ? 'en' : 'zh-Hans';
     const blocks = [...prose.children];
-    // A drop cap suits a Chinese character, not the M of a Latin name.
-    if (!/^[㐀-鿿]/.test(prose.textContent.trim())) prose.classList.add('no-drop');
-    if (reduced || !('IntersectionObserver' in window)) blocks.forEach(b => b.classList.add('is-in'));
-    else {
-      const io = new IntersectionObserver(entries => entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -6% 0px' });
-      blocks.forEach(b => io.observe(b));
-    }
+    // A drop cap suits a Chinese character or a Latin capital, not the M of a Latin name in a Chinese text.
+    const first = prose.textContent.trim()[0] || '';
+    prose.classList.toggle('no-drop', prose.lang === 'en' ? !/[A-Z]/.test(first) : !/[㐀-鿿]/.test(first));
+    if (!io || !arrive) blocks.forEach(b => b.classList.add('is-in'));
+    else blocks.forEach(b => io.observe(b));
+    return blocks;
+  };
+  const render = () => {
+    const blocks = fill();
+    if (!blocks.length) return;
+    // Switching language keeps the reader at the same point of the chapter.
+    document.addEventListener('lang:change', () => {
+      const at = ratio();
+      fill(false);
+      const b = bounds();
+      scrollTo({ top: Math.max(0, b.top + b.distance * at - innerHeight * .25), behavior: 'instant' });
+      onScroll();
+    });
     addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(onScroll); }, { passive: true });
     addEventListener('resize', () => { if (!frame) frame = requestAnimationFrame(onScroll); }, { passive: true });
     if (params.has('resume') && saved && saved.work === work.id && saved.chapter === chapter.id && saved.ratio > 0) {
@@ -228,9 +251,12 @@
       });
     } else onScroll();
   };
-  const script = document.createElement('script');
-  script.src = `data/text/${work.id}.js`;
-  script.onload = render;
-  script.onerror = render;
-  document.head.append(script);
+  const load = src => new Promise(done => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = script.onerror = done;
+    document.head.append(script);
+  });
+  const translated = work.chapters.some(c => c.source_en);
+  Promise.all([load(`data/text/${work.id}.js`), translated ? load(`data/text/${work.id}.en.js`) : null]).then(() => { loaded = true; paint(); render(); });
 })();

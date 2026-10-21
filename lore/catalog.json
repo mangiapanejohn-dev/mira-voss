@@ -16,6 +16,7 @@
       "quote_en": "Some places can only be charted after someone arrives.",
       "cover": "assets/art/cover-rovelle.webp",
       "source_dir": "lore/zh",
+      "source_dir_en": "lore/en",
       "chapters": [
         {
           "id": "00-prologue",
@@ -114,6 +115,7 @@
       "quote_en": "She had only gone a long way along the same side.",
       "cover": "assets/art/mobius-loop.svg",
       "source_dir": "lore/zh/only-one-side",
+      "source_dir_en": "lore/en/only-one-side",
       "after": "unfinished-chart",
       "chapters": [
         {

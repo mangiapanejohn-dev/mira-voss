@@ -9,6 +9,11 @@ This changelog records public-home releases separately from internal CLI develop
 - The website is now six pages (home, character, stories, reader, world, agent) with an in-site reader, a reader's chart of Rovelle, and page moods drawn from the original art. Stories are built from `lore/catalog.json`.
 - The original logo's outer paper removed for use on dark pages (`media/identity/mira-logo-cutout.png`); the logo itself is unchanged.
 - New README and README images.
+- Both stories and the character profile translated into English (`lore/en/`). On the English site the reader shows the translation; the Chinese text remains the original and the authority.
+- The English site shows no Chinese beyond the language switch: quotes, titles and chapter names change with the language.
+- Vard Light drawn as a sea chart's coastal view: seen from the supply ship on the home page, close up with the station on the world page. Its light turns every twelve seconds, as in the story.
+- The home page keeps Mira's name and introduction clear of her face at every window size.
+- Fixed: titles, covers and quotes revealed by a clip never appeared in Chrome.
 
 ## 2026-10-20 — Public home, initial edition
 

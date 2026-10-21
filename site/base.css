@@ -205,10 +205,31 @@ body::after { content: ''; position: fixed; z-index: 45; inset: 0; pointer-event
 .atmos-left::after { background: linear-gradient(90deg, transparent 0%, var(--navy) 62%), linear-gradient(180deg, var(--navy) 0%, transparent 25%, transparent 75%, var(--navy) 100%); }
 .atmos-right::after { background: linear-gradient(270deg, transparent 0%, var(--navy) 62%), linear-gradient(180deg, var(--navy) 0%, transparent 25%, transparent 75%, var(--navy) 100%); }
 
-/* Vard Light: a beam that sweeps every twelve seconds, as in the story */
-.beam { position: absolute; z-index: 0; left: var(--beam-x, 86%); top: var(--beam-y, 14%); width: 260vmax; height: 260vmax; pointer-events: none; transform: translate(-50%, -50%); background: conic-gradient(from 0deg, transparent 0 338deg, rgba(255, 244, 220, .05) 346deg, rgba(255, 246, 226, .2) 355deg, rgba(255, 246, 226, .06) 359deg, transparent 360deg); -webkit-mask-image: radial-gradient(closest-side, #000, rgba(0, 0, 0, .45) 30%, transparent 62%); mask-image: radial-gradient(closest-side, #000, rgba(0, 0, 0, .45) 30%, transparent 62%); mix-blend-mode: screen; animation: sweep 12s linear infinite; }
-.beam::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px; border-radius: 50%; background: #e8dcc0; }
-@keyframes sweep { to { transform: translate(-50%, -50%) rotate(360deg); } }
+/* Vard Light, drawn the way a sea chart draws a coast seen from the water. Its light turns once
+   every twelve seconds, as in the story: seen from the side the beam reaches out, shortens to the
+   lantern as it faces you, and reaches out the other way. */
+.coastview { position: absolute; z-index: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+.coastview svg { display: block; width: 100%; height: 100%; }
+.coastview-far { height: clamp(150px, 15vw, 330px); }
+.coastview-near { height: clamp(210px, 23.75vw, 470px); }
+.blade:has(> .coastview-far) { padding-bottom: clamp(150px, 14vw, 300px); }
+.blade:has(> .coastview-near) { padding-bottom: clamp(230px, 24vw, 470px); }
+.vard-beam { animation: vard-turn 12s infinite; }
+.vard-flash { opacity: 0; animation: vard-flash 12s infinite; }
+.vard-lamp { animation: vard-lamp 12s infinite; }
+@keyframes vard-turn {
+  0% { transform: scaleX(1); animation-timing-function: cubic-bezier(.12, 0, .39, 0); }
+  25% { transform: scaleX(0); animation-timing-function: cubic-bezier(.61, 1, .88, 1); }
+  50% { transform: scaleX(-1); animation-timing-function: cubic-bezier(.12, 0, .39, 0); }
+  75% { transform: scaleX(0); animation-timing-function: cubic-bezier(.61, 1, .88, 1); }
+  100% { transform: scaleX(1); }
+}
+@keyframes vard-flash { 0%, 20%, 30%, 100% { opacity: 0; } 25% { opacity: 1; } }
+@keyframes vard-lamp { 0%, 100% { opacity: .6; } 25% { opacity: 1; } 75% { opacity: .3; } }
+.vard-label { font-family: var(--sans); font-weight: 600; letter-spacing: .16em; fill: var(--muted); }
+html[data-lang='zh'] .vard-label.t-en, html:not([data-lang='zh']) .vard-label.t-zh { display: none; }
+@media (max-width: 760px) { .vard-label { display: none; } }
+@media (prefers-reduced-motion: reduce) { .vard-beam, .vard-flash, .vard-lamp { animation: none; } .vard-beam { transform: scaleX(.8); } }
 
 /* The halftone of her logo, used as a soft field of dots */
 .halftone-field { position: absolute; z-index: 0; pointer-events: none; width: var(--size, 70vmin); aspect-ratio: 1; background: radial-gradient(circle, var(--dot-color, var(--gold)) 1.15px, transparent 1.7px) 0 0 / 9px 9px; opacity: var(--op, .2); -webkit-mask-image: radial-gradient(closest-side, #000 10%, transparent); mask-image: radial-gradient(closest-side, #000 10%, transparent); }
@@ -253,8 +274,9 @@ html[data-lang='zh'] .u-sub, html[data-lang='zh'] .u-head > span, html[data-lang
 html[data-lang='zh'] .btn, html[data-lang='zh'] .text-link, html[data-lang='zh'] .topnav a, html[data-lang='zh'] .footer-nav a { letter-spacing: .14em; }
 html[data-lang='zh'] .ability-info h3, html[data-lang='zh'] .bell-panel h3, html[data-lang='zh'] .place-detail h3, html[data-lang='zh'] .art-caption h3, html[data-lang='zh'] .canon-col h3, html[data-lang='zh'] .spec-note h3, html[data-lang='zh'] .faq summary, html[data-lang='zh'] .reading-order h3, html[data-lang='zh'] .menu a { font-family: var(--serif-zh); font-style: normal; font-weight: 900; letter-spacing: .06em; text-transform: none; }
 html[data-lang='zh'] .lede, html[data-lang='zh'] p { line-break: strict; }
-/* In Chinese the line is already the original; its English rendering steps aside */
-html[data-lang='zh'] .person-en, html[data-lang='zh'] .pull-quote footer, html[data-lang='zh'] .bio-aside blockquote footer, html[data-lang='zh'] .quote-en { display: none; }
+/* Lines that belong only to the Chinese page, such as the English name under a Chinese title */
+html:not([data-lang='zh']) .zh-only { display: none !important; }
+html:not([data-lang='zh']) .zh-title + .lede { margin-top: 22px; }
 
 /* ---------- Cookie and storage notice, as the League's banner ---------- */
 .consent { position: fixed; z-index: 70; left: 50%; bottom: 18px; display: flex; align-items: center; gap: 28px; width: min(980px, calc(100% - 32px)); padding: 18px 22px 18px 26px; background: rgba(14, 14, 16, .97); border: 1px solid rgba(255, 255, 255, .08); border-top: 2px solid var(--gold); box-shadow: 0 18px 50px -12px rgba(0, 0, 0, .7); transform: translate(-50%, calc(100% + 40px)); transition: transform .7s cubic-bezier(.22, 1, .36, 1), opacity .3s ease; }
@@ -289,6 +311,7 @@ html[data-lang='zh'] .person-en, html[data-lang='zh'] .pull-quote footer, html[d
 /* ink: characters arrive as if written */
 .js [data-ink] .ink { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(.18em); transition: opacity .7s ease, filter .8s ease, transform .9s cubic-bezier(.22, 1, .36, 1); transition-delay: calc(var(--i) * 55ms + .1s); }
 .js [data-ink].is-in .ink { opacity: 1; filter: none; transform: none; }
+.ink-word { display: inline-block; white-space: nowrap; }
 
 /* ---------- Cards that lean toward the pointer, lit where it rests ---------- */
 [data-tilt] { --tilt-t: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transform: var(--tilt-t); will-change: transform; }

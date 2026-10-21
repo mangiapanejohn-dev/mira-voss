@@ -21,6 +21,7 @@ window.MIRA_LIBRARY = [
   "setting_zh": "罗维尔 · 她十七岁的冬天",
   "chars": 9454,
   "minutes": 22,
+  "minutes_en": 35,
   "chapters": [
    {
     "id": "00-prologue",
@@ -33,7 +34,10 @@ window.MIRA_LIBRARY = [
     "chars": 965,
     "minutes": 2,
     "source": "lore/zh/00-prologue.md",
-    "sha256": "350668565e11b6eb69fefe327abbc686ba1738f8aacfe27da3802c8840dbeb01"
+    "sha256": "350668565e11b6eb69fefe327abbc686ba1738f8aacfe27da3802c8840dbeb01",
+    "words": 814,
+    "minutes_en": 4,
+    "source_en": "lore/en/00-prologue.md"
    },
    {
     "id": "01-overdue-accuracy",
@@ -46,7 +50,10 @@ window.MIRA_LIBRARY = [
     "chars": 1200,
     "minutes": 3,
     "source": "lore/zh/01-overdue-accuracy.md",
-    "sha256": "dcd5b41c42b0a1a9f94dd79b3965fa08b32169e681434067e1e21bfd20347a8a"
+    "sha256": "dcd5b41c42b0a1a9f94dd79b3965fa08b32169e681434067e1e21bfd20347a8a",
+    "words": 980,
+    "minutes_en": 4,
+    "source_en": "lore/en/01-overdue-accuracy.md"
    },
    {
     "id": "02-unasked-question",
@@ -59,7 +66,10 @@ window.MIRA_LIBRARY = [
     "chars": 1341,
     "minutes": 3,
     "source": "lore/zh/02-unasked-question.md",
-    "sha256": "d2af5a170ad6db00237aa045c4781c058e5d2aa66f9ff4b8dc6f7ff523f5abc0"
+    "sha256": "d2af5a170ad6db00237aa045c4781c058e5d2aa66f9ff4b8dc6f7ff523f5abc0",
+    "words": 1074,
+    "minutes_en": 5,
+    "source_en": "lore/en/02-unasked-question.md"
    },
    {
     "id": "03-four-degrees-below",
@@ -72,7 +82,10 @@ window.MIRA_LIBRARY = [
     "chars": 956,
     "minutes": 2,
     "source": "lore/zh/03-four-degrees-below.md",
-    "sha256": "6834f5a2491b838090c0f042812bf1a81f9e9d8c5b9f072dc14a01888a0b03a1"
+    "sha256": "6834f5a2491b838090c0f042812bf1a81f9e9d8c5b9f072dc14a01888a0b03a1",
+    "words": 810,
+    "minutes_en": 4,
+    "source_en": "lore/en/03-four-degrees-below.md"
    },
    {
     "id": "04-the-omitted-page",
@@ -85,7 +98,10 @@ window.MIRA_LIBRARY = [
     "chars": 1205,
     "minutes": 3,
     "source": "lore/zh/04-the-omitted-page.md",
-    "sha256": "8a95a919f7fe64fb66a51867a1bd8b01b1b6e4498835a818f856e026da8fe63d"
+    "sha256": "8a95a919f7fe64fb66a51867a1bd8b01b1b6e4498835a818f856e026da8fe63d",
+    "words": 925,
+    "minutes_en": 4,
+    "source_en": "lore/en/04-the-omitted-page.md"
    },
    {
     "id": "05-third-bell",
@@ -98,7 +114,10 @@ window.MIRA_LIBRARY = [
     "chars": 1289,
     "minutes": 3,
     "source": "lore/zh/05-third-bell.md",
-    "sha256": "bca5ffd929000e9ce54854ec5f834ef115ed95c216d0a6c5d4c7f750f6e9286f"
+    "sha256": "bca5ffd929000e9ce54854ec5f834ef115ed95c216d0a6c5d4c7f750f6e9286f",
+    "words": 1039,
+    "minutes_en": 5,
+    "source_en": "lore/en/05-third-bell.md"
    },
    {
     "id": "06-no-perfect-number",
@@ -111,7 +130,10 @@ window.MIRA_LIBRARY = [
     "chars": 1195,
     "minutes": 3,
     "source": "lore/zh/06-no-perfect-number.md",
-    "sha256": "e0116c5c3fc8f5afd949719ea9a742db12b979c2a3f9b7042f23dfce422eefd4"
+    "sha256": "e0116c5c3fc8f5afd949719ea9a742db12b979c2a3f9b7042f23dfce422eefd4",
+    "words": 922,
+    "minutes_en": 4,
+    "source_en": "lore/en/06-no-perfect-number.md"
    },
    {
     "id": "07-after-departure",
@@ -124,7 +146,10 @@ window.MIRA_LIBRARY = [
     "chars": 1303,
     "minutes": 3,
     "source": "lore/zh/07-after-departure.md",
-    "sha256": "7fb72c5e63d420bfeef8dda2cb61a1745565b955c144272ea1cfcc253bfe5a54"
+    "sha256": "7fb72c5e63d420bfeef8dda2cb61a1745565b955c144272ea1cfcc253bfe5a54",
+    "words": 1042,
+    "minutes_en": 5,
+    "source_en": "lore/en/07-after-departure.md"
    },
    {
     "id": "character-profile",
@@ -138,7 +163,10 @@ window.MIRA_LIBRARY = [
     "chars": 2642,
     "minutes": 6,
     "source": "lore/zh/character-profile.md",
-    "sha256": "768211f6ebafb06ebe7281251aaa8aa0497bb63556b6bfe6a11d5c4082cbb625"
+    "sha256": "768211f6ebafb06ebe7281251aaa8aa0497bb63556b6bfe6a11d5c4082cbb625",
+    "words": 2086,
+    "minutes_en": 9,
+    "source_en": "lore/en/character-profile.md"
    }
   ]
  },
@@ -166,6 +194,7 @@ window.MIRA_LIBRARY = [
   "setting_zh": "MØBIUS 研究站 · 她的第一个冬天",
   "chars": 5441,
   "minutes": 12,
+  "minutes_en": 21,
   "chapters": [
    {
     "id": "01-arrival",
@@ -178,7 +207,10 @@ window.MIRA_LIBRARY = [
     "chars": 1282,
     "minutes": 3,
     "source": "lore/zh/only-one-side/01-arrival.md",
-    "sha256": "fb2b45a202d3a3b743d767757cba088db7317c3b91868f84571ec8a22bf1f0c3"
+    "sha256": "fb2b45a202d3a3b743d767757cba088db7317c3b91868f84571ec8a22bf1f0c3",
+    "words": 1064,
+    "minutes_en": 5,
+    "source_en": "lore/en/only-one-side/01-arrival.md"
    },
    {
     "id": "02-bleed-through",
@@ -191,7 +223,10 @@ window.MIRA_LIBRARY = [
     "chars": 1562,
     "minutes": 3,
     "source": "lore/zh/only-one-side/02-bleed-through.md",
-    "sha256": "a905f7e97ec3a09fc7cde9314f69adbfcba0906389604dbb8fab52d526dc7d76"
+    "sha256": "a905f7e97ec3a09fc7cde9314f69adbfcba0906389604dbb8fab52d526dc7d76",
+    "words": 1268,
+    "minutes_en": 6,
+    "source_en": "lore/en/only-one-side/02-bleed-through.md"
    },
    {
     "id": "03-first-letter",
@@ -204,7 +239,10 @@ window.MIRA_LIBRARY = [
     "chars": 1263,
     "minutes": 3,
     "source": "lore/zh/only-one-side/03-first-letter.md",
-    "sha256": "5834f75a3c5a1fe5f0ba6e7dc8633ad2b87e11f617921052bf867a117475f672"
+    "sha256": "5834f75a3c5a1fe5f0ba6e7dc8633ad2b87e11f617921052bf867a117475f672",
+    "words": 1057,
+    "minutes_en": 5,
+    "source_en": "lore/en/only-one-side/03-first-letter.md"
    },
    {
     "id": "04-only-one-side",
@@ -217,7 +255,10 @@ window.MIRA_LIBRARY = [
     "chars": 1334,
     "minutes": 3,
     "source": "lore/zh/only-one-side/04-only-one-side.md",
-    "sha256": "356631368368a78389300da177bea68f52abff1d53d17839aca9cd84eac1d2c0"
+    "sha256": "356631368368a78389300da177bea68f52abff1d53d17839aca9cd84eac1d2c0",
+    "words": 1089,
+    "minutes_en": 5,
+    "source_en": "lore/en/only-one-side/04-only-one-side.md"
    }
   ]
  }
