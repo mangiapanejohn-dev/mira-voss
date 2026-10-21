@@ -280,6 +280,10 @@ html[data-lang='zh'] .rovelle-chart .sea-name { font-family: var(--serif-zh); fo
 .canon-col li { position: relative; padding: 9px 0 9px 22px; border-bottom: 1px solid var(--navy-line); font-size: 15.5px; }
 .canon-col li::before { content: ''; position: absolute; left: 2px; top: 17px; width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
 .canon-col.is-open li::before { background: none; border: 1px dashed var(--gold-deep); }
+/* On a light section the cards are paper: white ground, dark ink, the gold frame kept */
+.blade-light .canon-col .frame-inner { background: #fff; }
+.blade-light .canon-col h3 { color: #0a1428; }
+.blade-light .canon-col li { color: #2a3140; }
 
 /* ===== Agent page ===== */
 .agent-head { min-height: clamp(560px, 78vh, 760px); }

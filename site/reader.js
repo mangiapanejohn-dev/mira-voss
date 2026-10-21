@@ -12,11 +12,22 @@
   const params = new URLSearchParams(location.search);
   const saved = store.get('mira-reading-v3');
   const url = (w, c) => `read.html?work=${w}&chapter=${c}`;
-  const HERO = {
-    'unfinished-chart': { src: 'assets/art/rovelle-harbor.webp', focus: '42% 62%' },
-    'only-one-side': { src: 'assets/art/mobius-loop.svg', art: 'mobius' },
-    'character-profile': { src: 'assets/art/mira-portrait.webp', focus: '50% 30%' },
+  // Each chapter opens on its place: a coast seen from the water under that chapter's sky, or a painting.
+  // A work sets the default; a chapter changes what it needs to.
+  const SCENES = {
+    'unfinished-chart': { view: 'rovelle-view', sky: 'dusk' },
+    '01-overdue-accuracy': { sky: 'lights' },
+    '02-unasked-question': { sky: 'storm' },
+    '03-four-degrees-below': { sky: 'lights' },
+    '05-third-bell': { sky: 'storm' },
+    '06-no-perfect-number': { sky: 'lights' },
+    '07-after-departure': { painting: 'assets/bg/sea.webp', focus: '58% 60%' },
+    'character-profile': { painting: 'assets/mira-rovell-splash-v2.webp', focus: '64% 28%' },
+    'only-one-side': { view: 'vard-near', sky: 'ice' },
+    '01-arrival': { view: 'vard-far' },
   };
+  // The object each work ends on.
+  const EMBLEMS = { 'unfinished-chart': 'watch', 'only-one-side': 'mobius' };
   const T = {
     en: {
       minutes: n => `About ${n} min`, min: n => `${n} min`,
@@ -57,16 +68,23 @@
 
   /* ---------- Opening ---------- */
   if (work.theme) root.dataset.theme = work.theme;
-  if (work.bg) $('.reader-atmos').style.setProperty('--reader-bg', `url(${work.bg})`);
   const hero = $('[data-hero]');
-  const art = HERO[chapter.id] || HERO[work.id] || { src: work.cover };
+  const scene = { ...SCENES[work.id], ...SCENES[chapter.id] };
   const heroImg = $('[data-hero-img]');
-  if (art.art) hero.dataset.art = art.art;
-  if (art.focus) hero.style.setProperty('--focus', art.focus);
-  heroImg.src = art.src;
+  let heroReady = Promise.resolve();
+  if (scene.painting) {
+    hero.dataset.art = 'painting';
+    if (scene.focus) hero.style.setProperty('--focus', scene.focus);
+    heroImg.src = scene.painting;
+    heroReady = heroImg.decode ? heroImg.decode() : Promise.resolve();
+  } else {
+    if (scene.sky) hero.style.setProperty('--sky', `url(assets/bg/${scene.sky}.webp)`);
+    if (scene.view) $('[data-hero-view]').dataset.view = scene.view;
+    if (scene.view) heroReady = fetch(`assets/art/${scene.view}.svg`).then(r => (r.ok ? r.text() : '')).then(svg => { $('[data-hero-view]').innerHTML = svg; });
+  }
   $('[data-version]').textContent = `${work.version} · ${work.date}`;
   const showHero = () => { requestAnimationFrame(() => hero.classList.add('is-ready')); setTimeout(() => hero.classList.add('is-ready'), 120); };
-  (heroImg.decode ? heroImg.decode() : Promise.resolve()).catch(() => {}).then(() => setTimeout(showHero, root.classList.contains('tide-out') ? 240 : 0));
+  heroReady.catch(() => {}).then(() => setTimeout(showHero, root.classList.contains('tide-out') ? 240 : 0));
 
   /* ---------- Contents drawer ---------- */
   const contents = $('[data-contents]');
@@ -125,6 +143,8 @@
   nextLink.hidden = !(next || showNextWork);
   if (prev) { prevLink.hidden = false; prevLink.href = url(work.id, prev.id); }
   let appendixLink = null;
+  const emblem = chapter === story[story.length - 1] && EMBLEMS[work.id];
+  if (emblem) $(`[data-emblem="${emblem}"]`).hidden = false;
   if (appendix && chapter === story[story.length - 1]) {
     appendixLink = document.createElement('a');
     appendixLink.className = 'text-link';
@@ -153,12 +173,15 @@
     document.title = zh ? `${chapter.title} · ${work.short_zh} · Mira Voss` : `${chapter.title_en} · ${work.title_en} · Mira Voss`;
     $('[data-bar-work]').textContent = zh ? work.short_zh : work.title_en;
     $('[data-bar-chapter]').textContent = chapter.kind === 'appendix' ? label(chapter) : `${label(chapter)} · ${title(chapter)}`;
+    $('[data-rail-work]').textContent = zh ? work.title_zh : work.title_en;
+    $('[data-rail-chapter]').textContent = chapter.kind === 'appendix' ? label(chapter) : `${label(chapter)} · ${title(chapter)}`;
     $('[data-series]').textContent = zh ? `${work.series_zh} · ${work.title_zh}` : `${work.series} · ${work.title_en}`;
     $('[data-label]').textContent = label(chapter);
     $('[data-label-en]').textContent = zh ? chapter.label_en : '';
     $('[data-label-en]').hidden = !zh;
     const h1 = $('[data-title]');
-    h1.textContent = title(chapter);
+    // A profile opens on the name, as a biography does; its spoiler warning is the first line of the text.
+    h1.textContent = chapter.kind === 'appendix' ? chapter.title : title(chapter);
     h1.lang = zh ? 'zh-Hans' : 'en';
     $('[data-title-en]').textContent = zh ? chapter.title_en : '';
     $('[data-title-en]').hidden = !zh;
@@ -192,7 +215,7 @@
 
   /* ---------- The text ---------- */
   const prose = $('[data-prose]');
-  const progress = $('.reading-progress span');
+  const progress = [$('.reading-progress span'), $('.rail-progress span')];
   const bounds = () => {
     const top = prose.getBoundingClientRect().top + scrollY;
     return { top, distance: Math.max(1, prose.offsetHeight - innerHeight * .6) };
@@ -204,7 +227,7 @@
   const onScroll = () => {
     frame = 0;
     const r = ratio();
-    progress.style.transform = `scaleX(${r})`;
+    progress.forEach(p => { p.style.transform = `scaleX(${r})`; });
     document.body.classList.toggle('is-reading', scrollY > hero.offsetHeight - 80);
     if (restoring) return;
     clearTimeout(saveTimer);

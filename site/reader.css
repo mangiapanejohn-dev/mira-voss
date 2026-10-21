@@ -2,12 +2,23 @@
 :root { --prose: 19px; }
 html[data-size='s'] { --prose: 17px; }
 html[data-size='l'] { --prose: 22px; }
-body { background: var(--navy); }
-/* The work's own weather at the edges of the page; the reading column stays clear */
-.reader-atmos { position: fixed; z-index: -1; inset: 0; pointer-events: none; }
-.reader-atmos::before { content: ''; position: absolute; inset: 0; background: var(--reader-bg, none) center / cover no-repeat; opacity: .55; }
-.reader-atmos::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 0%, var(--navy) 26%, var(--navy) 74%, transparent 100%); }
-.chapter-hero[data-art='mobius'] { background: var(--abyss) url(assets/bg/ice.webp) center / cover; }
+body { background: #080d15; }
+/* Behind the text: the dark of a chart room, and a sea chart's depth lines in both margins, fading out before the column */
+.reader-atmos { position: fixed; z-index: -1; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 0%, #0e1724 0%, #080d15 55%, #05080d 100%); }
+.reader-atmos::before { content: ''; position: absolute; inset: 0; background: url(assets/bg/depth-lines.svg) center / cover no-repeat; opacity: .2; -webkit-mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, .75) 14%, transparent 30%, transparent 70%, rgba(0, 0, 0, .75) 86%, #000 100%); mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, .75) 14%, transparent 30%, transparent 70%, rgba(0, 0, 0, .75) 86%, #000 100%); }
+html[data-theme='ice'] .reader-atmos { background: radial-gradient(120% 90% at 50% 0%, #0d1a20 0%, #071014 55%, #04080a 100%); }
+
+/* The rail: what is being read and how far, beside the text on a wide screen */
+.reader-rail { position: fixed; z-index: 20; top: calc(var(--bar) + 48px); left: max(var(--edge), calc((100vw - 1560px) / 2 + var(--edge))); width: 210px; opacity: 0; transform: translateX(-12px); transition: opacity .5s ease, transform .7s var(--ease-out); pointer-events: none; }
+.is-reading .reader-rail { opacity: 1; transform: none; }
+.rail-work { margin: 0; color: #f0e6d2; font: italic 800 20px/1.1 var(--display); text-transform: uppercase; }
+html[data-lang='zh'] .rail-work { font: 900 18px/1.35 var(--serif-zh); letter-spacing: .08em; }
+.rail-chapter { margin: 10px 0 18px; color: var(--gold); font: 700 11.5px/1.5 var(--sans); letter-spacing: .18em; text-transform: uppercase; }
+html[data-lang='zh'] .rail-chapter { font: 600 13px/1.6 var(--serif-zh); letter-spacing: .12em; }
+.rail-progress { height: 2px; background: rgba(200, 170, 110, .18); }
+.rail-progress span { display: block; height: 100%; background: var(--gold); transform-origin: left; transform: scaleX(0); }
+@media (max-width: 1279px) { .reader-rail { display: none; } }
+@media (min-width: 1280px) { .reader-bar .bar-title { visibility: hidden; } .reading-progress { display: none; } }
 
 /* Reader bar */
 .reader-bar { gap: 28px; }
@@ -51,36 +62,52 @@ html:not([data-lang='zh']) .bar-title { font: italic 700 15px/1 var(--display); 
 .toc-work .m { font-size: 12.5px; }
 .toc-work .t[lang='en'] { font: 600 16px/1.4 var(--display); }
 
-/* Chapter opening */
-.chapter-hero { position: relative; isolation: isolate; display: flex; align-items: flex-end; justify-content: center; min-height: clamp(420px, 62vh, 620px); padding: calc(var(--bar) + 60px) var(--edge) clamp(56px, 8vh, 90px); overflow: clip; background: var(--abyss); text-align: center; }
-.chapter-hero-art { position: absolute; z-index: -1; inset: 0; }
-.chapter-hero-art img { width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%); opacity: .5; transform: scale(1.08); transition: transform 2.6s var(--ease-out), opacity 1.6s var(--ease-out); }
-.chapter-hero-art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, var(--navy) 0%, rgba(10, 20, 40, .5) 45%, rgba(1, 10, 19, .65) 100%); }
-.chapter-hero.is-ready .chapter-hero-art img { transform: none; opacity: .62; }
-.chapter-hero[data-art='mobius'] .chapter-hero-art img { object-fit: contain; opacity: .55; padding: 40px 0 0; }
-.chapter-hero-body { max-width: 900px; }
+/* Chapter opening: the whole first screen is the place the chapter happens in, its title over the sky */
+.chapter-hero { --view-h: clamp(220px, 27.5vw, 470px); position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100svh; padding: calc(var(--bar) + 40px) var(--edge) calc(var(--view-h) * .66 + 40px); overflow: clip; background: #070c14; text-align: center; }
+.hero-sky { position: absolute; z-index: -3; inset: 0; background: var(--sky, none) center 40% / cover no-repeat; opacity: .92; transform: scale(1.08); transition: transform 3.2s var(--ease-out); }
+.hero-sky::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1, 10, 19, .8) 0%, rgba(1, 10, 19, .2) 32%, rgba(1, 10, 19, .05) 60%, rgba(1, 10, 19, .25) 100%); }
+.chapter-hero.is-ready .hero-sky { transform: none; }
+.hero-view { position: absolute; z-index: -2; left: 0; right: 0; bottom: 0; height: var(--view-h); }
+.hero-view svg { display: block; width: 100%; height: 100%; }
+/* A coast seen from far off stays low on the horizon */
+.hero-view[data-view='vard-far'] { height: calc(var(--view-h) * .6); }
+.chapter-hero::after { content: ''; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 14%; background: linear-gradient(0deg, #080d15, rgba(8, 13, 21, 0)); pointer-events: none; }
+.chapter-hero-art { display: none; position: absolute; z-index: -2; inset: 0; }
+.chapter-hero-art img { width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%); transform: scale(1.06); transition: transform 3.2s var(--ease-out); }
+.chapter-hero-art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1, 10, 19, .7) 0%, rgba(1, 10, 19, 0) 28%, rgba(1, 10, 19, 0) 48%, rgba(1, 10, 19, .78) 82%, #080d15 100%); }
+.chapter-hero.is-ready .chapter-hero-art img { transform: none; }
+.chapter-hero[data-art='painting'] { justify-content: flex-end; padding-bottom: clamp(110px, 15vh, 170px); }
+.chapter-hero[data-art='painting'] .chapter-hero-art { display: block; }
+.chapter-hero[data-art='painting'] .hero-sky, .chapter-hero[data-art='painting'] .hero-view { display: none; }
+.chapter-hero-body { position: relative; max-width: 960px; }
+/* A little more night behind the words, so the sky never has to be dimmed for them */
+.chapter-hero-body::before { content: ''; position: absolute; z-index: -1; inset: -30% -18%; background: radial-gradient(closest-side, rgba(1, 10, 19, .5), rgba(1, 10, 19, 0)); pointer-events: none; }
 .chapter-hero-body > * { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease-out), transform 1.2s var(--ease-out); }
 .chapter-hero.is-ready .chapter-hero-body > * { opacity: 1; transform: none; }
-.chapter-hero-body > :nth-child(2) { transition-delay: .12s; }
-.chapter-hero-body > :nth-child(3) { transition-delay: .24s; }
-.chapter-hero-body > :nth-child(4) { transition-delay: .36s; }
-.chapter-hero-body > :nth-child(5) { transition-delay: .48s; }
+.chapter-hero-body > :nth-child(2) { transition-delay: .14s; }
+.chapter-hero-body > :nth-child(3) { transition-delay: .28s; }
+.chapter-hero-body > :nth-child(4) { transition-delay: .42s; }
 .no-js .chapter-hero-body > * { opacity: 1; transform: none; }
-.hero-series { margin: 0 0 22px; color: var(--gold); font: italic 700 clamp(15px, .5vw + 12px, 19px)/1.2 var(--display); text-transform: uppercase; }
-.hero-label { display: flex; justify-content: center; align-items: center; gap: 16px; margin: 0 0 14px; color: var(--gold-pale); font: 600 16px/1 var(--serif-zh); letter-spacing: .3em; }
+.hero-label { display: flex; justify-content: center; align-items: center; gap: 16px; margin: 0 0 16px; color: var(--gold-pale); font: 600 16px/1 var(--serif-zh); letter-spacing: .3em; }
 .hero-label-en { color: var(--muted); font: 700 11.5px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; }
 .hero-label-en::before { content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 16px 2px 0; background: var(--gold); transform: rotate(45deg); }
-.chapter-hero h1 { margin: 0; color: #fff; font: 900 clamp(40px, 4vw + 18px, 84px)/1.2 var(--serif-zh); letter-spacing: .08em; text-wrap: balance; outline: none; }
-.chapter-hero h1[lang='en'] { font: italic 800 clamp(40px, 4vw + 18px, 84px)/1.05 var(--display); letter-spacing: -.005em; text-transform: uppercase; }
+.chapter-hero h1 { margin: 0; color: #fff; font: 900 clamp(42px, 4.4vw + 18px, 96px)/1.15 var(--serif-zh); letter-spacing: .08em; text-wrap: balance; outline: none; }
+.chapter-hero h1[lang='en'] { font: italic 800 clamp(42px, 4.4vw + 18px, 96px)/1.02 var(--display); letter-spacing: -.005em; text-transform: uppercase; }
 html:not([data-lang='zh']) .hero-label { font: italic 700 18px/1 var(--display); letter-spacing: .06em; }
-.hero-en { margin: 16px 0 0; color: var(--gold); font: 600 clamp(13px, .3vw + 12px, 15px)/1.3 var(--sans); letter-spacing: .3em; text-transform: uppercase; }
-.hero-note { margin: 14px 0 0; color: var(--muted); font: italic 600 14px/1.4 var(--display); }
-.hero-meta { justify-content: center; margin: 20px 0 0; color: var(--muted); font: 600 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
-.chapter-hero .u-rule { width: min(760px, 80vw); margin-top: 26px; }
+.hero-en { margin: 14px 0 0; color: var(--gold-pale); font: 600 clamp(13px, .3vw + 12px, 15px)/1.3 var(--sans); letter-spacing: .3em; text-transform: uppercase; }
+.hero-series { margin: 20px 0 0; color: var(--gold); font: 700 12.5px/1.4 var(--sans); letter-spacing: .24em; text-transform: uppercase; }
+html[data-lang='zh'] .hero-series { font: 600 14px/1.5 var(--serif-zh); letter-spacing: .2em; }
 .chapter-hero .u-cue { color: var(--gold-pale); }
 
+/* Between the opening and the text: a gold line comes down to a diamond, then the facts of the chapter */
+.chapter-intro { display: flex; flex-direction: column; align-items: center; padding: 0 var(--edge); scroll-margin-top: var(--bar); text-align: center; }
+.drop-line { position: relative; width: 1px; height: 88px; margin-bottom: 28px; background: linear-gradient(180deg, rgba(200, 170, 110, 0), var(--gold)); }
+.drop-line::after { content: ''; position: absolute; left: -4px; bottom: -9px; width: 7px; height: 7px; border: 1px solid var(--gold); background: #080d15; transform: rotate(45deg); }
+.hero-meta { justify-content: center; margin: 0; color: var(--muted); font: 600 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.hero-note { margin: 14px 0 0; color: var(--muted); font: italic 600 14px/1.4 var(--display); }
+
 /* The text */
-.prose { width: min(100% - 2 * var(--edge), 36em); margin: 0 auto; padding: clamp(40px, 6vh, 72px) 0 20px; color: #e3ded3; font: 400 var(--prose)/2.05 var(--serif-zh); letter-spacing: .02em; font-size: var(--prose); }
+.prose { width: min(100% - 2 * var(--edge), 36em); margin: 0 auto; padding: clamp(36px, 5vh, 56px) 0 20px; color: #e3ded3; font: 400 var(--prose)/2.05 var(--serif-zh); letter-spacing: .02em; font-size: var(--prose); }
 .prose p { margin: 0 0 1.15em; text-align: justify; text-justify: inter-ideograph; }
 .prose > p:first-child::first-letter { float: left; margin: .1em .26em 0 0; padding-bottom: .1em; color: var(--gold-pale); border-bottom: 2px solid var(--gold); font: 900 2.6em/1 var(--serif-zh); }
 /* A first paragraph shorter than its drop cap does not push the next one aside */
@@ -104,7 +131,7 @@ html:not([data-lang='zh']) .hero-label { font: italic 700 18px/1 var(--display);
 .prose[lang='en'] em { font-style: italic; }
 .prose[lang='en'] > p:first-child::first-letter { margin: .08em .1em 0 0; padding: 0; border: 0; font: 600 3.3em/.8 var(--display); }
 .prose[lang='en'] h2 { font: italic 700 1.3em/1.35 var(--display); letter-spacing: 0; }
-.prose[lang='en'] .end-mark { font: italic 700 1em/1 var(--display); letter-spacing: .3em; text-indent: .3em; }
+.prose[lang='en'] .end-mark { font: italic 700 1em/1 var(--display); letter-spacing: .3em; text-indent: .3em; text-align: center; }
 .js .prose > * { opacity: 0; transform: translateY(14px); transition: opacity .9s var(--ease-out), transform 1s var(--ease-out); }
 .js .prose > .is-in { opacity: 1; transform: none; }
 
@@ -113,6 +140,15 @@ html:not([data-lang='zh']) .hero-label { font: italic 700 18px/1 var(--display);
 .end-ornament { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 10px 0 54px; }
 .end-ornament span { width: 90px; height: 1px; background: var(--gold-line); }
 .end-ornament i { width: 9px; height: 9px; border: 1px solid var(--gold); transform: rotate(45deg); }
+/* The object the story ends on, as the stories of Runeterra end on one */
+.end-emblem { margin: 0 auto 60px; text-align: center; }
+.end-emblem svg { display: block; width: 140px; height: auto; margin: 0 auto; color: var(--gold); }
+.end-emblem figcaption { max-width: 30em; margin: 20px auto 0; color: var(--muted); font: italic 400 17px/1.5 var(--display); }
+html[data-lang='zh'] .end-emblem figcaption { font: 400 15px/1.8 var(--serif-zh); letter-spacing: .04em; }
+.end-emblem .mobius-art { width: 200px; margin: 0 auto; aspect-ratio: 4 / 5; }
+.end-emblem .mobius-art svg { width: 100%; height: 100%; }
+.end-emblem .mobius-pen { fill: var(--gold-pale); }
+.end-emblem .mobius-trail { fill: none; stroke: var(--gold-pale); stroke-width: 1.6; stroke-linecap: round; opacity: .45; }
 .next-card { display: block; }
 .next-card .frame-inner { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 32px 70px 32px 34px; transition: background-color .5s; }
 .next-card:hover .frame-inner { background: rgba(30, 45, 69, .9); }
@@ -142,7 +178,11 @@ html[data-reading='light'] .prose blockquote { color: #4a4f5a; }
 html[data-reading='light'] .prose em { color: #0a1428; }
 html[data-reading='light'] .prose .end-mark, html[data-reading='light'] .prose a { color: #8a6a2e; }
 html[data-reading='light'] .reader-atmos { display: none; }
-html[data-reading='light'] .chapter-hero-art::after { background: linear-gradient(0deg, #f6f6f4 0%, rgba(10, 20, 40, .55) 30%, rgba(1, 10, 19, .7) 100%); }
+html[data-reading='light'] .chapter-hero::after { background: linear-gradient(0deg, #f6f6f4, rgba(246, 246, 244, 0)); }
+html[data-reading='light'] .chapter-hero-art::after { background: linear-gradient(180deg, rgba(1, 10, 19, .7) 0%, rgba(1, 10, 19, 0) 28%, rgba(1, 10, 19, 0) 48%, rgba(1, 10, 19, .7) 84%, #f6f6f4 100%); }
+html[data-reading='light'] .drop-line::after { background: #f6f6f4; }
+html[data-reading='light'] .rail-work { color: #0a1428; }
+html[data-reading='light'] .rail-chapter, html[data-reading='light'] .end-emblem svg { color: #8a6a2e; }
 html[data-reading='light'] .next-card .frame-inner { background: #fff; }
 html[data-reading='light'] .next-card:hover .frame-inner { background: #f0eee8; }
 html[data-reading='light'] .next-title { color: #0a1428; }
