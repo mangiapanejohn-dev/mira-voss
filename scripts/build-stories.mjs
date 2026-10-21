@@ -159,9 +159,10 @@ const latestHTML = `
 function inject(file, marker, html) {
   const path = join(root, 'site', file);
   const page = readFileSync(path, 'utf8');
-  const re = new RegExp(`(<!-- ${marker}:start -->)[\\s\\S]*?(\\s*<!-- ${marker}:end -->)`);
+  // Everything between the markers is replaced, the end marker keeps its indent: running twice changes nothing.
+  const re = new RegExp(`(<!-- ${marker}:start -->)[\\s\\S]*?\\n([ \\t]*)<!-- ${marker}:end -->`);
   if (!re.test(page)) throw new Error(`${file}: no ${marker} markers`);
-  writeFileSync(path, page.replace(re, `$1${html}$2`));
+  writeFileSync(path, page.replace(re, (_, start, indent) => `${start}${html.trimEnd()}\n${indent}<!-- ${marker}:end -->`));
 }
 inject('stories.html', 'library', libraryHTML);
 inject('stories.html', 'order', orderHTML);

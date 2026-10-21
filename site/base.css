@@ -45,7 +45,7 @@ p { margin: 0 0 1.1em; }
 [lang='zh-Hans']:not(html):not(button) { font-family: var(--serif-zh); }
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.skip-link { position: fixed; z-index: 300; top: -80px; left: 16px; padding: 12px 18px; background: var(--gold); color: var(--abyss); font-weight: 700; }
+.skip-link { position: fixed; z-index: 300; top: -80px; left: 16px; padding: 12px 18px; background: #1e2328; color: #f0e6d2; border: 2px solid #c8aa6e; font-weight: 700; }
 .skip-link:focus { top: 12px; }
 
 /* ---------- Type ---------- */
@@ -110,30 +110,25 @@ p { margin: 0 0 1.1em; }
 .menu-open .menu a { opacity: 1; transform: none; transition-delay: calc(.18s + var(--i) * .06s); }
 .menu-open { overflow: hidden; }
 
-/* ---------- Buttons: the League CTA, with Mira's tide ----------
-   Primary: flat gold, navy text, a 1px ornamental frame 3px outside. On hover the frame
-   breathes outward, a soft light follows the pointer and the arrow passes through.
-   Secondary: a gold outline that fills from below like a rising tide, with a curved
-   waterline, and drains when the pointer leaves. */
-.btn { --rise: cubic-bezier(.22, 1, .36, 1); position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 36px; color: var(--gold-pale); font: 600 15px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; background: rgba(1, 10, 19, .35); border: 1px solid var(--gold); transition: color .4s ease .05s, border-color .4s ease, transform .2s ease; -webkit-tap-highlight-color: transparent; }
-.btn:not(.btn-gold)::before { content: ''; position: absolute; z-index: -1; left: -12%; right: -12%; bottom: 0; height: 150%; background: var(--gold); border-radius: 50% 50% 0 0 / 18% 18% 0 0; transform: translateY(101%); transition: transform .65s var(--rise); }
-.btn:not(.btn-gold):hover::before, .btn:not(.btn-gold):focus-visible::before { transform: translateY(0); }
-.btn:hover, .btn:focus-visible { color: #0a1428; }
-.btn:active { transform: translateY(1px) scale(.985); }
-.btn svg { width: 18px; height: 18px; flex: none; }
-.btn:hover svg, .btn:focus-visible svg { animation: arrow-pass .55s var(--rise); }
-@keyframes arrow-pass { 0% { transform: none; opacity: 1; } 42% { transform: translateX(14px); opacity: 0; } 43% { transform: translateX(-14px); opacity: 0; } 100% { transform: none; opacity: 1; } }
-
-.btn-gold { color: #0a1428; background-color: var(--gold); border-color: var(--gold); outline: 1px solid rgba(240, 230, 210, .7); outline-offset: 3px; transition: color .3s ease, background-color .45s ease, border-color .45s ease, outline-color .45s ease, outline-offset .55s var(--rise), transform .2s ease; }
-.btn-gold:hover, .btn-gold:focus-visible { color: #0a1428; background-color: #d9c18f; border-color: #d9c18f; outline-color: #fff; outline-offset: 6px; }
-.btn:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
-.btn-small { min-height: 38px; padding: 0 18px; font-size: 13px; letter-spacing: .06em; border-radius: 4px; }
+/* ---------- Buttons: the League client's hextech buttons ----------
+   A dark grey face (#1E2328), a 2px gold frame running Gold 4 to Gold 2, matte gold words (#CDBE91).
+   Hover lifts the frame to Gold 1 and the words to pale gold; nothing ever fills with colour.
+   Pressing darkens it. The primary is the same button with one thin outer frame. */
+.btn { --rise: cubic-bezier(.22, 1, .36, 1); position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 30px; color: #cdbe91; font: 700 14px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; background: #1e2328; border: 0; transition: color .35s ease, background-color .35s ease, transform .15s ease; -webkit-tap-highlight-color: transparent; }
+.btn::before, .btn::after { content: ''; position: absolute; z-index: -1; inset: 0; padding: 2px; pointer-events: none; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.btn::before { background: linear-gradient(180deg, #785a28, #c8aa6e); }
+.btn::after { background: linear-gradient(180deg, #f0e6d2, #c8aa6e); opacity: 0; transition: opacity .4s ease; }
+.btn:hover, .btn:focus-visible { color: #f0e6d2; background-color: #23282e; }
+.btn:hover::after, .btn:focus-visible::after { opacity: 1; }
+.btn:active { color: #a88a52; background-color: #1a1e23; transform: translateY(1px); }
+.btn:active::after { opacity: .4; }
+.btn svg { width: 18px; height: 18px; flex: none; transition: transform .35s var(--rise); }
+.btn:hover svg, .btn:focus-visible svg { transform: translateX(3px); }
+.btn-gold { color: #f0e6d2; outline: 1px solid rgba(200, 170, 110, .3); outline-offset: 3px; transition: color .35s ease, background-color .35s ease, outline-color .4s ease, outline-offset .5s var(--rise), transform .15s ease; }
+.btn-gold:hover, .btn-gold:focus-visible { outline-color: rgba(200, 170, 110, .65); outline-offset: 5px; }
+.btn:focus-visible { outline: 1px solid #f0e6d2; outline-offset: 5px; }
+.btn-small { min-height: 36px; padding: 0 16px; font-size: 12px; letter-spacing: .06em; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 20px; }
-.blade-light .btn { color: #0a1428; background: transparent; }
-.blade-light .btn::before { background: #0a1428; }
-.blade-light .btn:hover, .blade-light .btn:focus-visible { color: #fff; }
-.blade-light .btn-gold { background-color: var(--gold); outline-color: rgba(10, 20, 40, .35); }
-.blade-light .btn-gold:hover { color: #0a1428; outline-color: #0a1428; }
 
 /* Text links: the nav's underline, drawn in from the left */
 .text-link { position: relative; display: inline-flex; align-items: center; gap: 8px; padding-bottom: 4px; color: var(--gold); font: 600 13px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--gold-pale); transition: color .35s ease; }
@@ -173,7 +168,7 @@ p { margin: 0 0 1.1em; }
 .subbar-crumb img { width: 24px; height: auto; }
 .subbar-crumb span::before { content: '›'; margin-right: 10px; color: rgba(255, 255, 255, .4); }
 .subbar-top { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); transition: background-color .25s, color .25s; }
-.subbar-top:hover { background: var(--gold); color: #0a1428; }
+.subbar-top:hover { background: #1e2328; color: #f0e6d2; border-color: #f0e6d2; }
 .subbar-top svg { width: 12px; height: 12px; }
 .subbar-track { position: relative; flex: 1; height: 100%; }
 .subbar-track::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(200, 170, 110, .25); }
@@ -212,7 +207,7 @@ body::after { content: ''; position: fixed; z-index: 45; inset: 0; pointer-event
 
 /* Vard Light: a beam that sweeps every twelve seconds, as in the story */
 .beam { position: absolute; z-index: 0; left: var(--beam-x, 86%); top: var(--beam-y, 14%); width: 260vmax; height: 260vmax; pointer-events: none; transform: translate(-50%, -50%); background: conic-gradient(from 0deg, transparent 0 338deg, rgba(255, 244, 220, .05) 346deg, rgba(255, 246, 226, .2) 355deg, rgba(255, 246, 226, .06) 359deg, transparent 360deg); -webkit-mask-image: radial-gradient(closest-side, #000, rgba(0, 0, 0, .45) 30%, transparent 62%); mask-image: radial-gradient(closest-side, #000, rgba(0, 0, 0, .45) 30%, transparent 62%); mix-blend-mode: screen; animation: sweep 12s linear infinite; }
-.beam::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px; border-radius: 50%; background: #fff6e2; box-shadow: 0 0 10px 2px rgba(255, 238, 200, .35); }
+.beam::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px; border-radius: 50%; background: #e8dcc0; }
 @keyframes sweep { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
 /* The halftone of her logo, used as a soft field of dots */
@@ -237,13 +232,14 @@ body::after { content: ''; position: fixed; z-index: 45; inset: 0; pointer-event
 /* ---------- Language ---------- */
 html.i18n-pending body { visibility: hidden; animation: i18n-fallback 0s 1.2s forwards; }
 @keyframes i18n-fallback { to { visibility: visible; } }
-.lang-switch { position: relative; display: flex; flex: none; padding: 3px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 999px; }
-.lang-switch::before { content: ''; position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 999px; background: var(--gold); transition: transform .5s cubic-bezier(.22, 1, .36, 1); }
+.lang-switch { position: relative; display: flex; flex: none; height: 32px; background: #111316; border: 1px solid rgba(200, 170, 110, .3); }
+.lang-switch::before { content: ''; position: absolute; left: 0; bottom: -1px; width: 50%; height: 2px; background: var(--gold); transition: transform .45s cubic-bezier(.22, 1, .36, 1); }
 html[data-lang='zh'] .lang-switch::before { transform: translateX(100%); }
-.lang-switch button { position: relative; z-index: 1; width: 38px; height: 28px; color: rgba(255, 255, 255, .7); font: 700 12px/1 var(--sans); letter-spacing: .06em; transition: color .35s ease; }
+.lang-switch button { width: 40px; color: #7f7b70; font: 700 12px/1 var(--sans); letter-spacing: .06em; transition: color .3s ease; }
+.lang-switch button + button { border-left: 1px solid rgba(200, 170, 110, .18); }
 .lang-switch button[lang='zh-Hans'] { font: 600 13px/1 var(--serif-zh); }
-.lang-switch button[aria-pressed='true'] { color: #0a1428; }
-.lang-switch button:hover:not([aria-pressed='true']) { color: #fff; }
+.lang-switch button[aria-pressed='true'] { color: #f0e6d2; }
+.lang-switch button:hover:not([aria-pressed='true']) { color: #cdbe91; }
 main, .site-footer, .topnav, .topbar .btn-small, .subbar-crumb, .consent { transition: opacity .23s ease, filter .23s ease; }
 html.lang-out main, html.lang-out .site-footer, html.lang-out .topnav, html.lang-out .topbar .btn-small, html.lang-out .subbar-crumb, html.lang-out .consent { opacity: 0; filter: blur(6px); }
 html.lang-in main, html.lang-in .site-footer, html.lang-in .topnav, html.lang-in .topbar .btn-small, html.lang-in .subbar-crumb, html.lang-in .consent { transition: opacity .6s ease, filter .6s ease; }
@@ -265,8 +261,6 @@ html[data-lang='zh'] .person-en, html[data-lang='zh'] .pull-quote footer, html[d
 .consent.is-shown { transform: translate(-50%, 0); }
 .consent p { margin: 0; color: #d9d5cc; font-size: 14.5px; line-height: 1.6; }
 .consent-actions { display: flex; flex: none; gap: 12px; }
-.consent .btn-gold { outline-offset: 2px; }
-.consent .btn-gold:hover { outline-offset: 4px; }
 
 /* ---------- Reveals: each section chooses its own ---------- */
 /* mask: a heading rises out of a hidden baseline */
