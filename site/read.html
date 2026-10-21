@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400;1,700;1,800&family=Source+Sans+3:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="reader.css" />
-  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}var q=new URLSearchParams(location.search).get('lang'),g=localStorage.getItem('mira-lang'),l=q||(g&&JSON.parse(g))||((navigator.language||'').toLowerCase().indexOf('zh')===0?'zh':'en');d.dataset.lang=l==='zh'?'zh':'en';if(l==='zh'){d.lang='zh-Hans';d.classList.add('i18n-pending')}var s=localStorage.getItem('mira-reader-size');if(s)d.dataset.size=JSON.parse(s);var l=localStorage.getItem('mira-reader-light');if(l&&JSON.parse(l))d.dataset.reading='light'}catch(e){}})(document.documentElement)</script>
+  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}var q=new URLSearchParams(location.search).get('lang'),g=localStorage.getItem('mira-lang'),l=q||(g&&JSON.parse(g))||'en';d.dataset.lang=l==='zh'?'zh':'en';if(l==='zh'){d.lang='zh-Hans';d.classList.add('i18n-pending')}var s=localStorage.getItem('mira-reader-size');if(s)d.dataset.size=JSON.parse(s);var l=localStorage.getItem('mira-reader-light');if(l&&JSON.parse(l))d.dataset.reading='light'}catch(e){}})(document.documentElement)</script>
   <script src="data/library.js" defer></script>
   <script src="site.js" defer></script>
   <script src="reader.js" defer></script>
