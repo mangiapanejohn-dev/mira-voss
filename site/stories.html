@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="no-js" data-theme="ink">
+<html lang="en" class="no-js" data-mode="universe" data-theme="ink">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -19,7 +19,7 @@
   <script src="data/library.js" defer></script>
   <script src="site.js" defer></script>
 </head>
-<body>
+<body data-subbar="Stories">
   <a class="skip-link" href="#main">Skip to content</a>
   <svg class="sprite" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
@@ -45,20 +45,23 @@
   </nav>
 
   <main id="main">
-    <section class="masthead page-head" data-masthead style="--focus: 30% 62%" aria-labelledby="page-title">
+    <section class="masthead page-head u-hero" data-masthead style="--focus: 30% 62%" aria-labelledby="page-title">
       <div class="masthead-art" data-parallax aria-hidden="true"><img src="assets/art/rovelle-harbor.webp" alt="" fetchpriority="high" /></div>
       <div class="masthead-shade" aria-hidden="true"></div>
       <div class="masthead-body">
-        <p class="supertitle intro" style="--d: 0">The library · 故事</p>
-        <h1 class="page-title champion-name misreg" id="page-title" data-text="Stories" aria-label="Stories"><span data-letters aria-hidden="true">Stories</span></h1>
-        <p class="masthead-bio intro" style="--d: 3">Mira's story is written in Chinese first. New stories are added here as they are finished, in the order they happen to her. Each one reads online, chapter by chapter, and remembers where you stopped.</p>
+        <h1 class="u-title intro" id="page-title" style="--d: 0">Stories</h1>
+        <div class="u-rule notch intro" style="--d: 1.5" aria-hidden="true"></div>
+        <p class="u-sub intro" style="--d: 2.5">The library · 故事</p>
+        <p class="masthead-bio intro" style="--d: 3.5">Mira's story is written in Chinese first. New stories are added here as they are finished, in the order they happen to her. Each one reads online, chapter by chapter, and remembers where you stopped.</p>
       </div>
+      <a class="u-cue intro" style="--d: 5" href="#library"><span>Scroll to begin</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6M6 4l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
     </section>
 
-    <section class="blade" aria-label="The stories">
+    <section class="blade" id="library" data-nav="The stories" aria-labelledby="library-title">
       <div class="atmos atmos-lights" aria-hidden="true"></div>
       <div class="isobaths-bg" data-isobaths="assets/chart-lines.svg" aria-hidden="true" style="opacity: .6"></div>
       <div class="blade-inner">
+        <h2 class="u-head reveal" id="library-title"><span><img src="assets/mira-logo-cutout.webp" alt="" />The stories of <em>Mira Voss</em></span></h2>
         <a class="continue reveal" href="read.html" data-continue hidden>
           <span class="label">Continue reading</span>
           <span><strong><span data-continue-work></span> · <span data-continue-chapter></span></strong><span class="continue-bar" data-continue-progress></span></span>
@@ -68,7 +71,7 @@
         <article class="work reveal" id="unfinished-chart" style="--work-bg: url(assets/bg/dusk.webp)">
           <a class="work-cover frame" href="read.html?work=unfinished-chart" tabindex="-1" aria-hidden="true"><span class="frame-inner halftone"><img src="assets/art/cover-rovelle.webp" alt="" loading="lazy" /></span></a>
           <div class="work-body">
-            <ul class="work-meta"><li>Rovelle · Book One</li><li>Prologue + 7 chapters</li><li>22 min</li><li>v3.0 · 2026-10-21</li></ul>
+            <ul class="work-meta diamonds"><li>Rovelle · Book One</li><li>Prologue + 7 chapters</li><li>22 min</li><li>v3.0 · 2026-10-21</li></ul>
             <h2 class="work-title">The Unfinished Chart</h2>
             <p class="zh-title" lang="zh-Hans">罗维尔：未完成的海图</p>
             <p class="lede">A winter current is coming, and the city wants to use Mira's tidal chart beyond the conditions it was tested in. To correct the record she has to make its limits public, and let other people into a decision that cannot be hers alone.</p>
@@ -89,7 +92,7 @@
         <article class="work reveal" id="only-one-side" style="--work-bg: url(assets/bg/ice.webp)">
           <a class="work-cover frame" href="read.html?work=only-one-side" tabindex="-1" aria-hidden="true"><span class="frame-inner halftone" style="background: url(assets/bg/ice.webp) center / cover"><img src="assets/art/mobius-loop.svg" alt="" loading="lazy" /></span></a>
           <div class="work-body">
-            <ul class="work-meta"><li>MØBIUS · Short story</li><li>4 parts</li><li>12 min</li><li>v1.0 · 2026-10-21</li></ul>
+            <ul class="work-meta diamonds"><li>MØBIUS · Short story</li><li>4 parts</li><li>12 min</li><li>v1.0 · 2026-10-21</li></ul>
             <h2 class="work-title">Only One Side</h2>
             <p class="zh-title" lang="zh-Hans">MØBIUS：只有一面</p>
             <p class="lede">Three days north of Ailan, a station without a name keeps its deep-water record on a paper loop twisted half a turn. For nineteen winters, part of the sea in it was written off as ink bleeding through the paper.</p>
@@ -106,13 +109,10 @@
       </div>
     </section>
 
-    <section class="blade blade-dark" aria-labelledby="order-title">
+    <section class="blade blade-dark" id="order" data-nav="Reading order" aria-labelledby="order-title">
       <div class="atmos atmos-storm" aria-hidden="true"></div>
       <div class="blade-inner">
-        <div class="blade-head">
-          <p class="supertitle reveal">Where each story falls in her life</p>
-          <h2 class="blade-title misreg" id="order-title" data-text="Reading order">Reading order</h2>
-        </div>
+        <h2 class="u-head reveal" id="order-title"><span>Where each story falls in <em>her life</em></span></h2>
         <!-- order:start -->
         <ol class="reading-order reveal">
           <li><h3>The Unfinished Chart</h3><p>Rovelle · the winter she is seventeen</p></li>
@@ -125,13 +125,12 @@
   </main>
 
   <footer class="site-footer">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a><a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
+    </nav>
     <div class="footer-inner">
-      <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="64" height="53" loading="lazy" /><span>Mira Voss</span></a>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a>
-        <a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
-      </nav>
-      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime.<br />© 2026 Mira Voss project. All rights reserved.</p>
+      <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="56" height="47" loading="lazy" /><span>Mira Voss</span></a>
+      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime. © 2026 Mira Voss project. All rights reserved.</p>
     </div>
   </footer>
 </body>

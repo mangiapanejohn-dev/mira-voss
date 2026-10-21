@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;1,700;1,800&family=Source+Sans+3:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="reader.css" />
-  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}var s=localStorage.getItem('mira-reader-size');if(s)d.dataset.size=JSON.parse(s)}catch(e){}})(document.documentElement)</script>
+  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}var s=localStorage.getItem('mira-reader-size');if(s)d.dataset.size=JSON.parse(s);var l=localStorage.getItem('mira-reader-light');if(l&&JSON.parse(l))d.dataset.reading='light'}catch(e){}})(document.documentElement)</script>
   <script src="data/library.js" defer></script>
   <script src="site.js" defer></script>
   <script src="reader.js" defer></script>
@@ -34,6 +34,7 @@
         <button type="button" data-size="m" aria-label="中字号">A</button>
         <button type="button" data-size="l" aria-label="大字号">A</button>
       </div>
+      <button class="light-toggle" type="button" aria-pressed="false" aria-label="亮色阅读"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
       <button class="contents-toggle" type="button" aria-expanded="false" aria-controls="contents"><svg aria-hidden="true"><use href="#i-list" /></svg><span>目录</span></button>
     </div>
     <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -56,10 +57,13 @@
         <p class="hero-label"><span data-label></span><span class="hero-label-en" data-label-en></span></p>
         <h1 id="chapter" tabindex="-1" data-title></h1>
         <p class="hero-en" data-title-en></p>
-        <p class="hero-meta"><span data-minutes></span><span data-version></span></p>
+        <div class="u-rule notch" aria-hidden="true"></div>
+        <ul class="hero-meta diamonds"><li data-minutes></li><li data-version></li></ul>
       </div>
+      <a class="u-cue" href="#chapter-start"><span>向下阅读</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6M6 4l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
     </header>
 
+    <span id="chapter-start"></span>
     <article class="prose" data-prose aria-labelledby="chapter"></article>
     <noscript><p class="prose">阅读器需要 JavaScript。也可以在 <a href="https://github.com/mangiapanejohn-dev/mira-voss/tree/main/lore/zh">GitHub</a> 上阅读原文。</p></noscript>
 

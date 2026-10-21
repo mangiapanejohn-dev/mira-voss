@@ -22,7 +22,7 @@
   <script src="data/library.js" defer></script>
   <script src="site.js" defer></script>
 </head>
-<body>
+<body data-subbar="Home">
   <a class="skip-link" href="#main">Skip to content</a>
   <svg class="sprite" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
@@ -74,7 +74,7 @@
     </section>
 
     <!-- latest:start -->
-    <section class="blade blade-dark feature" id="latest" aria-labelledby="feature-title">
+    <section class="blade blade-dark feature" id="latest" data-nav="Newest story" aria-labelledby="feature-title">
       <div class="atmos" style="--atmos-img: url(assets/bg/ice.webp); --atmos-op: .8" aria-hidden="true"></div>
       <div class="beam" style="--beam-x: 6%; --beam-y: 12%" aria-hidden="true"></div>
       <div class="blade-inner feature-grid">
@@ -97,9 +97,11 @@
     
     
     
+    
+    
     <!-- latest:end -->
 
-    <section class="blade explore" aria-labelledby="explore-title">
+    <section class="blade explore" id="explore" data-nav="Explore" aria-labelledby="explore-title">
       <div class="atmos atmos-storm" aria-hidden="true"></div>
       <div class="blade-inner">
         <div class="blade-head">
@@ -127,7 +129,7 @@
       </div>
     </section>
 
-    <section class="blade blade-dark quote-band" aria-label="A line from The Unfinished Chart">
+    <section class="blade blade-dark quote-band" id="line" data-nav="A line" aria-label="A line from The Unfinished Chart">
       <div class="atmos atmos-dusk" aria-hidden="true"></div>
       <div class="isobaths-bg" data-isobaths="assets/chart-lines.svg" aria-hidden="true"></div>
       <figure class="blade-inner quote reveal">
@@ -138,13 +140,12 @@
   </main>
 
   <footer class="site-footer">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a><a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
+    </nav>
     <div class="footer-inner">
-      <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="64" height="53" loading="lazy" /><span>Mira Voss</span></a>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a>
-        <a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
-      </nav>
-      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime.<br />© 2026 Mira Voss project. All rights reserved.</p>
+      <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="56" height="47" loading="lazy" /><span>Mira Voss</span></a>
+      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime. © 2026 Mira Voss project. All rights reserved.</p>
     </div>
   </footer>
 </body>

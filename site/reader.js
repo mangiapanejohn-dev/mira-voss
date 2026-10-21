@@ -52,7 +52,7 @@
   $('[data-title-en]').textContent = chapter.title_en;
   $('[data-minutes]').textContent = `约 ${chapter.minutes} 分钟`;
   $('[data-version]').textContent = `${work.version} · ${work.date}`;
-  const showHero = () => requestAnimationFrame(() => hero.classList.add('is-ready'));
+  const showHero = () => { requestAnimationFrame(() => hero.classList.add('is-ready')); setTimeout(() => hero.classList.add('is-ready'), 120); };
   (heroImg.decode ? heroImg.decode() : Promise.resolve()).catch(() => {}).then(() => setTimeout(showHero, root.classList.contains('tide-out') ? 240 : 0));
 
   /* ---------- Contents ---------- */
@@ -97,6 +97,16 @@
   };
   sizes.forEach(b => b.addEventListener('click', () => setSize(b.dataset.size)));
   sizes.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.size === (root.dataset.size || 'm'))));
+
+  /* ---------- Light reading, as on the Universe story pages ---------- */
+  const light = $('.light-toggle');
+  const setLight = on => {
+    if (on) root.dataset.reading = 'light'; else delete root.dataset.reading;
+    light.setAttribute('aria-pressed', String(on));
+    store.set('mira-reader-light', on);
+  };
+  light.setAttribute('aria-pressed', String(root.dataset.reading === 'light'));
+  light.addEventListener('click', () => setLight(root.dataset.reading !== 'light'));
 
   /* ---------- After the chapter ---------- */
   // The next card follows the story; appendices (the spoiler profile) are offered below it instead.

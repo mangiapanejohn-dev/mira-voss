@@ -19,16 +19,16 @@
   <script src="data/library.js" defer></script>
   <script src="site.js" defer></script>
 </head>
-<body>
+<body data-subbar="The Agent">
   <a class="skip-link" href="#main">Skip to content</a>
   <svg class="sprite" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
     <symbol id="i-out" viewBox="0 0 24 24"><path d="M8 5h11v11M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
-    <symbol id="i-ask" viewBox="0 0 32 32"><path d="M5 5h22v16H15l-6 6v-6H5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M13 11a3 3 0 1 1 4.5 2.6c-.9.5-1.5 1-1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="18.4" r="1.2" fill="currentColor"/></symbol>
-    <symbol id="i-read" viewBox="0 0 32 32"><path d="M3 7c5-1.6 9-1 13 2 4-3 8-3.6 13-2v18c-5-1.6-9-1-13 2-4-3-8-3.6-13-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 9v18" stroke="currentColor" stroke-width="1.8"/></symbol>
-    <symbol id="i-edit" viewBox="0 0 32 32"><path d="M21 4l7 7L12 27H5v-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 8l7 7" stroke="currentColor" stroke-width="1.8"/></symbol>
-    <symbol id="i-run" viewBox="0 0 32 32"><rect x="3" y="5" width="26" height="22" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12l5 4-5 4M15 21h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
-    <symbol id="i-report" viewBox="0 0 32 32"><path d="M7 3h13l6 6v20H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M11 17l3.5 3.5L22 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></symbol>
+    <symbol id="i-ask" viewBox="0 0 32 32"><path pathLength="1" d="M5 5h22v16H15l-6 6v-6H5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path pathLength="1" d="M13 11a3 3 0 1 1 4.5 2.6c-.9.5-1.5 1-1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="18.4" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-read" viewBox="0 0 32 32"><path pathLength="1" d="M3 7c5-1.6 9-1 13 2 4-3 8-3.6 13-2v18c-5-1.6-9-1-13 2-4-3-8-3.6-13-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path pathLength="1" d="M16 9v18" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 32 32"><path pathLength="1" d="M21 4l7 7L12 27H5v-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path pathLength="1" d="M17 8l7 7" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-run" viewBox="0 0 32 32"><rect pathLength="1" x="3" y="5" width="26" height="22" fill="none" stroke="currentColor" stroke-width="1.8"/><path pathLength="1" d="M8 12l5 4-5 4M15 21h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></symbol>
+    <symbol id="i-report" viewBox="0 0 32 32"><path pathLength="1" d="M7 3h13l6 6v20H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path pathLength="1" d="M11 17l3.5 3.5L22 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></symbol>
   </svg>
 
   <header class="topbar">
@@ -70,44 +70,44 @@
       </div>
     </section>
 
-    <section class="blade" aria-labelledby="abilities-title">
+    <section class="blade" id="abilities" data-nav="Abilities" aria-labelledby="abilities-title">
       <div class="atmos atmos-ember" aria-hidden="true"></div>
-      <div class="blade-inner abilities">
-        <div data-tabs data-abilities>
+      <div class="blade-inner abilities" data-tabs data-abilities data-autoplay>
+        <div class="abilities-main">
           <p class="supertitle reveal">In your project</p>
           <h2 class="blade-title misreg" id="abilities-title" data-text="Abilities">Abilities</h2>
-          <div style="height: 40px"></div>
+          <p class="lede reveal">Start her in a folder and these are the things she does there, within her configuration and the permissions you give her.</p>
           <div class="ability-keys reveal" role="tablist" aria-label="Abilities">
-            <button class="ability-key" role="tab" id="key-p" aria-controls="ability-panel" aria-selected="true" data-key="p" data-slot="Passive" data-name="Asks before she changes things"><svg aria-hidden="true"><use href="#i-ask" /></svg><span class="key-letter">P</span></button>
-            <button class="ability-key" role="tab" id="key-q" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="q" data-slot="Q" data-name="Reads the project"><svg aria-hidden="true"><use href="#i-read" /></svg><span class="key-letter">Q</span></button>
-            <button class="ability-key" role="tab" id="key-w" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="w" data-slot="W" data-name="Edits files"><svg aria-hidden="true"><use href="#i-edit" /></svg><span class="key-letter">W</span></button>
-            <button class="ability-key" role="tab" id="key-e" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="e" data-slot="E" data-name="Runs commands"><svg aria-hidden="true"><use href="#i-run" /></svg><span class="key-letter">E</span></button>
-            <button class="ability-key" role="tab" id="key-r" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="r" data-slot="Ultimate" data-name="Shows her work"><svg aria-hidden="true"><use href="#i-report" /></svg><span class="key-letter">R</span></button>
+            <button class="ability-key" role="tab" id="key-p" aria-controls="ability-panel" aria-selected="true" data-key="p" data-glyph="#i-ask" data-slot="Passive" data-name="Asks before she changes things"><span class="key-icon"><svg aria-hidden="true"><use href="#i-ask" /></svg><span class="key-letter">P</span></span><span class="key-name">Asks first</span></button>
+            <button class="ability-key" role="tab" id="key-q" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="q" data-glyph="#i-read" data-slot="Q" data-name="Reads the project"><span class="key-icon"><svg aria-hidden="true"><use href="#i-read" /></svg><span class="key-letter">Q</span></span><span class="key-name">Reads</span></button>
+            <button class="ability-key" role="tab" id="key-w" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="w" data-glyph="#i-edit" data-slot="W" data-name="Edits files"><span class="key-icon"><svg aria-hidden="true"><use href="#i-edit" /></svg><span class="key-letter">W</span></span><span class="key-name">Edits</span></button>
+            <button class="ability-key" role="tab" id="key-e" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="e" data-glyph="#i-run" data-slot="E" data-name="Runs commands"><span class="key-icon"><svg aria-hidden="true"><use href="#i-run" /></svg><span class="key-letter">E</span></span><span class="key-name">Runs</span></button>
+            <button class="ability-key" role="tab" id="key-r" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="r" data-glyph="#i-report" data-slot="Ultimate" data-name="Shows her work"><span class="key-icon"><svg aria-hidden="true"><use href="#i-report" /></svg><span class="key-letter">R</span></span><span class="key-name">Shows her work</span></button>
           </div>
-          <div class="ability-panel reveal" id="ability-panel" role="tabpanel" aria-labelledby="key-p" data-ability-panel>
-            <span data-key aria-hidden="true">P</span>
-            <span class="label" data-slot>Passive</span>
+        </div>
+        <div class="ability-media reveal" id="ability-panel" role="tabpanel" aria-labelledby="key-p" data-ability-panel>
+          <div class="ability-frame frame">
+            <div class="frame-inner ability-plate">
+              <div class="halftone-field" style="--size: 120%; left: -10%; top: -10%; --op: .16" aria-hidden="true"></div>
+              <svg class="plate-glyph" data-glyph aria-hidden="true"><use href="#i-ask" /></svg>
+              <span class="plate-key" data-key aria-hidden="true">P</span>
+            </div>
+          </div>
+          <div class="ability-info">
             <h3 data-name>Asks before she changes things</h3>
+            <span class="label" data-slot>Passive</span>
             <p data-text>In the default mode, Mira asks for your approval before she makes changes to your project. You read each request and decide.</p>
           </div>
-          <template data-for="p">In the default mode, Mira asks for your approval before she makes changes to your project. You read each request and decide.</template>
-          <template data-for="q">Start <code>mira</code> in a folder and she can read the files there, so she works from what your project actually contains.</template>
-          <template data-for="w">She makes the edits a task needs directly in your files, instead of handing you snippets to paste.</template>
-          <template data-for="e">She runs terminal commands, such as builds, tests and scripts, and reads what they print.</template>
-          <template data-for="r">She shows you what she has done, so you can check her work before you rely on it.</template>
         </div>
-        <aside class="install-card frame reveal" aria-labelledby="fiction-title">
-          <div class="frame-inner">
-            <span class="label">Product and fiction</span>
-            <h3 id="fiction-title" style="margin-top: 10px">The story is not the spec</h3>
-            <p style="margin-top: 16px">The stories give Mira a face and a voice. They do not describe the software. No line of fiction grants a permission, bypasses a review, guarantees a result, or tells you which model is running. What the CLI does is defined by its code, its model and provider, your configuration and the permissions you set.</p>
-            <a class="text-link" href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/product-vs-fiction.md">Product vs. fiction <svg aria-hidden="true"><use href="#i-out" /></svg></a>
-          </div>
-        </aside>
+        <template data-for="p">In the default mode, Mira asks for your approval before she makes changes to your project. You read each request and decide.</template>
+        <template data-for="q">Start <code>mira</code> in a folder and she can read the files there, so she works from what your project actually contains.</template>
+        <template data-for="w">She makes the edits a task needs directly in your files, instead of handing you snippets to paste.</template>
+        <template data-for="e">She runs terminal commands, such as builds, tests and scripts, and reads what they print.</template>
+        <template data-for="r">She shows you what she has done, so you can check her work before you rely on it.</template>
       </div>
     </section>
 
-    <section class="blade blade-dark" aria-labelledby="start-title">
+    <section class="blade blade-dark" id="first-launch" data-nav="First launch" aria-labelledby="start-title">
       <div class="atmos atmos-lights" aria-hidden="true"></div>
       <div class="blade-inner">
         <div class="blade-head">
@@ -124,12 +124,17 @@
       </div>
     </section>
 
-    <section class="blade" aria-labelledby="faq-title">
-      <div class="atmos atmos-storm" aria-hidden="true"></div>
-      <div class="blade-inner">
-        <div class="blade-head">
+    <section class="blade blade-light" id="faq" data-nav="FAQ" aria-labelledby="faq-title">
+      <div class="blade-inner faq-grid">
+        <div>
           <p class="supertitle reveal">Questions</p>
           <h2 class="blade-title misreg" id="faq-title" data-text="FAQ">FAQ</h2>
+          <aside class="spec-note reveal" aria-labelledby="fiction-title">
+            <span class="label">Product and fiction</span>
+            <h3 id="fiction-title">The story is not the spec</h3>
+            <p>The stories give Mira a face and a voice. They do not describe the software. No line of fiction grants a permission, bypasses a review, guarantees a result, or tells you which model is running. What the CLI does is defined by its code, its model and provider, your configuration and the permissions you set.</p>
+            <a class="text-link" href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/product-vs-fiction.md">Product vs. fiction <svg aria-hidden="true"><use href="#i-out" /></svg></a>
+          </aside>
         </div>
         <div class="faq reveal">
           <details><summary>Is Mira open source?</summary><div class="answer"><p>No. The CLI runtime is proprietary. The public GitHub repository hosts documentation, the stories, her visual identity and this website, not the CLI's implementation.</p></div></details>
@@ -145,13 +150,12 @@
   </main>
 
   <footer class="site-footer">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a><a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
+    </nav>
     <div class="footer-inner">
-      <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="64" height="53" loading="lazy" /><span>Mira Voss</span></a>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a>
-        <a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
-      </nav>
-      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime.<br />© 2026 Mira Voss project. All rights reserved.</p>
+      <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="56" height="47" loading="lazy" /><span>Mira Voss</span></a>
+      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime. © 2026 Mira Voss project. All rights reserved.</p>
     </div>
   </footer>
 </body>

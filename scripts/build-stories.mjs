@@ -114,7 +114,7 @@ const libraryHTML = library.map(work => `
         <article class="work reveal" id="${work.id}" style="--work-bg: url(${work.bg})">
           <a class="work-cover frame" href="${read(work.id)}" tabindex="-1" aria-hidden="true"><span class="frame-inner halftone"${work.cover_bg ? ` style="background: url(${work.cover_bg}) center / cover"` : ''}><img src="${work.cover}" alt="" loading="lazy" /></span></a>
           <div class="work-body">
-            <ul class="work-meta"><li>${attr(work.series)}</li><li>${attr(partsLabel(work))}</li><li>${work.minutes} min</li><li>${attr(work.version)} · ${work.date}</li></ul>
+            <ul class="work-meta diamonds"><li>${attr(work.series)}</li><li>${attr(partsLabel(work))}</li><li>${work.minutes} min</li><li>${attr(work.version)} · ${work.date}</li></ul>
             <h2 class="work-title">${attr(work.title_en)}</h2>
             <p class="zh-title" lang="zh-Hans">${attr(work.title_zh)}</p>
             <p class="lede">${attr(work.summary_en)}</p>
@@ -133,7 +133,7 @@ const orderHTML = `
 
 const latest = [...library].reverse().reduce((best, w) => (!best || w.date > best.date ? w : best), null);
 const latestHTML = `
-    <section class="blade blade-dark feature" id="latest" aria-labelledby="feature-title">
+    <section class="blade blade-dark feature" id="latest" data-nav="Newest story" aria-labelledby="feature-title">
       <div class="atmos" style="--atmos-img: url(${latest.bg}); --atmos-op: .8" aria-hidden="true"></div>${latest.light === 'beam' ? `
       <div class="beam" style="--beam-x: 6%; --beam-y: 12%" aria-hidden="true"></div>` : ''}
       <div class="blade-inner feature-grid">
