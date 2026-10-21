@@ -87,11 +87,13 @@ p { margin: 0 0 1.1em; }
 .brand img { width: 42px; height: auto; transition: transform .7s var(--ease-out); }
 .brand:hover img { transform: rotate(-8deg) scale(1.08); }
 .topnav { display: flex; gap: 34px; margin-right: auto; }
-.topnav a { position: relative; padding: 10px 0; color: #fff; font: 700 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; opacity: .82; transition: opacity .25s ease-in-out, color .25s ease-in-out; }
-.topnav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -20px; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform .3s ease-in-out; }
-.topnav a:hover { opacity: 1; color: #d3bb8b; }
+.topnav a { position: relative; padding: 10px 0; color: #fff; font: 700 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; opacity: .82; transition: opacity .35s ease, color .35s ease; }
+/* The underline draws in from the left and fades up on hover, then leaves to the right */
+.topnav a::after { content: ''; position: absolute; left: -2px; right: -2px; bottom: 1px; height: 2px; background: linear-gradient(90deg, rgba(200, 170, 110, 0), var(--gold) 22%, #f3e3b6 50%, var(--gold) 78%, rgba(200, 170, 110, 0)); filter: drop-shadow(0 0 4px rgba(214, 180, 112, .55)); opacity: 0; transform: scaleX(0); transform-origin: right center; transition: transform .55s cubic-bezier(.22, 1, .36, 1), opacity .4s ease; pointer-events: none; }
+.topnav a:hover, .topnav a:focus-visible { opacity: 1; color: #f0e6d2; }
+.topnav a:hover::after, .topnav a:focus-visible::after { opacity: 1; transform: scaleX(1); transform-origin: left center; }
 .topnav a[aria-current='page'] { opacity: 1; color: #fff; }
-.topnav a[aria-current='page']::after { transform: scaleX(1); }
+.topnav a[aria-current='page']::after { opacity: 1; transform: scaleX(1); }
 .menu-toggle { display: none; width: 44px; height: 44px; margin-right: -10px; position: relative; }
 .menu-toggle span { position: absolute; left: 11px; right: 11px; height: 1.5px; background: var(--gold-pale); transition: transform .5s var(--ease-out), top .5s var(--ease-out); }
 .menu-toggle span:first-child { top: 17px; }
