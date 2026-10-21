@@ -4,9 +4,9 @@ The CLI is distributed as [`mira-voss` on npm](https://www.npmjs.com/package/mir
 
 ## Requirements
 
-- **Node.js 22 or newer** is recommended by the published package README. Its npm `engines` field currently says `>=18`; follow the publisher's more specific installation guidance until that metadata is reconciled.
-- npm is required for the installation command below.
-- The optional prebuilt MØBIUS kernel for ChatGPT plan sign-in is supplied in this release for **macOS on Apple silicon**. The package README describes other sign-in options for other platforms. Check that README for current platform details.
+- **macOS on Apple silicon.** Version 1.0.0 is built for this system only: its one platform package is `mira-voss-darwin-arm64`. On any other system npm installs the package, but `mira` stops with a message that it is not made for that system yet.
+- **Node.js 22 or newer**, as the package README asks (its npm `engines` field says `>=18`), and npm for the commands below.
+- **A model to work through**: a Claude plan (Pro, Max; Claude Code must be installed), a ChatGPT plan (Plus, Pro, Business; signed in through the MØBIUS kernel, which comes with the package), or an API key.
 
 ## Install and start
 
@@ -20,7 +20,7 @@ From the directory where you want to work:
 mira
 ```
 
-The published package also provides `mobius` as an alternate executable name. On first launch, follow the CLI's sign-in prompts. The [published package README](https://www.npmjs.com/package/mira-voss) explains the available plan and API-key options; do not put credentials in public issues.
+The published package also provides `mobius` as an alternate executable name. On first launch, follow the CLI's sign-in prompts; the [README](../README.md#sign-in) lists the plans and API-key services. Do not put credentials in public issues.
 
 ## Verify or troubleshoot
 

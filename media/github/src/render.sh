@@ -7,7 +7,8 @@ CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 python3 -I - <<'PY'
 import json
 svg = open('../../../site/assets/art/rovelle-chart.svg').read()
-page = open('banners.html').read().replace('</head>', '<script>window.CHART_SVG = %s;</script></head>' % json.dumps(svg), 1)
+svgs = {'rovelle': open('../../../site/assets/art/rovelle-view.svg').read()}
+page = open('banners.html').read().replace('</head>', '<script>window.CHART_SVG = %s; window.SVGS = %s;</script></head>' % (json.dumps(svg), json.dumps(svgs)), 1)
 open('_render.html', 'w').write(page)
 PY
 for spec in banner:1280:640 stories:1280:240 world:1280:240 agent:1280:240 chart:1280:860 cover-mobius:480:600; do

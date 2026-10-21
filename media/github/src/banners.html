@@ -22,10 +22,11 @@
 
   /* banner 1280×640 */
   #banner { width: 1280px; height: 640px; }
-  #banner .bg { object-position: 72% 30%; }
+  /* The picture starts 110px in, so her face always begins well right of her name */
+  #banner .bg { left: 110px; width: 1280px; object-position: 0 30%; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 240px); }
   #banner .shade { background: linear-gradient(90deg, rgba(1,10,19,.94) 0%, rgba(1,10,19,.7) 30%, rgba(1,10,19,0) 62%), linear-gradient(0deg, rgba(1,10,19,.85) 0%, rgba(1,10,19,0) 40%); }
   #banner .body { position: absolute; left: 72px; bottom: 70px; width: 900px; }
-  #banner .title { font-size: 124px; margin-bottom: 22px; white-space: nowrap; }
+  #banner .title { font-size: 112px; margin-bottom: 22px; white-space: nowrap; }
   #banner p.tag { margin: 0 0 30px; color: #e6e1d6; font: 600 21px/1.5 'Source Sans 3', sans-serif; max-width: 34em; }
   #banner .cmd { display: inline-flex; align-items: center; gap: 14px; padding: 14px 22px; border: 1px solid var(--gold-deep); background: rgba(1,10,19,.85); font: 600 19px ui-monospace, 'SF Mono', Menlo, monospace; color: var(--gold-pale); }
   #banner .cmd b { color: var(--gold-deep); }
@@ -38,7 +39,13 @@
   .section .zh { margin-top: 14px; color: var(--gold-pale); font: 600 20px 'Noto Serif SC', serif; letter-spacing: .3em; }
   .section .line { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent); }
   .section .line::after { content: ''; position: absolute; left: calc(50% - 5px); top: -5px; width: 10px; height: 10px; transform: rotate(45deg); background: var(--abyss); border: 1px solid var(--gold); }
-  #stories .shade { background: linear-gradient(90deg, rgba(9,7,10,.92) 0%, rgba(9,7,10,.6) 45%, rgba(9,7,10,.2) 100%); }
+  #stories { background: #070c14; }
+  #stories .bg { opacity: .55; }
+  #stories .shade { background: linear-gradient(90deg, rgba(7,12,20,.92) 0%, rgba(7,12,20,.55) 50%, rgba(7,12,20,.75) 100%); }
+  #stories .coast { position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 150px; opacity: .85; }
+  #stories .coast svg { display: block; width: 100%; height: 100%; }
+  /* The coast's chart labels belong to the website's pages, not to a banner */
+  .vard-label { display: none; }
   #stories .covers { position: absolute; right: 72px; top: 34px; display: flex; gap: 18px; }
   #stories .covers .frame-box { width: 138px; height: 172px; }
   #stories .covers .frame-box > div { height: 100%; background-size: cover; background-position: center; }
@@ -83,9 +90,10 @@
   </section>
 
   <section class="frame grain section" id="stories">
-    <img class="bg" src="../../../site/assets/bg/dusk.webp" alt="" />
+    <img class="bg" src="../../../site/assets/bg/storm.webp" alt="" />
+    <div class="coast" data-svg-name="rovelle"></div>
     <div class="shade"></div>
-    <div class="body"><p class="super">Read in Chinese · 故事</p><h2 class="title" data-text="The Stories">The Stories</h2></div>
+    <div class="body"><p class="super">Rovelle · MØBIUS · two stories</p><h2 class="title" data-text="The Stories">The Stories</h2></div>
     <div class="covers">
       <div class="frame-box"><div style="background-image: url(../../../site/assets/art/cover-rovelle.webp)"></div></div>
       <div class="frame-box"><div style="background-image: url(../../../site/assets/art/mobius-loop.svg), url(../../../site/assets/bg/ice.webp)"></div></div>
@@ -121,6 +129,7 @@
     document.getElementById(id).classList.add('on');
     // file:// cannot fetch, so the chart is embedded by render.sh as window.CHART_SVG.
     document.querySelectorAll('[data-svg]').forEach(el => { if (window.CHART_SVG) el.innerHTML = window.CHART_SVG; });
+    document.querySelectorAll('[data-svg-name]').forEach(el => { const svg = (window.SVGS || {})[el.dataset.svgName]; if (svg) el.innerHTML = svg; });
   </script>
 </body>
 </html>

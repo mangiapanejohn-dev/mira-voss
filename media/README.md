@@ -7,6 +7,7 @@
 | `character/mira-approved-key-art.png` | Earlier approved game-illustration direction, kept as a reference |
 | `character/mira-rovell-splash-v2.png` | The approved Rovelle harbor splash used across the website |
 | `github/*.jpg` | README banner and section images, rendered from [`github/src/banners.html`](github/src/banners.html) by `github/src/render.sh` |
+| `github/cli-first-run.png` | Version 1.0.0 on first launch, captured from the published npm package in a fresh terminal (no account signed in) |
 
 ## Visual rules
 
