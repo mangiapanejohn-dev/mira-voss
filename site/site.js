@@ -577,12 +577,4 @@
     place();
   }
 
-  /* ---------- A soft light follows the pointer across gold buttons ---------- */
-  if (finePointer && !reduced) document.addEventListener('pointermove', e => {
-    const b = e.target.closest && e.target.closest('.btn-gold');
-    if (!b) return;
-    const r = b.getBoundingClientRect();
-    b.style.setProperty('--mx', `${e.clientX - r.left}px`);
-    b.style.setProperty('--my', `${e.clientY - r.top}px`);
-  }, { passive: true });
 })();

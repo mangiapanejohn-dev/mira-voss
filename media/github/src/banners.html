@@ -15,7 +15,8 @@
   .shade { position: absolute; inset: 0; z-index: -1; }
   .super { margin: 0 0 6px; color: var(--gold); font: italic 700 26px/1.2 Spectral, serif; text-transform: uppercase; }
   .title { position: relative; isolation: isolate; margin: 0; font: italic 800 96px/.95 Spectral, serif; text-transform: uppercase; letter-spacing: -.01em; }
-  .title::before { content: attr(data-text); position: absolute; z-index: -1; inset: 0; color: transparent; -webkit-text-stroke: 1.6px var(--ember); transform: translate(.05em, .04em); }
+  /* The offset orange contour belongs to her name alone */
+  #banner .title::before { content: attr(data-text); position: absolute; z-index: -1; inset: 0; color: transparent; -webkit-text-stroke: 1.6px var(--ember); transform: translate(.05em, .04em); }
   .frame-box { border: 1px solid var(--gold); padding: 6px; }
   .frame-box > div { background: rgba(1, 10, 19, .78); }
 

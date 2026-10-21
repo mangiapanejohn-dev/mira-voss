@@ -143,7 +143,7 @@ const latestHTML = `
         <a class="feature-cover frame" data-reveal="unfold" href="${read(latest.id)}" tabindex="-1" aria-hidden="true"><span class="frame-inner halftone"${latest.cover_bg ? ` style="background: url(${latest.cover_bg}) center / cover"` : ''}><img src="${latest.cover}" alt="" loading="lazy" /></span></a>
         <div class="feature-copy" data-stagger>
           <p class="supertitle" data-reveal="from-right"${z(`最新故事 · ${latest.series_zh}`)}>Newest story · ${attr(latest.series)}</p>
-          <h2 class="blade-title misreg" data-reveal="mask" id="feature-title" data-text="${attr(latest.title_en)}" data-zh-misreg="${attr(latest.title_zh)}"${z(latest.title_zh)}>${attr(latest.title_en)}</h2>
+          <h2 class="blade-title" data-reveal="mask" id="feature-title" data-text="${attr(latest.title_en)}" data-zh-misreg="${attr(latest.title_zh)}"${z(latest.title_zh)}>${attr(latest.title_en)}</h2>
           <p class="zh-title" data-reveal="from-right"${z(latest.title_en)}>${attr(latest.title_zh)}</p>
           <p class="lede" data-reveal="from-right"${z(latest.summary_zh)}>${attr(latest.summary_en)}</p>
           <blockquote class="pull-quote" data-reveal="wipe"><p lang="zh-Hans">${attr(latest.quote_zh)}</p><footer>${attr(latest.quote_en)}</footer></blockquote>
