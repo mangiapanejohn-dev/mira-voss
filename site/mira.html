@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#010a13" />
-  <title>Mira Voss — Character</title>
-  <meta name="description" content="Mira Voss: seventeen, a tidal researcher from Rovelle. Her biography, her life so far, the people around her, and her art." />
+  <title data-zh="Mira Voss — 人物">Mira Voss — Character</title>
+  <meta name="description" content="Mira Voss: seventeen, a tidal researcher from Rovelle. Her biography, her life so far, the people around her, and her art."  data-zh-content="Mira Voss，十七岁，来自罗维尔的潮汐研究者。她的生平、走过的路、身边的人与原画。"/>
   <link rel="canonical" href="https://mangiapanejohn-dev.github.io/mira-voss/mira.html" />
   <meta property="og:title" content="Mira Voss — Character" />
   <meta property="og:image" content="https://mangiapanejohn-dev.github.io/mira-voss/assets/mira-rovell-splash-v2.png" />
@@ -15,33 +15,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;1,700;1,800&family=Source+Sans+3:wght@400;600;700&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="pages.css" />
-  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}}catch(e){}})(document.documentElement)</script>
+  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}var q=new URLSearchParams(location.search).get('lang'),g=localStorage.getItem('mira-lang'),l=q||(g&&JSON.parse(g))||((navigator.language||'').toLowerCase().indexOf('zh')===0?'zh':'en');d.dataset.lang=l==='zh'?'zh':'en';if(l==='zh'){d.lang='zh-Hans';d.classList.add('i18n-pending')}}catch(e){}})(document.documentElement)</script>
   <script src="data/library.js" defer></script>
   <script src="site.js" defer></script>
 </head>
 <body data-subbar="Mira Voss">
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-zh="跳到正文">Skip to content</a>
   <svg class="sprite" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
   </svg>
 
   <header class="topbar">
-    <a class="brand" href="index.html" aria-label="Mira Voss, home"><img src="assets/mira-logo-cutout.webp" alt="" width="42" height="35" /><span>Mira Voss</span></a>
-    <nav class="topnav" aria-label="Main">
+    <a class="brand" href="index.html" aria-label="Mira Voss, home" data-zh-aria="Mira Voss 首页"><img src="assets/mira-logo-cutout.webp" alt="" width="42" height="35" /><span>Mira Voss</span></a>
+    <nav class="topnav" aria-label="Main" data-zh-aria="主导航">
       <a href="mira.html" aria-current="page">Mira</a>
-      <a href="stories.html">Stories</a>
-      <a href="world.html">Rovelle</a>
-      <a href="agent.html">The Agent</a>
+      <a href="stories.html" data-zh="故事">Stories</a>
+      <a href="world.html" data-zh="罗维尔">Rovelle</a>
+      <a href="agent.html" data-zh="Agent">The Agent</a>
     </nav>
-    <a class="btn btn-small" href="stories.html">Read the stories</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span><span></span></button>
+    <div class="lang-switch" role="group" aria-label="Language · 语言">
+      <button type="button" data-set-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false" lang="zh-Hans">中</button>
+    </div>
+    <a class="btn btn-small" href="stories.html" data-zh="阅读故事">Read the stories</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu" data-zh-aria="菜单"><span></span><span></span></button>
   </header>
-  <nav class="menu" id="menu" aria-label="Main">
-    <a href="index.html"><small>Start</small>Home</a>
-    <a href="mira.html"><small>Her life</small>Mira</a>
-    <a href="stories.html"><small>Read</small>Stories</a>
-    <a href="world.html"><small>The world</small>Rovelle</a>
-    <a href="agent.html"><small>Install</small>The Agent</a>
+  <nav class="menu" id="menu" aria-label="Main" data-zh-aria="主导航">
+    <a href="index.html" data-zh="&lt;small&gt;开始&lt;/small&gt;首页"><small>Start</small>Home</a>
+    <a href="mira.html" data-zh="&lt;small&gt;人物&lt;/small&gt;Mira"><small>Her life</small>Mira</a>
+    <a href="stories.html" data-zh="&lt;small&gt;阅读&lt;/small&gt;故事"><small>Read</small>Stories</a>
+    <a href="world.html" data-zh="&lt;small&gt;世界&lt;/small&gt;罗维尔"><small>The world</small>Rovelle</a>
+    <a href="agent.html" data-zh="&lt;small&gt;安装&lt;/small&gt;终端 Agent"><small>Install</small>The Agent</a>
   </nav>
 
   <main id="main">
@@ -51,146 +55,154 @@
       <div class="masthead-shade" aria-hidden="true"></div>
       <div class="halftone-field" style="--size: 70vmin; left: 34%; top: 8%; --op: .2; --dot-color: #e8622c" aria-hidden="true"></div>
       <div class="masthead-body">
-        <p class="supertitle intro" style="--d: 0">Character · 米拉·沃斯</p>
-        <h1 class="page-title champion-name misreg" id="page-title" data-text="Mira Voss" aria-label="Mira Voss"><span data-letters aria-hidden="true">Mira Voss</span></h1>
-        <p class="masthead-bio intro" style="--d: 3">Seventeen. Born on the south slope of Cape Ward, in the harbor city of Rovelle. She reads currents, geometry and error from observations that do not agree, and she is still learning what that skill cannot settle between people.</p>
+        <p class="supertitle intro" style="--d: 0" data-zh="人物 · Mira Voss">Character · 米拉·沃斯</p>
+        <h1 class="page-title champion-name misreg" id="page-title" data-latin data-text="Mira Voss" aria-label="Mira Voss"><span data-letters aria-hidden="true">Mira Voss</span></h1>
+        <p class="masthead-bio intro" style="--d: 3" data-zh="十七岁，生于港城罗维尔岬台的南坡。她能从彼此矛盾的观测里读出海流、几何与误差；而这份本事解决不了的、人与人之间的事，她还在学。">Seventeen. Born on the south slope of Cape Ward, in the harbor city of Rovelle. She reads currents, geometry and error from observations that do not agree, and she is still learning what that skill cannot settle between people.</p>
       </div>
     </section>
 
-    <section class="blade" id="biography" data-nav="Biography" aria-labelledby="bio-title">
+    <section class="blade" id="biography" data-nav="Biography" aria-labelledby="bio-title" data-zh-nav="生平">
       <div class="atmos atmos-ember" aria-hidden="true"></div>
       <div class="blade-inner bio-grid">
         <div class="bio-text" data-stagger>
-          <p class="supertitle reveal">Biography</p>
-          <h2 class="blade-title misreg" id="bio-title" data-text="A boat without a tug">A boat without a tug</h2>
+          <p class="supertitle reveal" data-zh="生平">Biography</p>
+          <h2 class="blade-title misreg" id="bio-title" data-text="A boat without a tug" data-zh="一条不需要拖船的小艇" data-zh-misreg="一条不需要拖船的小艇">A boat without a tug</h2>
           <div style="height: 34px"></div>
-          <p class="reveal drop">Mira grew up in a house where every reasonable request was answered on time. A book she asked for was waiting on the hall tray the next morning; a driver took her to the observatory; the doctor came at two in the morning. What the house did not answer were the sentences that could not be handled, like <em>I'm a little sad today</em>. She learned early to stop saying them.</p>
-          <p class="reveal">Her gift is real: she finds the structure in sparse, conflicting observations of the sea that other people read as noise. At nine she kept tide notes; at eleven Rowan Venn brought her into the observatory; at sixteen she led the method behind Rovelle's new folding tide chart. Her family's money gave her room to practice, and she has never pretended otherwise.</p>
-          <p class="reveal">She is direct, quick and hard to approach when she is quiet, and she can be playful, stubborn and childish about being caught out. She remembers an instrument's error to the decimal and forgets her best friend's exam date. Feelings tend to reach her a step late: she checks the equations first, and days later remembers the look on someone's face as they left the room.</p>
-          <p class="reveal">At seventeen, when the city tried to stretch her chart past the conditions it was tested in, she had to do something harder than calculate. She made its limits public, asked other people to measure with her, and left a decision that was never hers alone to the people it fell on. Then she went north.</p>
+          <p class="reveal drop" data-zh="Mira 在一座有求必应的房子里长大。她要的书，第二天早上就躺在门厅的托盘里；司机送她去观测站；半夜两点，医生会提着皮包上楼。这座房子回答不了的，是那些无法被处理的句子，比如&lt;em&gt;今天有点难过&lt;/em&gt;。她很早就学会了不再说出口。">Mira grew up in a house where every reasonable request was answered on time. A book she asked for was waiting on the hall tray the next morning; a driver took her to the observatory; the doctor came at two in the morning. What the house did not answer were the sentences that could not be handled, like <em>I'm a little sad today</em>. She learned early to stop saying them.</p>
+          <p class="reveal" data-zh="她的天赋是真的：别人眼里的噪声，她能从稀疏而彼此矛盾的海洋观测里读出结构。九岁记潮汐笔记，十一岁被 Rowan Venn 带进观测站，十六岁主导了罗维尔新折页潮图背后的方法。家里的钱给了她练习的余地，她从不假装不是这样。">Her gift is real: she finds the structure in sparse, conflicting observations of the sea that other people read as noise. At nine she kept tide notes; at eleven Rowan Venn brought her into the observatory; at sixteen she led the method behind Rovelle's new folding tide chart. Her family's money gave her room to practice, and she has never pretended otherwise.</p>
+          <p class="reveal" data-zh="她直接、反应快，安静时不好接近；也会调皮、固执，被戳穿时还会孩子气地不服。她能把一台仪器的误差记到小数点后，却记不住最好朋友的考试日期。情绪总是晚她一步才到：她先检查方程，几天后才想起某个人离开房间时的神情。">She is direct, quick and hard to approach when she is quiet, and she can be playful, stubborn and childish about being caught out. She remembers an instrument's error to the decimal and forgets her best friend's exam date. Feelings tend to reach her a step late: she checks the equations first, and days later remembers the look on someone's face as they left the room.</p>
+          <p class="reveal" data-zh="十七岁那年，城市想把她的潮图用到验证范围以外，她要做的事比计算更难。她把它的边界公之于众，请别人和她一起测量，把一个从来不只属于她的决定，交还给要承担它的人。然后，她去了北方。">At seventeen, when the city tried to stretch her chart past the conditions it was tested in, she had to do something harder than calculate. She made its limits public, asked other people to measure with her, and left a decision that was never hers alone to the people it fell on. Then she went north.</p>
         </div>
-        <aside class="bio-aside frame reveal" aria-label="In a sentence">
+        <aside class="bio-aside frame" data-reveal="from-right" aria-label="In a sentence" data-zh-aria="一句话">
           <div class="frame-inner">
             <blockquote>
               <p lang="zh-Hans">她很早就学会了如何独自把事情做好。后来才发现，做得好与有人愿意陪着自己，并不是同一件事。</p>
               <footer>She learned early how to do things well on her own. Only later did she find that doing well and having someone beside you are not the same thing.</footer>
             </blockquote>
             <dl class="facts">
-              <dt>Age</dt><dd>Seventeen</dd>
-              <dt>Born</dt><dd>Cape Ward, Rovelle</dd>
-              <dt>Field</dt><dd>Currents, geometry and error</dd>
-              <dt>Now</dt><dd>MØBIUS Station, her first winter</dd>
-              <dt>Carries</dt><dd>A silver pocket watch with her name on the back</dd>
+              <dt data-zh="年龄">Age</dt><dd data-zh="十七岁">Seventeen</dd>
+              <dt data-zh="出生">Born</dt><dd data-zh="罗维尔 · 岬台">Cape Ward, Rovelle</dd>
+              <dt data-zh="专长">Field</dt><dd data-zh="海流、几何与误差">Currents, geometry and error</dd>
+              <dt data-zh="现在">Now</dt><dd data-zh="MØBIUS 研究站，第一个冬天">MØBIUS Station, her first winter</dd>
+              <dt data-zh="随身">Carries</dt><dd data-zh="一只表背刻着她名字的银壳怀表">A silver pocket watch with her name on the back</dd>
             </dl>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="blade blade-dark" id="life" data-nav="Her life" aria-labelledby="life-title">
+    <section class="blade blade-dark" id="life" data-nav="Her life" aria-labelledby="life-title" data-zh-nav="年表">
       <div class="atmos atmos-lights" aria-hidden="true"></div>
       <div class="blade-inner">
         <div class="blade-head">
-          <p class="supertitle reveal">Soundings</p>
-          <h2 class="blade-title misreg" id="life-title" data-text="Her life so far">Her life so far</h2>
+          <p class="supertitle reveal" data-zh="测深">Soundings</p>
+          <h2 class="blade-title misreg" id="life-title" data-text="Her life so far" data-zh="她走过的路" data-zh-misreg="她走过的路">Her life so far</h2>
         </div>
         <ol class="timeline reveal">
-          <li style="--rd: .1s"><span class="age">9</span><span class="tick"></span><h3>Seven minutes</h3><p>She sets every clock in the house seven minutes slow to find out which harbor bell is wrong.</p><a href="read.html?work=unfinished-chart&amp;chapter=00-prologue">Prologue</a></li>
-          <li style="--rd: .25s"><span class="age">11</span><span class="tick"></span><h3>The observatory</h3><p>Rowan Venn reads her tide notebooks and brings her into real measurement.</p><a href="read.html?work=unfinished-chart&amp;chapter=character-profile">Profile</a></li>
-          <li style="--rd: .4s"><span class="age">13</span><span class="tick"></span><h3>Who wrote it?</h3><p>A review board asks who her father is. She rewrites the derivation in chalk.</p><a href="read.html?work=unfinished-chart&amp;chapter=02-unasked-question">Chapter II</a></li>
-          <li style="--rd: .55s"><span class="age">14<small>–15</small></span><span class="tick"></span><h3>Verification paths</h3><p>A report returned on suspicion of an adult's hand; another rewritten for four months.</p><a href="read.html?work=unfinished-chart&amp;chapter=02-unasked-question">Chapter II</a></li>
-          <li style="--rd: .7s"><span class="age">16</span><span class="tick"></span><h3>The folding chart</h3><p>Her method records the deep currents separately. A first contract, a dinner, a fork set down.</p><a href="read.html?work=unfinished-chart&amp;chapter=01-overdue-accuracy">Chapter I</a></li>
-          <li style="--rd: .85s"><span class="age">17</span><span class="tick"></span><h3>The third bell</h3><p>A winter current, a hearing, and a warning she cannot make exact.</p><a href="read.html?work=unfinished-chart&amp;chapter=05-third-bell">Chapter V</a></li>
-          <li style="--rd: 1s"><span class="age">17</span><span class="tick"></span><h3>Leaving</h3><p>She sails north with a chart full of other people's names.</p><a href="read.html?work=unfinished-chart&amp;chapter=07-after-departure">Chapter VII</a></li>
-          <li class="is-now" style="--rd: 1.15s"><span class="age">17</span><span class="tick"></span><h3>MØBIUS</h3><p>The first winter at the station by Vard Light.</p><a href="read.html?work=only-one-side">Only One Side</a></li>
+          <li style="--rd: .1s"><span class="age">9</span><span class="tick"></span><h3 data-zh="七分钟">Seven minutes</h3><p data-zh="她把家里所有的钟拨慢七分钟，想弄清港口哪一只钟错了。">She sets every clock in the house seven minutes slow to find out which harbor bell is wrong.</p><a href="read.html?work=unfinished-chart&amp;chapter=00-prologue" data-zh="序章">Prologue</a></li>
+          <li style="--rd: .25s"><span class="age">11</span><span class="tick"></span><h3 data-zh="观测站">The observatory</h3><p data-zh="Rowan Venn 读了她的潮汐笔记，把她带进真正的测量。">Rowan Venn reads her tide notebooks and brings her into real measurement.</p><a href="read.html?work=unfinished-chart&amp;chapter=character-profile" data-zh="人物档案">Profile</a></li>
+          <li style="--rd: .4s"><span class="age">13</span><span class="tick"></span><h3 data-zh="是谁写的？">Who wrote it?</h3><p data-zh="评议会问她父亲是谁。她用粉笔把推导重写了一遍。">A review board asks who her father is. She rewrites the derivation in chalk.</p><a href="read.html?work=unfinished-chart&amp;chapter=02-unasked-question" data-zh="第二章">Chapter II</a></li>
+          <li style="--rd: .55s"><span class="age">14<small>–15</small></span><span class="tick"></span><h3 data-zh="验证路径">Verification paths</h3><p data-zh="一份报告因怀疑成年人代笔被退回；另一份重写了四个月。">A report returned on suspicion of an adult's hand; another rewritten for four months.</p><a href="read.html?work=unfinished-chart&amp;chapter=02-unasked-question" data-zh="第二章">Chapter II</a></li>
+          <li style="--rd: .7s"><span class="age">16</span><span class="tick"></span><h3 data-zh="折页潮图">The folding chart</h3><p data-zh="她的方法把深层海流单独记录。第一份合同，一顿晚餐，一把放下的叉子。">Her method records the deep currents separately. A first contract, a dinner, a fork set down.</p><a href="read.html?work=unfinished-chart&amp;chapter=01-overdue-accuracy" data-zh="第一章">Chapter I</a></li>
+          <li style="--rd: .85s"><span class="age">17</span><span class="tick"></span><h3 data-zh="第三只钟">The third bell</h3><p data-zh="一股冬季冷流，一场听证会，一个她给不出准确时刻的预警。">A winter current, a hearing, and a warning she cannot make exact.</p><a href="read.html?work=unfinished-chart&amp;chapter=05-third-bell" data-zh="第五章">Chapter V</a></li>
+          <li style="--rd: 1s"><span class="age">17</span><span class="tick"></span><h3 data-zh="离岸">Leaving</h3><p data-zh="她带着一张写满别人名字的海图北上。">She sails north with a chart full of other people's names.</p><a href="read.html?work=unfinished-chart&amp;chapter=07-after-departure" data-zh="第七章">Chapter VII</a></li>
+          <li class="is-now" style="--rd: 1.15s"><span class="age">17</span><span class="tick"></span><h3>MØBIUS</h3><p data-zh="瓦德灯塔旁那座研究站的第一个冬天。">The first winter at the station by Vard Light.</p><a href="read.html?work=only-one-side" data-zh="只有一面">Only One Side</a></li>
         </ol>
       </div>
     </section>
 
-    <section class="blade" id="people" data-nav="Her people" aria-labelledby="people-title">
+    <section class="blade" id="people" data-nav="Her people" aria-labelledby="people-title" data-zh-nav="身边的人">
       <div class="atmos atmos-storm" aria-hidden="true"></div>
       <div class="blade-inner">
         <div class="blade-head">
-          <p class="supertitle reveal">In their own words</p>
-          <h2 class="blade-title misreg" id="people-title" data-text="Her people">Her people</h2>
-          <p class="lede reveal">None of them exists to teach Mira a lesson. Each has a life of their own, and a line she has not forgotten.</p>
+          <p class="supertitle reveal" data-zh="他们说过的话">In their own words</p>
+          <h2 class="blade-title misreg" data-reveal="mask" id="people-title" data-text="Her people" data-zh="身边的人" data-zh-misreg="身边的人">Her people</h2>
+          <p class="lede reveal" data-zh="他们没有一个人是为了教会 Mira 什么而存在。每个人都有自己的生活，也都留下了一句她忘不掉的话。">None of them exists to teach Mira a lesson. Each has a life of their own, and a line she has not forgotten.</p>
         </div>
         <div class="people" data-stagger>
-          <figure class="person reveal">
+          <figure class="person" data-reveal="flip" data-tilt="5" data-tilt-light style="--rd: 0.00s">
             <blockquote lang="zh-Hans">你今天能不能不要把我当成一双会划船的手？</blockquote>
             <p class="person-en">“Could you not treat me like a pair of hands that can row, just for today?”</p>
-            <footer><span class="person-name">Nell Arden</span><span class="person-role label">Pilot · her closest friend</span><p class="person-note">Three years of training for a deep-sea license. Her own exam, her own future.</p></footer>
+            <footer><span class="person-name">Nell Arden</span><span class="person-role label" data-zh="引航员 · 挚友">Pilot · her closest friend</span><p class="person-note" data-zh="为一张远海资格证学了三年。她有自己的考试，也有自己的未来。">Three years of training for a deep-sea license. Her own exam, her own future.</p></footer>
           </figure>
-          <figure class="person reveal">
+          <figure class="person" data-reveal="flip" data-tilt="5" data-tilt-light style="--rd: 0.09s">
             <blockquote lang="zh-Hans">告诉你一个怀疑，和给你一条可以发表的结论，是两件事。</blockquote>
             <p class="person-en">“Telling you a suspicion and giving you a conclusion you can publish are two different things.”</p>
-            <footer><span class="person-name">Rowan Venn</span><span class="person-role label">Observer · her mentor</span><p class="person-note">Trusts raw records and openly written errors more than talent.</p></footer>
+            <footer><span class="person-name">Rowan Venn</span><span class="person-role label" data-zh="观测员 · 导师">Observer · her mentor</span><p class="person-note" data-zh="比起天赋，他更相信原始记录和写在明处的错误。">Trusts raw records and openly written errors more than talent.</p></footer>
           </figure>
-          <figure class="person reveal">
+          <figure class="person" data-reveal="flip" data-tilt="5" data-tilt-light style="--rd: 0.18s">
             <blockquote lang="zh-Hans">我们有时候，只是不知道还能为你做什么。</blockquote>
             <p class="person-en">“Sometimes we just don't know what else we can do for you.”</p>
-            <footer><span class="person-name">Lena Voss</span><span class="person-role label">Her mother</span><p class="person-note">Shows care through plans and arrangements, and knows it often arrives late.</p></footer>
+            <footer><span class="person-name">Lena Voss</span><span class="person-role label" data-zh="母亲">Her mother</span><p class="person-note" data-zh="习惯用规划和安排表达关心，也知道这份关心常常来得太晚。">Shows care through plans and arrangements, and knows it often arrives late.</p></footer>
           </figure>
-          <figure class="person reveal">
+          <figure class="person" data-reveal="flip" data-tilt="5" data-tilt-light style="--rd: 0.27s">
             <blockquote lang="zh-Hans">我还没有判断。</blockquote>
             <p class="person-en">“I haven't decided yet.”</p>
-            <footer><span class="person-name">Elias Voss</span><span class="person-role label">Her father · marine insurance</span><p class="person-note">Good at pricing risk, slower to stop and listen. He did read her report.</p></footer>
+            <footer><span class="person-name">Elias Voss</span><span class="person-role label" data-zh="父亲 · 海事保险">Her father · marine insurance</span><p class="person-note" data-zh="擅长为风险定价，不擅长停下来倾听。但他读完了她的报告。">Good at pricing risk, slower to stop and listen. He did read her report.</p></footer>
           </figure>
-          <figure class="person reveal">
+          <figure class="person" data-reveal="flip" data-tilt="5" data-tilt-light style="--rd: 0.36s">
             <blockquote lang="zh-Hans">你不一定要留在这里，也可以帮我们审查。</blockquote>
             <p class="person-en">“You don't have to stay here to help us check it.”</p>
-            <footer><span class="person-name">Alden Hesse</span><span class="person-role label">Tide Office</span><p class="person-note">Weighs public safety against procedure and budgets. Can be persuaded, and can reasonably disagree.</p></footer>
+            <footer><span class="person-name">Alden Hesse</span><span class="person-role label" data-zh="潮表院">Tide Office</span><p class="person-note" data-zh="在公共安全、程序与经费之间权衡。能被说服，也可能有理有据地不同意。">Weighs public safety against procedure and budgets. Can be persuaded, and can reasonably disagree.</p></footer>
           </figure>
-          <figure class="person reveal">
+          <figure class="person" data-reveal="flip" data-tilt="5" data-tilt-light style="--rd: 0.45s">
             <blockquote lang="zh-Hans">先别说名字。先看是不是真的。</blockquote>
             <p class="person-en">“Names later. First see whether it's true.”</p>
-            <footer><span class="person-name">Søren Aske</span><span class="person-role label">MØBIUS · the deep-water recorder</span><p class="person-note">Thirty-one winters of logbooks that nobody had asked to read.</p></footer>
+            <footer><span class="person-name">Søren Aske</span><span class="person-role label" data-zh="MØBIUS · 深水记录仪">MØBIUS · the deep-water recorder</span><p class="person-note" data-zh="三十一个冬天的日志，从来没有人要求读过。">Thirty-one winters of logbooks that nobody had asked to read.</p></footer>
           </figure>
         </div>
       </div>
     </section>
 
-    <section class="blade blade-light" id="art" data-nav="Art" aria-labelledby="art-title">
+    <section class="blade blade-light" id="art" data-nav="Art" aria-labelledby="art-title" data-zh-nav="原画">
       <div class="blade-inner">
-        <h2 class="skins-title reveal" id="art-title">Available art</h2>
-        <div class="art-viewer reveal" data-tabs data-art>
+        <h2 class="skins-title reveal" id="art-title" data-zh="原画">Available art</h2>
+        <div class="art-viewer" data-reveal="focus" data-tabs data-art>
           <div class="art-stage" id="art-stage" role="tabpanel" aria-labelledby="art-harbor">
-            <figure class="art-slide is-active" data-slide="harbor"><img src="assets/mira-rovell-splash-v2.webp" alt="Mira Voss at a harbor railing in a storm, waves breaking below and Rovelle's lights across the water" loading="lazy" /></figure>
-            <figure class="art-slide art-slide-profile" data-slide="profile"><img src="assets/mira-logo-cutout.webp" alt="Mira Voss's original profile: a left-facing portrait with a short black-and-white bob, in black halftone with orange contour lines" loading="lazy" /></figure>
-            <button class="art-arrow art-prev" type="button" data-art-prev aria-label="Previous art"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
-            <button class="art-arrow art-next" type="button" data-art-next aria-label="Next art"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            <figure class="art-slide is-active" data-slide="harbor"><img src="assets/mira-rovell-splash-v2.webp" alt="Mira Voss at a harbor railing in a storm, waves breaking below and Rovelle's lights across the water" loading="lazy"  data-zh-alt="风暴中的港口栏杆旁，Mira Voss 望向海面，浪在脚下碎开，远处是罗维尔的灯火"/></figure>
+            <figure class="art-slide art-slide-profile" data-slide="profile"><img src="assets/mira-logo-cutout.webp" alt="Mira Voss's original profile: a left-facing portrait with a short black-and-white bob, in black halftone with orange contour lines" loading="lazy"  data-zh-alt="Mira Voss 最初的侧像：面朝左，黑白相间的短发，黑色半调网点与橙色轮廓线"/></figure>
+            <button class="art-arrow art-prev" type="button" data-art-prev aria-label="Previous art" data-zh-aria="上一张"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            <button class="art-arrow art-next" type="button" data-art-next aria-label="Next art" data-zh-aria="下一张"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
           </div>
-          <div class="art-thumbs" role="tablist" aria-label="Art">
-            <button class="art-thumb" role="tab" id="art-harbor" aria-controls="art-stage" aria-selected="true" data-slide="harbor" data-name="Rovelle Harbor" data-text="The Grey Sea at dusk, from the harbor wall of the city where her story begins."><span class="thumb-frame"><img src="assets/art/rovelle-harbor.webp" alt="" loading="lazy" /></span><span class="thumb-name">Rovelle Harbor</span></button>
-            <button class="art-thumb" role="tab" id="art-profile" aria-controls="art-stage" aria-selected="false" tabindex="-1" data-slide="profile" data-name="Original Profile" data-text="The first drawing of Mira. Every later illustration keeps this face and her black-and-white bob."><span class="thumb-frame thumb-profile"><img src="assets/mira-logo-cutout.webp" alt="" loading="lazy" /></span><span class="thumb-name">Original Profile</span></button>
+          <div class="art-thumbs" role="tablist" aria-label="Art" data-zh-aria="原画">
+            <button class="art-thumb" role="tab" id="art-harbor" aria-controls="art-stage" aria-selected="true" data-slide="harbor" data-name="Rovelle Harbor" data-body="The Grey Sea at dusk, from the harbor wall of the city where her story begins." data-zh-name="罗维尔港" data-zh-body="黄昏的灰海，从她故事开始的那座城的港堤上望去。"><span class="thumb-frame"><img src="assets/art/rovelle-harbor.webp" alt="" loading="lazy" /></span><span class="thumb-name" data-zh="罗维尔港">Rovelle Harbor</span></button>
+            <button class="art-thumb" role="tab" id="art-profile" aria-controls="art-stage" aria-selected="false" tabindex="-1" data-slide="profile" data-name="Original Profile" data-body="The first drawing of Mira. Every later illustration keeps this face and her black-and-white bob." data-zh-name="最初的侧像" data-zh-body="Mira 的第一张画像。之后的每一幅原画，都保留这张脸和她黑白相间的短发。"><span class="thumb-frame thumb-profile"><img src="assets/mira-logo-cutout.webp" alt="" loading="lazy" /></span><span class="thumb-name" data-zh="最初的侧像">Original Profile</span></button>
           </div>
-          <div class="art-caption" data-art-caption aria-live="polite"><h3>Rovelle Harbor</h3><p>The Grey Sea at dusk, from the harbor wall of the city where her story begins.</p></div>
+          <div class="art-caption" data-art-caption aria-live="polite"><h3 data-zh="罗维尔港">Rovelle Harbor</h3><p data-zh="黄昏的灰海，从她故事开始的那座城的港堤上望去。">The Grey Sea at dusk, from the harbor wall of the city where her story begins.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="blade blade-dark quote-band" id="begin" data-nav="Read" aria-labelledby="begin-title">
+    <section class="blade blade-dark quote-band" id="begin" data-nav="Read" aria-labelledby="begin-title" data-zh-nav="阅读">
       <div class="atmos atmos-dusk" aria-hidden="true"></div>
       <div class="isobaths-bg" data-isobaths="assets/chart-lines.svg" aria-hidden="true"></div>
       <div class="blade-inner quote reveal">
-        <p class="supertitle">Rovelle · Book One</p>
-        <h2 class="blade-title misreg" id="begin-title" data-text="Her story begins in Rovelle">Her story begins in Rovelle</h2>
+        <p class="supertitle" data-zh="罗维尔 · 第一部">Rovelle · Book One</p>
+        <h2 class="blade-title misreg" data-reveal="mask" id="begin-title" data-text="Her story begins in Rovelle" data-zh="她的故事从罗维尔开始" data-zh-misreg="她的故事从罗维尔开始">Her story begins in Rovelle</h2>
         <div class="btn-row" style="justify-content: center; margin-top: 36px">
-          <a class="btn btn-gold" href="read.html?work=unfinished-chart">Read The Unfinished Chart <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
-          <a class="btn" href="stories.html">All stories</a>
+          <a class="btn btn-gold" href="read.html?work=unfinished-chart" data-zh="阅读《未完成的海图》 &lt;svg aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#i-arrow&quot; /&gt;&lt;/svg&gt;">Read The Unfinished Chart <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+          <a class="btn" href="stories.html" data-zh="全部故事">All stories</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a><a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
+    <nav class="footer-nav" aria-label="Footer" data-zh-aria="页脚">
+      <a href="mira.html">Mira</a><a href="stories.html" data-zh="故事">Stories</a><a href="world.html" data-zh="罗维尔">Rovelle</a><a href="agent.html" data-zh="Agent">The Agent</a><a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
     </nav>
     <div class="footer-inner">
       <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="56" height="47" loading="lazy" /><span>Mira Voss</span></a>
-      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime. © 2026 Mira Voss project. All rights reserved.</p>
+      <p class="footer-legal" data-zh="Mira Voss、罗维尔与 MØBIUS 研究站均为虚构。Mira Voss CLI 是闭源软件；本站及其仓库公开的是故事、美术与文档，不包含运行时代码。© 2026 Mira Voss project 保留所有权利。">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime. © 2026 Mira Voss project. All rights reserved.</p>
     </div>
   </footer>
+
+  <div class="consent" role="region" aria-label="Privacy" data-zh-aria="隐私" data-consent hidden>
+    <p data-zh="本站不使用任何追踪或广告 Cookie。它只在你的浏览器里记住语言、阅读进度和显示设置，这些信息不会离开你的设备。">This site uses no tracking or advertising cookies. It only remembers your language, reading position and display settings in your browser, and none of it leaves your device.</p>
+    <div class="consent-actions">
+      <button class="btn btn-small btn-gold" type="button" data-consent-ok data-zh="好的">OK</button>
+      <button class="btn btn-small" type="button" data-consent-forget data-zh="不要记住">Don't remember</button>
+    </div>
+  </div>
 </body>
 </html>

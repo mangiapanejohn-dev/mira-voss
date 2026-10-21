@@ -94,7 +94,9 @@
         }
       ],
       "bg": "assets/bg/dusk.webp",
-      "theme": "dusk"
+      "theme": "dusk",
+      "series_zh": "罗维尔 · 第一部",
+      "setting_zh": "罗维尔 · 她十七岁的冬天"
     },
     {
       "id": "only-one-side",
@@ -150,11 +152,15 @@
       "bg": "assets/bg/ice.webp",
       "theme": "ice",
       "light": "beam",
-      "cover_bg": "assets/bg/ice.webp"
+      "cover_bg": "assets/bg/ice.webp",
+      "series_zh": "MØBIUS · 短篇",
+      "setting_zh": "MØBIUS 研究站 · 她的第一个冬天"
     }
   ],
   "unwritten": {
     "title_en": "Not yet charted",
-    "text_en": "The rest of her first year at MØBIUS has not been written yet. When it is, it will appear here."
+    "text_en": "The rest of her first year at MØBIUS has not been written yet. When it is, it will appear here.",
+    "title_zh": "尚未画出",
+    "text_zh": "她在 MØBIUS 第一年的其余部分还没有写。写好以后，会出现在这里。"
   }
 }

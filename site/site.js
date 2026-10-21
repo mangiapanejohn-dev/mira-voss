@@ -3,21 +3,94 @@
   'use strict';
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const raw = key => { try { return JSON.parse(localStorage.getItem(key)); } catch (_) { return null; } };
   const store = {
-    get(key) { try { return JSON.parse(localStorage.getItem(key)); } catch (_) { return null; } },
-    set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) { /* reading still works without storage */ } },
+    get: raw,
+    // After "Don't remember", only that choice itself is kept.
+    set(key, value) {
+      if (raw('mira-consent') === 'essential' && key !== 'mira-consent') return;
+      try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) { /* everything still works without storage */ }
+    },
   };
-  window.MiraSite = { store };
+
+  /* ---------- Language: English and Chinese on every page ---------- */
+  const lang = () => (root.dataset.lang === 'zh' ? 'zh' : 'en');
+  const cap = s => s[0].toUpperCase() + s.slice(1);
+  // A component's text for the current language: data-zh-<key> in Chinese, data-<key> otherwise.
+  const t = (el, key) => (lang() === 'zh' && el.dataset[`zh${cap(key)}`] !== undefined ? el.dataset[`zh${cap(key)}`] : el.dataset[key]);
+  const UI = {
+    en: { copy: 'Copy', copied: 'Copied', selected: 'Selected', top: 'Back to top' },
+    zh: { copy: '复制', copied: '已复制', selected: '已选中', top: '回到顶部' },
+  };
+  const ui = key => UI[lang()][key];
+  const ATTRS = { zhAria: 'aria-label', zhAlt: 'alt', zhMisreg: 'data-text', zhContent: 'content' };
+  const applyLang = l => {
+    $$('[data-zh]').forEach(el => {
+      if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+      el.innerHTML = l === 'zh' ? el.dataset.zh : el.dataset.en;
+    });
+    Object.entries(ATTRS).forEach(([key, attr]) => {
+      const sel = `[data-${key.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`)}]`;
+      $$(sel).forEach(el => {
+        const keep = `en${key.slice(2)}`;
+        if (el.dataset[keep] === undefined) el.dataset[keep] = el.getAttribute(attr) || '';
+        el.setAttribute(attr, l === 'zh' ? el.dataset[key] : el.dataset[keep]);
+      });
+    });
+    root.dataset.lang = l;
+    root.lang = l === 'zh' ? 'zh-Hans' : 'en';
+    $$('[data-set-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.setLang === l)));
+    document.dispatchEvent(new CustomEvent('lang:change', { detail: l }));
+  };
+  applyLang(lang());
+  root.classList.remove('i18n-pending');
+  $$('[data-set-lang]').forEach(button => button.addEventListener('click', () => {
+    const l = button.dataset.setLang;
+    if (l === lang()) return;
+    store.set('mira-lang', l);
+    const url = new URL(location.href);
+    if (url.searchParams.has('lang')) { url.searchParams.set('lang', l); history.replaceState(null, '', url); }
+    if (reduced) { applyLang(l); return; }
+    // Words blur out, change, and settle back in.
+    root.classList.add('lang-out');
+    setTimeout(() => {
+      applyLang(l);
+      root.classList.remove('lang-out');
+      root.classList.add('lang-in');
+      setTimeout(() => root.classList.remove('lang-in'), 700);
+    }, 230);
+  }));
+
+  /* ---------- Cookie and storage notice ---------- */
+  const notice = $('[data-consent]');
+  if (notice && !raw('mira-consent')) {
+    setTimeout(() => { notice.hidden = false; requestAnimationFrame(() => notice.classList.add('is-shown')); setTimeout(() => notice.classList.add('is-shown'), 60); }, 1200);
+    const close = value => {
+      try { localStorage.setItem('mira-consent', JSON.stringify(value)); } catch (_) { /* nothing to keep */ }
+      notice.classList.remove('is-shown');
+      setTimeout(() => { notice.hidden = true; }, 500);
+    };
+    $('[data-consent-ok]', notice).addEventListener('click', () => close('ok'));
+    $('[data-consent-forget]', notice).addEventListener('click', () => {
+      try { Object.keys(localStorage).filter(k => k.startsWith('mira-')).forEach(k => localStorage.removeItem(k)); } catch (_) { /* nothing stored */ }
+      close('essential');
+    });
+  }
+  window.MiraSite = { store, lang, t };
 
   /* ---------- The tide between pages ---------- */
   if (root.classList.contains('tide-in')) {
-    requestAnimationFrame(() => requestAnimationFrame(() => {
+    const drain = () => {
+      if (!root.classList.contains('tide-in')) return;
       root.classList.add('tide-out');
       root.classList.remove('tide-in');
       setTimeout(() => root.classList.remove('tide-out'), 950);
-    }));
+    };
+    requestAnimationFrame(() => requestAnimationFrame(drain));
+    setTimeout(drain, 120);
   }
   const isPageLink = a => {
     if (!a || a.target || a.hasAttribute('download')) return false;
@@ -29,22 +102,20 @@
   document.addEventListener('click', event => {
     const a = event.target.closest('a[href]');
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (!isPageLink(a) || reduced) return;
+    if (!isPageLink(a)) return;
+    const url = new URL(a.href, location.href);
+    // Without stored preferences, the language travels in the address.
+    if (raw('mira-consent') === 'essential' && lang() === 'zh') url.searchParams.set('lang', 'zh');
+    if (reduced) { if (url.href !== a.href) { event.preventDefault(); location.href = url.href; } return; }
     event.preventDefault();
     root.classList.remove('menu-open');
     root.classList.add('tide-cover');
     try { sessionStorage.setItem('mira-tide', '1'); } catch (_) { /* the next page simply appears */ }
-    setTimeout(() => { location.href = a.href; }, 640);
+    setTimeout(() => { location.href = url.href; }, 640);
   });
   addEventListener('pageshow', event => { if (event.persisted) root.classList.remove('tide-cover', 'tide-in', 'tide-out'); });
 
-  /* ---------- Top bar and menu ---------- */
-  const bar = $('.topbar');
-  if (bar) {
-    const solid = () => bar.classList.toggle('is-solid', scrollY > 24 || !!bar.dataset.alwaysSolid);
-    solid();
-    addEventListener('scroll', solid, { passive: true });
-  }
+  /* ---------- Menu on small screens ---------- */
   const toggle = $('.menu-toggle');
   if (toggle) {
     const setMenu = open => {
@@ -60,7 +131,7 @@
   }
 
   /* ---------- Masthead entrance ---------- */
-  $$('[data-letters]').forEach(el => {
+  const splitLetters = el => {
     // Letters arrive one by one, but words stay whole so lines break where the outline's do.
     let i = 0;
     const words = el.textContent.split(' ');
@@ -77,7 +148,8 @@
       el.append(group);
       if (w < words.length - 1) { el.append(' '); i++; }
     });
-  });
+  };
+  $$('[data-letters]').forEach(splitLetters);
   const masthead = $('[data-masthead]');
   if (masthead) {
     const img = $('img', masthead);
@@ -89,27 +161,57 @@
       setTimeout(go, 120);
       $$('.misreg', masthead).forEach(el => setTimeout(() => el.classList.add('is-in'), 300));
     });
-    const art = $('[data-parallax]', masthead);
-    if (art && !reduced) {
-      let ticking = false;
-      addEventListener('scroll', () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          const y = Math.min(scrollY, innerHeight * 1.2);
-          art.style.transform = `translate3d(0, ${y * 0.32}px, 0)`;
-          ticking = false;
-        });
-      }, { passive: true });
-    }
   }
 
-  /* ---------- Scroll reveals ---------- */
+  /* ---------- Depth: the opening art and each section's atmosphere move at their own pace ---------- */
+  if (!reduced) {
+    const layers = [];
+    const art = masthead && $('[data-parallax]', masthead);
+    if (art) layers.push({ el: art, speed: .32, from: 'top' });
+    $$('.atmos').forEach(el => layers.push({ el, speed: -.12, from: 'centre' }));
+    let ticking = false;
+    const move = () => {
+      ticking = false;
+      layers.forEach(({ el, speed, from }) => {
+        if (from === 'top') { el.style.transform = `translate3d(0, ${Math.min(scrollY, innerHeight * 1.2) * speed}px, 0)`; return; }
+        const r = el.parentElement.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > innerHeight + 200) return;
+        el.style.transform = `translate3d(0, ${(r.top + r.height / 2 - innerHeight / 2) * speed}px, 0)`;
+      });
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(move); } }, { passive: true });
+    move();
+  }
+
+  /* ---------- Scroll reveals: several kinds, chosen per section ---------- */
+  // ink: a line of text arrives character by character, as if written
+  $$('[data-ink]').forEach(el => {
+    const prepare = () => {
+      const nodes = [...el.childNodes];
+      el.textContent = '';
+      let i = 0;
+      nodes.forEach(node => {
+        if (node.nodeType === 1 && node.tagName === 'BR') { el.append(document.createElement('br')); return; }
+        [...node.textContent].forEach(ch => {
+          const s = document.createElement('span');
+          s.className = 'ink';
+          s.textContent = ch;
+          s.style.setProperty('--i', i++);
+          el.append(s);
+        });
+      });
+    };
+    prepare();
+    document.addEventListener('lang:change', prepare);
+  });
+  // cascade: children of a list arrive one after another
+  $$('[data-cascade]').forEach(list => [...list.children].forEach((child, i) => child.style.setProperty('--ci', i)));
   const seen = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const el = entry.target;
       el.classList.add(el.matches('[data-isobaths]') ? 'is-drawn' : 'is-in');
+      if (el.matches('[data-tilt]')) setTimeout(() => el.classList.add('is-settled'), 1600);
       if (el.classList.contains('halftone')) {
         const done = () => el.classList.add('is-printed');
         el.addEventListener('transitionend', done, { once: true });
@@ -119,9 +221,28 @@
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: .12 });
   const watch = el => seen.observe(el);
-  $$('[data-stagger]').forEach(group => $$('.reveal', group).forEach((el, i) => el.style.setProperty('--rd', `${i * 70}ms`)));
-  $$('.reveal, .halftone, .misreg:not([data-masthead] .misreg)').forEach(watch);
+  $$('[data-stagger]').forEach(group => $$('.reveal, [data-reveal]', group).forEach((el, i) => el.style.setProperty('--rd', `${i * 80}ms`)));
+  $$('.reveal, .halftone, [data-reveal], [data-ink], [data-cascade], .misreg:not([data-masthead] .misreg)').forEach(watch);
   if (reduced || !('CSS' in window && CSS.registerProperty)) $$('.halftone').forEach(el => el.classList.add('is-in', 'is-printed'));
+
+  /* ---------- Cards lean toward the pointer ---------- */
+  if (finePointer && !reduced) {
+    $$('[data-tilt]').forEach(card => {
+      const max = Number(card.dataset.tilt) || 6;
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - .5;
+        const y = (e.clientY - r.top) / r.height - .5;
+        card.style.setProperty('--rx', `${(-y * max).toFixed(2)}deg`);
+        card.style.setProperty('--ry', `${(x * max).toFixed(2)}deg`);
+        card.style.setProperty('--px', `${((x + .5) * 100).toFixed(1)}%`);
+        card.style.setProperty('--py', `${((y + .5) * 100).toFixed(1)}%`);
+        card.style.setProperty('--tx', `${(-x * 14).toFixed(1)}px`);
+        card.style.setProperty('--ty', `${(-y * 14).toFixed(1)}px`);
+      });
+      card.addEventListener('pointerleave', () => { ['--rx', '--ry'].forEach(v => card.style.setProperty(v, '0deg')); ['--tx', '--ty'].forEach(v => card.style.setProperty(v, '0px')); });
+    });
+  }
 
   /* ---------- Inline SVG art: sea-chart lines, the Rovelle chart, the MØBIUS loop ---------- */
   const inline = (el, url) => fetch(url).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(svg => { el.innerHTML = svg; return el; });
@@ -141,9 +262,11 @@
     const tabs = $$('[role="tab"]', group);
     const select = (tab, focus) => {
       if (tab.getAttribute('aria-selected') === 'true') return;
-      tabs.forEach(t => { const on = t === tab; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+      const from = tabs.findIndex(x => x.getAttribute('aria-selected') === 'true');
+      tabs.forEach(x => { const on = x === tab; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
       if (focus) tab.focus();
-      group.dispatchEvent(new CustomEvent('tab:select', { detail: tab }));
+      group.dataset.dir = tabs.indexOf(tab) > from ? 'next' : 'prev';
+      group.dispatchEvent(new CustomEvent('tab:select', { detail: tab, bubbles: false }));
     };
     tabs.forEach((tab, i) => {
       tab.addEventListener('click', () => select(tab));
@@ -156,197 +279,71 @@
       });
     });
   });
-  const swap = (panel, update) => {
+  const current = group => $$('[role="tab"]', group).find(x => x.getAttribute('aria-selected') === 'true');
+  const swap = (panel, update, style = 'slide') => {
     if (reduced || !panel.animate) { update(); return; }
-    panel.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(-14px)' }], { duration: 170, easing: 'ease-in', fill: 'forwards' }).finished.then(() => {
+    const out = style === 'rise' ? [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-10px)' }] : [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(-14px)' }];
+    const into = style === 'rise' ? [{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }] : [{ opacity: 0, transform: 'translateX(18px)' }, { opacity: 1, transform: 'none' }];
+    panel.animate(out, { duration: 170, easing: 'ease-in', fill: 'forwards' }).finished.then(() => {
       update();
-      panel.animate([{ opacity: 0, transform: 'translateX(18px)' }, { opacity: 1, transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' });
+      panel.animate(into, { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' });
     });
   };
+
   $$('[data-abilities]').forEach(group => {
     const panel = $('[data-ability-panel]', group);
-    group.addEventListener('tab:select', ({ detail: tab }) => swap(panel, () => {
-      $('[data-slot]', panel).textContent = tab.dataset.slot;
-      $('[data-name]', panel).textContent = tab.dataset.name;
-      $('[data-text]', panel).innerHTML = $(`template[data-for="${tab.dataset.key}"]`, group).innerHTML;
+    const fill = tab => {
+      const tpl = $(`template[data-for="${tab.dataset.key}"]`, group);
+      $('[data-slot]', panel).textContent = t(tab, 'slot');
+      $('[data-name]', panel).textContent = t(tab, 'name');
+      $('[data-text]', panel).innerHTML = lang() === 'zh' && tpl.dataset.zh ? tpl.dataset.zh : tpl.innerHTML;
       $('[data-key]', panel).textContent = tab.dataset.key.toUpperCase();
+      panel.setAttribute('aria-labelledby', tab.id);
+    };
+    group.addEventListener('tab:select', ({ detail: tab }) => swap(panel, () => {
+      fill(tab);
       const glyph = $('[data-glyph]', panel);
       if (glyph && tab.dataset.glyph) {
         $('use', glyph).setAttribute('href', tab.dataset.glyph);
         glyph.classList.remove('is-drawing'); void glyph.getBoundingClientRect(); glyph.classList.add('is-drawing');
       }
-      panel.setAttribute('aria-labelledby', tab.id);
-    }));
+    }, 'rise'));
+    document.addEventListener('lang:change', () => fill(current(group)));
   });
+
   $$('[data-art]').forEach(group => {
     const caption = $('[data-art-caption]', group);
+    const fill = tab => { $('h3', caption).textContent = t(tab, 'name'); $('p', caption).textContent = t(tab, 'body'); };
     group.addEventListener('tab:select', ({ detail: tab }) => {
-      $$('[data-slide]', group).forEach(s => s.classList.toggle('is-active', s.dataset.slide === tab.dataset.slide));
-      swap(caption, () => { $('h3', caption).textContent = tab.dataset.name; $('p', caption).textContent = tab.dataset.text; });
-    });
-  });
-
-  /* ---------- Copy the install command ---------- */
-  $$('[data-copy]').forEach(button => button.addEventListener('click', async () => {
-    const text = $(button.dataset.copy).textContent.trim();
-    const label = $('[data-copy-label]', button);
-    try { await navigator.clipboard.writeText(text); label.textContent = 'Copied'; }
-    catch (_) {
-      const range = document.createRange(); range.selectNodeContents($(button.dataset.copy));
-      getSelection().removeAllRanges(); getSelection().addRange(range); label.textContent = 'Selected';
-    }
-    setTimeout(() => { label.textContent = 'Copy'; }, 1800);
-  }));
-
-  /* ---------- Continue reading (saved by the reader) ---------- */
-  const saved = store.get('mira-reading-v3');
-  const library = window.MIRA_LIBRARY || [];
-  const savedWork = saved && library.find(w => w.id === saved.work);
-  const savedChapter = savedWork && savedWork.chapters.find(c => c.id === saved.chapter);
-  $$('[data-continue]').forEach(el => {
-    if (!savedChapter || (saved.ratio < .02 && savedChapter === savedWork.chapters[0])) return;
-    el.hidden = false;
-    $$('a', el).concat(el.matches('a') ? [el] : []).forEach(a => { a.href = `read.html?work=${savedWork.id}&chapter=${savedChapter.id}&resume=1`; });
-    $$('[data-continue-work]', el).forEach(n => { n.textContent = savedWork.short_zh; });
-    $$('[data-continue-chapter]', el).forEach(n => { n.textContent = `${savedChapter.label} · ${savedChapter.title}`; });
-    $$('[data-continue-progress]', el).forEach(n => n.style.setProperty('--p', saved.ratio));
-  });
-
-  /* ---------- The Rovelle chart: places on the map and in the list answer each other ---------- */
-  const chartWrap = $('[data-chart]');
-  if (chartWrap) {
-    const detail = $('[data-place-detail]');
-    const items = $$('[data-place-item]');
-    const choose = (id, scroll) => {
-      const item = items.find(i => i.dataset.placeItem === id);
-      if (!item) return;
-      items.forEach(i => i.setAttribute('aria-pressed', String(i === item)));
-      $$('.place', chartWrap).forEach(p => p.classList.toggle('is-active', p.dataset.place === id));
-      swap(detail, () => {
-        detail.querySelector('h3').textContent = item.dataset.name;
-        detail.querySelector('[data-zh]').textContent = item.dataset.zh;
-        detail.querySelector('p').textContent = item.dataset.text;
-        const link = detail.querySelector('a');
-        link.href = item.dataset.href; link.querySelector('span').textContent = item.dataset.where;
+      // Slides travel the way the viewer moved.
+      const dir = group.dataset.dir === 'prev' ? -1 : 1;
+      $$('[data-slide]', group).forEach(s => {
+        const on = s.dataset.slide === tab.dataset.slide;
+        if (on && s.animate && !reduced) s.animate([{ transform: `translateX(${dir * 6}%) scale(1.04)`, opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 900, easing: 'cubic-bezier(.16,1,.3,1)' });
+        s.classList.toggle('is-active', on);
       });
-      if (scroll && innerWidth < 960) detail.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest' });
-    };
-    const hover = (id, on) => {
-      $$('.place', chartWrap).forEach(p => p.classList.toggle('is-hover', on && p.dataset.place === id));
-      items.forEach(i => i.classList.toggle('is-hover', on && i.dataset.placeItem === id));
-    };
-    items.forEach(i => {
-      i.addEventListener('click', () => choose(i.dataset.placeItem));
-      i.addEventListener('mouseenter', () => hover(i.dataset.placeItem, true));
-      i.addEventListener('mouseleave', () => hover(i.dataset.placeItem, false));
+      swap(caption, () => fill(tab), 'rise');
     });
-    chartWrap.addEventListener('svg:ready', () => {
-      $$('.place', chartWrap).forEach(p => {
-        p.addEventListener('click', () => choose(p.dataset.place, true));
-        p.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(p.dataset.place, true); } });
-        p.addEventListener('mouseenter', () => hover(p.dataset.place, true));
-        p.addEventListener('mouseleave', () => hover(p.dataset.place, false));
-      });
-      $$('.place', chartWrap).forEach((p, i) => p.style.setProperty('--i', i));
-      chartWrap.classList.add('is-ready');
-      choose(items[0].dataset.placeItem);
-    });
-  }
-
-  /* ---------- The MØBIUS loop: a pen travels the tape, front and back, without lifting ---------- */
-  $$('[data-mobius]').forEach(el => el.addEventListener('svg:ready', () => {
-    const path = $('.mobius-centre', el);
-    const svg = $('svg', el);
-    if (!path || !svg) return;
-    const pen = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    pen.setAttribute('r', '6'); pen.setAttribute('class', 'mobius-pen');
-    const trail = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    trail.setAttribute('class', 'mobius-trail');
-    svg.append(trail, pen);
-    const length = path.getTotalLength();
-    let visible = false;
-    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(el);
-    const draw = t => {
-      const at = (t / 16000 % 1) * length;
-      const p = path.getPointAtLength(at);
-      pen.setAttribute('cx', p.x); pen.setAttribute('cy', p.y);
-      const pts = [];
-      for (let k = 0; k < 40; k++) { const q = path.getPointAtLength((at - k * 6 + length) % length); pts.push(`${q.x.toFixed(1)} ${q.y.toFixed(1)}`); }
-      trail.setAttribute('d', `M${pts.join(' L')}`);
+    const step = d => {
+      const tabs = $$('[role="tab"]', group);
+      const i = tabs.indexOf(current(group));
+      tabs[(i + d + tabs.length) % tabs.length].click();
     };
-    if (reduced) { draw(4000); return; }
-    const frame = t => { if (visible) draw(t); requestAnimationFrame(frame); };
-    requestAnimationFrame(frame);
-  }));
-
-  /* ---------- Bells: each one rings when chosen ---------- */
-  $$('[data-bells]').forEach(group => {
-    const panel = $('[data-bell-panel]', group);
-    group.addEventListener('tab:select', ({ detail: tab }) => {
-      const bell = $('.bell-shape', tab);
-      if (bell && !reduced && bell.animate) bell.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(14deg)' }, { transform: 'rotate(-10deg)' }, { transform: 'rotate(6deg)' }, { transform: 'rotate(-3deg)' }, { transform: 'rotate(0)' }], { duration: 1300, easing: 'ease-out' });
-      swap(panel, () => {
-        $('h3', panel).textContent = tab.dataset.name;
-        $('p', panel).textContent = tab.dataset.text;
-        $('[data-count]', panel).textContent = tab.dataset.count;
-      });
-    });
+    $$('[data-art-prev]', group).forEach(b => b.addEventListener('click', () => step(-1)));
+    $$('[data-art-next]', group).forEach(b => b.addEventListener('click', () => step(1)));
+    document.addEventListener('lang:change', () => fill(current(group)));
   });
-  /* ---------- Universe sub-bar: a crumb, a track of the page's sections, back to top ---------- */
-  const crumb = document.body.dataset.subbar;
-  const sections = $$('main > section[data-nav]');
-  if (crumb && sections.length > 1) {
-    const sub = document.createElement('div');
-    sub.className = 'subbar';
-    sub.innerHTML = '<a class="subbar-crumb" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" /><span></span></a>'
-      + '<a class="subbar-top" href="#main" aria-label="Back to top"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 10V2M2.5 5.5L6 2l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>'
-      + '<div class="subbar-track"><span class="subbar-fill"></span></div>';
-    $('span', sub).textContent = crumb;
-    const track = $('.subbar-track', sub);
-    const fill = $('.subbar-fill', sub);
-    const dots = sections.map(section => {
-      const a = document.createElement('a');
-      a.className = 'subbar-dot';
-      a.href = `#${section.id || (section.id = `s-${Math.random().toString(36).slice(2, 7)}`)}`;
-      a.innerHTML = '<span></span>';
-      a.firstChild.textContent = section.dataset.nav;
-      a.setAttribute('aria-label', section.dataset.nav);
-      track.append(a);
-      return a;
-    });
-    $('.subbar-top', sub).addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); });
-    document.body.append(sub);
-    const head = $('[data-masthead]');
-    let queued = false;
-    const place = () => {
-      queued = false;
-      const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-      const tops = sections.map(sec => Math.min(1, sec.offsetTop / max));
-      dots.forEach((d, i) => { d.style.left = `${4 + tops[i] * 92}%`; });
-      const r = Math.min(1, scrollY / max);
-      fill.style.transform = `scaleX(${(4 + r * 92) / 100})`;
-      let current = -1;
-      sections.forEach((sec, i) => { if (sec.getBoundingClientRect().top < innerHeight * .45) current = i; });
-      dots.forEach((d, i) => { d.classList.toggle('is-past', i < current); d.classList.toggle('is-current', i === current); });
-      sub.classList.toggle('is-shown', scrollY > (head ? head.offsetHeight - 120 : 200));
-    };
-    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(place); } };
-    addEventListener('scroll', queue, { passive: true });
-    addEventListener('resize', queue, { passive: true });
-    addEventListener('load', queue);
-    place();
-  }
 
   /* ---------- Abilities play through on their own, as on a champion page ---------- */
   $$('[data-abilities][data-autoplay]').forEach(group => {
     const tabs = $$('[role="tab"]', group);
     let stopped = reduced;
     const arm = () => {
-      tabs.forEach(t => t.classList.remove('is-timing'));
+      tabs.forEach(x => x.classList.remove('is-timing'));
       if (stopped) return;
-      const current = tabs.find(t => t.getAttribute('aria-selected') === 'true');
-      void current.offsetWidth;
-      current.classList.add('is-timing');
+      const now = current(group);
+      void now.offsetWidth;
+      now.classList.add('is-timing');
     };
     tabs.forEach((tab, i) => {
       const meter = document.createElement('i');
@@ -364,18 +361,224 @@
     arm();
   });
 
-  /* ---------- Art viewer arrows ---------- */
-  $$('[data-art]').forEach(group => {
-    const tabs = $$('[role="tab"]', group);
-    const step = d => {
-      const i = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
-      tabs[(i + d + tabs.length) % tabs.length].click();
+  /* ---------- Bells: the chosen one swings and its sound spreads in rings ---------- */
+  $$('[data-bells]').forEach(group => {
+    const panel = $('[data-bell-panel]', group);
+    const fill = tab => {
+      $('h3', panel).textContent = t(tab, 'name');
+      $('p', panel).textContent = t(tab, 'body');
+      $('[data-count]', panel).textContent = t(tab, 'count');
     };
-    $$('[data-art-prev]', group).forEach(b => b.addEventListener('click', () => step(-1)));
-    $$('[data-art-next]', group).forEach(b => b.addEventListener('click', () => step(1)));
+    group.addEventListener('tab:select', ({ detail: tab }) => {
+      const bell = $('.bell-shape', tab);
+      if (bell && !reduced && bell.animate) {
+        bell.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(16deg)' }, { transform: 'rotate(-12deg)' }, { transform: 'rotate(7deg)' }, { transform: 'rotate(-3deg)' }, { transform: 'rotate(0)' }], { duration: 1400, easing: 'ease-out' });
+        const rings = Number(tab.dataset.rings) || 1;
+        for (let k = 0; k < rings * 2; k++) {
+          const ring = document.createElement('span');
+          ring.className = 'bell-ring';
+          ring.style.animationDelay = `${k * 220}ms`;
+          tab.append(ring);
+          setTimeout(() => ring.remove(), 1800 + k * 220);
+        }
+      }
+      swap(panel, () => fill(tab), 'rise');
+    });
+    document.addEventListener('lang:change', () => fill(current(group)));
   });
+
+  /* ---------- Questions open and close smoothly ---------- */
+  $$('.faq details').forEach(d => {
+    const summary = $('summary', d);
+    const body = $('.answer', d);
+    summary.addEventListener('click', e => {
+      if (reduced || !body.animate) return;
+      e.preventDefault();
+      if (d.open) {
+        const h = body.offsetHeight;
+        body.animate([{ height: `${h}px`, opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 380, easing: 'cubic-bezier(.65,0,.35,1)' }).finished.then(() => { d.open = false; });
+      } else {
+        d.open = true;
+        const h = body.offsetHeight;
+        body.animate([{ height: '0px', opacity: 0, transform: 'translateY(-6px)' }, { height: `${h}px`, opacity: 1, transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.16,1,.3,1)' });
+      }
+    });
+  });
+
+  /* ---------- Copy the install command ---------- */
+  $$('[data-copy]').forEach(button => {
+    const label = $('[data-copy-label]', button);
+    const reset = () => { label.textContent = ui('copy'); };
+    reset();
+    document.addEventListener('lang:change', reset);
+    button.addEventListener('click', async () => {
+      const text = $(button.dataset.copy).textContent.trim();
+      try { await navigator.clipboard.writeText(text); label.textContent = ui('copied'); }
+      catch (_) {
+        const range = document.createRange(); range.selectNodeContents($(button.dataset.copy));
+        getSelection().removeAllRanges(); getSelection().addRange(range); label.textContent = ui('selected');
+      }
+      setTimeout(reset, 1800);
+    });
+  });
+
+  /* ---------- Continue reading (saved by the reader) ---------- */
+  const saved = store.get('mira-reading-v3');
+  const library = window.MIRA_LIBRARY || [];
+  const savedWork = saved && library.find(w => w.id === saved.work);
+  const savedChapter = savedWork && savedWork.chapters.find(c => c.id === saved.chapter);
+  $$('[data-continue]').forEach(el => {
+    if (!savedChapter || (saved.ratio < .02 && savedChapter === savedWork.chapters[0])) return;
+    el.hidden = false;
+    $$('a', el).concat(el.matches('a') ? [el] : []).forEach(a => { a.href = `read.html?work=${savedWork.id}&chapter=${savedChapter.id}&resume=1`; });
+    $$('[data-continue-work]', el).forEach(n => { n.textContent = savedWork.short_zh; });
+    $$('[data-continue-chapter]', el).forEach(n => { n.textContent = `${savedChapter.label} · ${savedChapter.title}`; });
+    $$('[data-continue-progress]', el).forEach(n => n.style.setProperty('--p', saved.ratio));
+  });
+
+  /* ---------- The Rovelle chart: choosing a place pans the chart to it ---------- */
+  const chartWrap = $('[data-chart]');
+  if (chartWrap) {
+    const detail = $('[data-place-detail]');
+    const items = $$('[data-place-item]');
+    let chosen = null;
+    const fill = item => {
+      detail.querySelector('h3').textContent = lang() === 'zh' ? item.dataset.cn : item.dataset.name;
+      detail.querySelector('[data-place-alt]').textContent = lang() === 'zh' ? item.dataset.name : item.dataset.cn;
+      detail.querySelector('p').textContent = t(item, 'body');
+      const link = detail.querySelector('a');
+      link.href = item.dataset.href; link.querySelector('span').textContent = t(item, 'where');
+    };
+    const focusOn = id => {
+      const svg = $('svg', chartWrap);
+      const mark = svg && $(`.place[data-place="${id}"] .place-mark`, svg);
+      if (!mark || reduced) return;
+      const b = mark.getBBox();
+      const cx = (b.x + b.width / 2) / 1000;
+      const cy = (b.y + b.height / 2) / 700;
+      // Lean in a little toward the place, never so far that the rest of the city is lost.
+      svg.style.setProperty('--zx', `${(.5 - cx) * 18}%`);
+      svg.style.setProperty('--zy', `${(.5 - cy) * 18}%`);
+      svg.classList.add('is-focused');
+    };
+    const choose = (id, scroll) => {
+      const item = items.find(i => i.dataset.placeItem === id);
+      if (!item) return;
+      chosen = item;
+      items.forEach(i => i.setAttribute('aria-pressed', String(i === item)));
+      $$('.place', chartWrap).forEach(p => p.classList.toggle('is-active', p.dataset.place === id));
+      focusOn(id);
+      swap(detail, () => fill(item), 'rise');
+      if (scroll && innerWidth < 960) detail.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest' });
+    };
+    const hover = (id, on) => {
+      $$('.place', chartWrap).forEach(p => p.classList.toggle('is-hover', on && p.dataset.place === id));
+      items.forEach(i => i.classList.toggle('is-hover', on && i.dataset.placeItem === id));
+    };
+    items.forEach(i => {
+      i.addEventListener('click', () => choose(i.dataset.placeItem));
+      i.addEventListener('mouseenter', () => hover(i.dataset.placeItem, true));
+      i.addEventListener('mouseleave', () => hover(i.dataset.placeItem, false));
+    });
+    const paintChart = () => $$('text[data-cn]', chartWrap).forEach(label => {
+      if (label.dataset.en === undefined) label.dataset.en = label.textContent;
+      label.textContent = lang() === 'zh' ? label.dataset.cn : label.dataset.en;
+    });
+    document.addEventListener('lang:change', paintChart);
+    chartWrap.addEventListener('svg:ready', () => {
+      paintChart();
+      $$('.place', chartWrap).forEach((p, i) => {
+        p.style.setProperty('--i', i);
+        p.addEventListener('click', () => choose(p.dataset.place, true));
+        p.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(p.dataset.place, true); } });
+        p.addEventListener('mouseenter', () => hover(p.dataset.place, true));
+        p.addEventListener('mouseleave', () => hover(p.dataset.place, false));
+      });
+      chartWrap.classList.add('is-ready');
+      chosen = items[0];
+      items[0].setAttribute('aria-pressed', 'true');
+      $$('.place', chartWrap).forEach(p => p.classList.toggle('is-active', p.dataset.place === items[0].dataset.placeItem));
+      fill(items[0]);
+    });
+    document.addEventListener('lang:change', () => { if (chosen) fill(chosen); });
+  }
+
+  /* ---------- The MØBIUS loop: a pen travels the tape, front and back, without lifting ---------- */
+  $$('[data-mobius]').forEach(el => el.addEventListener('svg:ready', () => {
+    const path = $('.mobius-centre', el);
+    const svg = $('svg', el);
+    if (!path || !svg) return;
+    const pen = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    pen.setAttribute('r', '6'); pen.setAttribute('class', 'mobius-pen');
+    const trail = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    trail.setAttribute('class', 'mobius-trail');
+    svg.append(trail, pen);
+    const length = path.getTotalLength();
+    let visible = false;
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(el);
+    const draw = time => {
+      const at = (time / 16000 % 1) * length;
+      const p = path.getPointAtLength(at);
+      pen.setAttribute('cx', p.x); pen.setAttribute('cy', p.y);
+      const pts = [];
+      for (let k = 0; k < 40; k++) { const q = path.getPointAtLength((at - k * 6 + length) % length); pts.push(`${q.x.toFixed(1)} ${q.y.toFixed(1)}`); }
+      trail.setAttribute('d', `M${pts.join(' L')}`);
+      // The loop turns a little as the page passes it.
+      const r = el.getBoundingClientRect();
+      svg.style.transform = `rotate(${((r.top + r.height / 2 - innerHeight / 2) / innerHeight * -8).toFixed(2)}deg)`;
+    };
+    if (reduced) { draw(4000); return; }
+    const frame = time => { if (visible) draw(time); requestAnimationFrame(frame); };
+    requestAnimationFrame(frame);
+  }));
+
+  /* ---------- Universe sub-bar: a crumb, a track of the page's sections, back to top ---------- */
+  const sections = $$('main > section[data-nav]');
+  if (document.body.dataset.subbar && sections.length > 1) {
+    const sub = document.createElement('div');
+    sub.className = 'subbar';
+    sub.innerHTML = '<a class="subbar-crumb" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" /><span></span></a>'
+      + '<a class="subbar-top" href="#main"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 10V2M2.5 5.5L6 2l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>'
+      + '<div class="subbar-track"><span class="subbar-fill"></span></div>';
+    const track = $('.subbar-track', sub);
+    const fill = $('.subbar-fill', sub);
+    const dots = sections.map(section => {
+      const a = document.createElement('a');
+      a.className = 'subbar-dot';
+      a.href = `#${section.id || (section.id = `s-${Math.random().toString(36).slice(2, 7)}`)}`;
+      a.innerHTML = '<span></span>';
+      track.append(a);
+      return a;
+    });
+    const label = () => {
+      $('.subbar-crumb span', sub).textContent = t(document.body, 'subbar');
+      $('.subbar-top', sub).setAttribute('aria-label', ui('top'));
+      dots.forEach((a, i) => { const name = t(sections[i], 'nav'); a.firstChild.textContent = name; a.setAttribute('aria-label', name); });
+    };
+    label();
+    document.addEventListener('lang:change', label);
+    $('.subbar-top', sub).addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); });
+    document.body.append(sub);
+    let queued = false;
+    const place = () => {
+      queued = false;
+      const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+      dots.forEach((d, i) => { d.style.left = `${4 + Math.min(1, sections[i].offsetTop / max) * 92}%`; });
+      fill.style.transform = `scaleX(${(4 + Math.min(1, scrollY / max) * 92) / 100})`;
+      let now = -1;
+      sections.forEach((sec, i) => { if (sec.getBoundingClientRect().top < innerHeight * .45) now = i; });
+      dots.forEach((d, i) => { d.classList.toggle('is-past', i < now); d.classList.toggle('is-current', i === now); });
+      sub.classList.toggle('is-shown', scrollY > (masthead ? masthead.offsetHeight - 120 : 200));
+    };
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(place); setTimeout(() => { if (queued) place(); }, 120); } };
+    addEventListener('scroll', queue, { passive: true });
+    addEventListener('resize', queue, { passive: true });
+    addEventListener('load', queue);
+    place();
+  }
+
   /* ---------- A soft light follows the pointer across gold buttons ---------- */
-  if (!reduced) document.addEventListener('pointermove', e => {
+  if (finePointer && !reduced) document.addEventListener('pointermove', e => {
     const b = e.target.closest && e.target.closest('.btn-gold');
     if (!b) return;
     const r = b.getBoundingClientRect();

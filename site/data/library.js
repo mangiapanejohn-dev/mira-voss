@@ -17,6 +17,8 @@ window.MIRA_LIBRARY = [
   "cover": "assets/art/cover-rovelle.webp",
   "bg": "assets/bg/dusk.webp",
   "theme": "dusk",
+  "series_zh": "罗维尔 · 第一部",
+  "setting_zh": "罗维尔 · 她十七岁的冬天",
   "chars": 9454,
   "minutes": 22,
   "chapters": [
@@ -160,6 +162,8 @@ window.MIRA_LIBRARY = [
   "theme": "ice",
   "light": "beam",
   "cover_bg": "assets/bg/ice.webp",
+  "series_zh": "MØBIUS · 短篇",
+  "setting_zh": "MØBIUS 研究站 · 她的第一个冬天",
   "chars": 5441,
   "minutes": 12,
   "chapters": [

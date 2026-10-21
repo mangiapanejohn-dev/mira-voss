@@ -1,11 +1,12 @@
-/* Mira Voss — the story reader: one chapter per page, progress remembered. */
+/* Mira Voss — the story reader: one chapter per page, progress remembered.
+   The interface follows the site's language; the stories are Chinese originals. */
 (() => {
   'use strict';
   const library = window.MIRA_LIBRARY || [];
   if (!library.length) return;
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const store = window.MiraSite.store;
+  const { store, lang } = window.MiraSite;
   const $ = s => document.querySelector(s);
   const params = new URLSearchParams(location.search);
   const saved = store.get('mira-reading-v3');
@@ -15,6 +16,21 @@
     'only-one-side': { src: 'assets/art/mobius-loop.svg', art: 'mobius' },
     'character-profile': { src: 'assets/art/mira-portrait.webp', focus: '50% 30%' },
   };
+  const T = {
+    en: {
+      minutes: n => `About ${n} min`, min: n => `${n} min`,
+      next: kind => (kind === 'Short story' ? 'Next part' : 'Next chapter'), nextStory: 'Next story',
+      spoilers: c => c.title_en, original: 'Chinese original · an English translation is not yet available',
+      failed: 'This chapter could not be loaded. Reload the page, or read the original on GitHub.',
+    },
+    zh: {
+      minutes: n => `约 ${n} 分钟`, min: n => `${n} 分钟`,
+      next: kind => (kind === 'Short story' ? '下一节' : '下一章'), nextStory: '下一个故事',
+      spoilers: c => `${c.label}（含完整剧透）`, original: '',
+      failed: '这一章暂时无法载入。请刷新页面，或在 GitHub 上阅读原文。',
+    },
+  };
+  const tr = () => T[lang()];
 
   let work = library.find(w => w.id === params.get('work'));
   let chapterId = params.get('chapter');
@@ -24,14 +40,17 @@
   }
   const chapters = work.chapters;
   const chapter = chapters.find(c => c.id === chapterId) || chapters[0];
+  const story = chapters.filter(c => c.kind === 'chapter');
+  const next = chapter.kind === 'chapter' ? story[story.indexOf(chapter) + 1] : null;
   const nextWork = library[library.indexOf(work) + 1];
+  const showNextWork = !next && nextWork && (chapter.kind === 'appendix' || chapter === story[story.length - 1]);
+  const prev = chapter.kind === 'chapter' ? story[story.indexOf(chapter) - 1] : story[story.length - 1];
+  const appendix = chapters.find(c => c.kind === 'appendix' && c !== chapter);
+  const label = c => (lang() === 'zh' ? c.label : c.label_en);
 
   /* ---------- Opening ---------- */
   if (work.theme) root.dataset.theme = work.theme;
-  if (work.bg) document.querySelector('.reader-atmos').style.setProperty('--reader-bg', `url(${work.bg})`);
-  document.title = `${chapter.title} · ${work.short_zh} · Mira Voss`;
-  $('[data-bar-work]').textContent = work.short_zh;
-  $('[data-bar-chapter]').textContent = chapter.kind === 'appendix' ? chapter.label : `${chapter.label} · ${chapter.title}`;
+  if (work.bg) $('.reader-atmos').style.setProperty('--reader-bg', `url(${work.bg})`);
   const hero = $('[data-hero]');
   const art = HERO[chapter.id] || HERO[work.id] || { src: work.cover };
   const heroImg = $('[data-hero-img]');
@@ -45,33 +64,27 @@
   }
   if (art.focus) hero.style.setProperty('--focus', art.focus);
   heroImg.src = art.src;
-  $('[data-series]').textContent = `${work.series} · ${work.title_en}`;
-  $('[data-label]').textContent = chapter.label;
-  $('[data-label-en]').textContent = chapter.label_en;
   $('[data-title]').textContent = chapter.title;
   $('[data-title-en]').textContent = chapter.title_en;
-  $('[data-minutes]').textContent = `约 ${chapter.minutes} 分钟`;
   $('[data-version]').textContent = `${work.version} · ${work.date}`;
   const showHero = () => { requestAnimationFrame(() => hero.classList.add('is-ready')); setTimeout(() => hero.classList.add('is-ready'), 120); };
   (heroImg.decode ? heroImg.decode() : Promise.resolve()).catch(() => {}).then(() => setTimeout(showHero, root.classList.contains('tide-out') ? 240 : 0));
 
-  /* ---------- Contents ---------- */
+  /* ---------- Contents drawer ---------- */
   const contents = $('[data-contents]');
+  const tocLinks = [];
   library.forEach(w => {
     const block = document.createElement('section');
     block.className = 'toc-work';
-    block.innerHTML = `<h2></h2><span class="zh" lang="zh-Hans"></span><ol></ol>`;
-    block.querySelector('h2').textContent = w.title_en;
-    block.querySelector('.zh').textContent = w.title_zh;
+    block.innerHTML = '<h2></h2><span class="zh"></span><ol></ol>';
+    block.dataset.work = w.id;
     w.chapters.forEach(c => {
       const li = document.createElement('li');
       const a = document.createElement('a');
       a.href = url(w.id, c.id);
-      a.innerHTML = '<span class="n"></span><span class="t"></span><span class="m"></span>';
-      a.querySelector('.n').textContent = c.label_en;
-      a.querySelector('.t').textContent = c.kind === 'appendix' ? `${c.label}（含剧透）` : c.title;
-      a.querySelector('.m').textContent = `${c.minutes} min`;
+      a.innerHTML = '<span class="n"></span><span class="t" lang="zh-Hans"></span><span class="m"></span>';
       if (w === work && c === chapter) a.setAttribute('aria-current', 'page');
+      tocLinks.push({ a, c });
       li.append(a);
       block.querySelector('ol').append(li);
     });
@@ -88,7 +101,7 @@
   toggle.addEventListener('click', () => setDrawer(!root.classList.contains('contents-open')));
   $('[data-close-contents]').addEventListener('click', () => setDrawer(false));
 
-  /* ---------- Type size ---------- */
+  /* ---------- Type size and light reading ---------- */
   const sizes = [...document.querySelectorAll('.size-switch button')];
   const setSize = size => {
     root.dataset.size = size;
@@ -97,56 +110,76 @@
   };
   sizes.forEach(b => b.addEventListener('click', () => setSize(b.dataset.size)));
   sizes.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.size === (root.dataset.size || 'm'))));
-
-  /* ---------- Light reading, as on the Universe story pages ---------- */
   const light = $('.light-toggle');
-  const setLight = on => {
+  light.setAttribute('aria-pressed', String(root.dataset.reading === 'light'));
+  light.addEventListener('click', () => {
+    const on = root.dataset.reading !== 'light';
     if (on) root.dataset.reading = 'light'; else delete root.dataset.reading;
     light.setAttribute('aria-pressed', String(on));
     store.set('mira-reader-light', on);
-  };
-  light.setAttribute('aria-pressed', String(root.dataset.reading === 'light'));
-  light.addEventListener('click', () => setLight(root.dataset.reading !== 'light'));
+  });
 
   /* ---------- After the chapter ---------- */
-  // The next card follows the story; appendices (the spoiler profile) are offered below it instead.
-  const story = chapters.filter(c => c.kind === 'chapter');
-  const next = chapter.kind === 'chapter' ? story[story.indexOf(chapter) + 1] : null;
   const nextLink = $('[data-next]');
-  if (next || (nextWork && (chapter.kind === 'appendix' || chapter === story[story.length - 1]))) {
-    nextLink.hidden = false;
+  const prevLink = $('[data-prev]');
+  if (next) nextLink.href = url(work.id, next.id);
+  else if (showNextWork) nextLink.href = url(nextWork.id, nextWork.chapters[0].id);
+  nextLink.hidden = !(next || showNextWork);
+  if (prev) { prevLink.hidden = false; prevLink.href = url(work.id, prev.id); }
+  let appendixLink = null;
+  if (appendix && chapter === story[story.length - 1]) {
+    appendixLink = document.createElement('a');
+    appendixLink.className = 'text-link';
+    appendixLink.href = url(work.id, appendix.id);
+    $('.end-links').insertBefore(appendixLink, $('[data-source]'));
+  }
+  $('[data-source]').href = `https://github.com/mangiapanejohn-dev/mira-voss/blob/main/${chapter.source}`;
+
+  /* ---------- Every piece of interface text, in the current language ---------- */
+  const paintContents = () => {
+    const zh = lang() === 'zh';
+    contents.querySelectorAll('.toc-work').forEach(block => {
+      const w = library.find(x => x.id === block.dataset.work);
+      block.querySelector('h2').textContent = zh ? w.title_zh : w.title_en;
+      block.querySelector('.zh').textContent = zh ? w.title_en : w.title_zh;
+    });
+    tocLinks.forEach(({ a, c }) => {
+      a.querySelector('.n').textContent = label(c);
+      a.querySelector('.t').textContent = c.kind === 'appendix' ? tr().spoilers(c) : c.title;
+      a.querySelector('.m').textContent = tr().min(c.minutes);
+    });
+  };
+  const paint = () => {
+    const zh = lang() === 'zh';
+    document.title = `${chapter.title} · ${work.short_zh} · Mira Voss`;
+    $('[data-bar-work]').textContent = zh ? work.short_zh : work.title_en;
+    $('[data-bar-chapter]').textContent = chapter.kind === 'appendix' ? label(chapter) : `${label(chapter)} · ${chapter.title}`;
+    $('[data-series]').textContent = zh ? `${work.series_zh} · ${work.title_zh}` : `${work.series} · ${work.title_en}`;
+    $('[data-label]').textContent = chapter.label;
+    $('[data-label-en]').textContent = chapter.label_en;
+    $('[data-minutes]').textContent = tr().minutes(chapter.minutes);
+    $('[data-hero-note]').textContent = tr().original;
+    $('[data-hero-note]').hidden = zh;
+    paintContents();
     if (next) {
-      nextLink.href = url(work.id, next.id);
-      $('[data-next-label]').textContent = `下一${work.kind === 'Short story' ? '节' : '章'} · ${next.label}`;
+      $('[data-next-label]').textContent = `${tr().next(work.kind)} · ${label(next)}`;
       $('[data-next-title]').textContent = next.title;
       $('[data-next-en]').textContent = next.title_en;
-    } else {
-      nextLink.href = url(nextWork.id, nextWork.chapters[0].id);
-      $('[data-next-label]').textContent = `下一个故事 · ${nextWork.series}`;
+    } else if (showNextWork) {
+      $('[data-next-label]').textContent = `${tr().nextStory} · ${zh ? nextWork.series_zh : nextWork.series}`;
       $('[data-next-title]').textContent = nextWork.title_zh;
       $('[data-next-en]').textContent = nextWork.title_en;
     }
-  }
-  const appendix = chapters.find(c => c.kind === 'appendix' && c !== chapter);
-  if (appendix && chapter === story[story.length - 1]) {
-    const a = document.createElement('a');
-    a.className = 'text-link';
-    a.href = url(work.id, appendix.id);
-    a.textContent = `${appendix.label}（含完整剧透）`;
-    $('.end-links').insertBefore(a, $('[data-source]'));
-  }
-  const prev = chapter.kind === 'chapter' ? story[story.indexOf(chapter) - 1] : story[story.length - 1];
-  if (prev) {
-    const prevLink = $('[data-prev]');
-    prevLink.hidden = false;
-    prevLink.href = url(work.id, prev.id);
-    $('[data-prev-title]').textContent = `${prev.label} · ${prev.title}`;
-  }
-  $('[data-source]').href = `https://github.com/mangiapanejohn-dev/mira-voss/blob/main/${chapter.source}`;
+    if (prev) $('[data-prev-title]').textContent = `${label(prev)} · ${prev.title}`;
+    if (appendixLink) appendixLink.textContent = tr().spoilers(appendix);
+  };
+  paint();
+  document.addEventListener('lang:change', paint);
+
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey || /input|textarea|select/i.test(e.target.tagName)) return;
     if (e.key === 'Escape' && root.classList.contains('contents-open')) { setDrawer(false); toggle.focus(); }
-    const target = e.key === 'ArrowRight' ? nextLink : e.key === 'ArrowLeft' ? $('[data-prev]') : null;
+    const target = e.key === 'ArrowRight' ? nextLink : e.key === 'ArrowLeft' ? prevLink : null;
     if (target && !target.hidden) target.click();
   });
 
@@ -172,11 +205,11 @@
   };
   const render = () => {
     const html = (window.MIRA_TEXT || {})[work.id]?.[chapter.id];
-    if (!html) { prose.innerHTML = '<p>这一章暂时无法载入。请刷新页面，或在 GitHub 上阅读原文。</p>'; return; }
+    if (!html) { prose.textContent = tr().failed; return; }
     prose.innerHTML = html;
     const blocks = [...prose.children];
     // A drop cap suits a Chinese character, not the M of a Latin name.
-    if (!/^[\u3400-\u9fff]/.test(prose.textContent.trim())) prose.classList.add('no-drop');
+    if (!/^[㐀-鿿]/.test(prose.textContent.trim())) prose.classList.add('no-drop');
     if (reduced || !('IntersectionObserver' in window)) blocks.forEach(b => b.classList.add('is-in'));
     else {
       const io = new IntersectionObserver(entries => entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } }), { rootMargin: '0px 0px -6% 0px' });

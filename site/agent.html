@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#010a13" />
-  <title>The Agent — Mira Voss</title>
-  <meta name="description" content="Mira Voss is a closed-source terminal agent distributed on npm. What she does in your project, how to install her, and how to start." />
+  <title data-zh="终端 Agent — Mira Voss">The Agent — Mira Voss</title>
+  <meta name="description" content="Mira Voss is a closed-source terminal agent distributed on npm. What she does in your project, how to install her, and how to start."  data-zh-content="Mira Voss 是通过 npm 分发的闭源终端 Agent。她在你的项目里做什么、如何安装、如何开始。"/>
   <link rel="canonical" href="https://mangiapanejohn-dev.github.io/mira-voss/agent.html" />
   <meta property="og:title" content="The Agent — Mira Voss" />
   <meta property="og:image" content="https://mangiapanejohn-dev.github.io/mira-voss/assets/mira-rovell-splash-v2.png" />
@@ -15,12 +15,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;1,700;1,800&family=Source+Sans+3:wght@400;600;700&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="pages.css" />
-  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}}catch(e){}})(document.documentElement)</script>
+  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}var q=new URLSearchParams(location.search).get('lang'),g=localStorage.getItem('mira-lang'),l=q||(g&&JSON.parse(g))||((navigator.language||'').toLowerCase().indexOf('zh')===0?'zh':'en');d.dataset.lang=l==='zh'?'zh':'en';if(l==='zh'){d.lang='zh-Hans';d.classList.add('i18n-pending')}}catch(e){}})(document.documentElement)</script>
   <script src="data/library.js" defer></script>
   <script src="site.js" defer></script>
 </head>
-<body data-subbar="The Agent">
-  <a class="skip-link" href="#main">Skip to content</a>
+<body data-subbar="The Agent" data-zh-subbar="终端 Agent">
+  <a class="skip-link" href="#main" data-zh="跳到正文">Skip to content</a>
   <svg class="sprite" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
     <symbol id="i-out" viewBox="0 0 24 24"><path d="M8 5h11v11M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
@@ -32,22 +32,26 @@
   </svg>
 
   <header class="topbar">
-    <a class="brand" href="index.html" aria-label="Mira Voss, home"><img src="assets/mira-logo-cutout.webp" alt="" width="42" height="35" /><span>Mira Voss</span></a>
-    <nav class="topnav" aria-label="Main">
+    <a class="brand" href="index.html" aria-label="Mira Voss, home" data-zh-aria="Mira Voss 首页"><img src="assets/mira-logo-cutout.webp" alt="" width="42" height="35" /><span>Mira Voss</span></a>
+    <nav class="topnav" aria-label="Main" data-zh-aria="主导航">
       <a href="mira.html">Mira</a>
-      <a href="stories.html">Stories</a>
-      <a href="world.html">Rovelle</a>
-      <a href="agent.html" aria-current="page">The Agent</a>
+      <a href="stories.html" data-zh="故事">Stories</a>
+      <a href="world.html" data-zh="罗维尔">Rovelle</a>
+      <a href="agent.html" aria-current="page" data-zh="Agent">The Agent</a>
     </nav>
-    <a class="btn btn-small" href="#install">Install</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span><span></span></button>
+    <div class="lang-switch" role="group" aria-label="Language · 语言">
+      <button type="button" data-set-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false" lang="zh-Hans">中</button>
+    </div>
+    <a class="btn btn-small" href="#install" data-zh="安装">Install</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu" data-zh-aria="菜单"><span></span><span></span></button>
   </header>
-  <nav class="menu" id="menu" aria-label="Main">
-    <a href="index.html"><small>Start</small>Home</a>
-    <a href="mira.html"><small>Her life</small>Mira</a>
-    <a href="stories.html"><small>Read</small>Stories</a>
-    <a href="world.html"><small>The world</small>Rovelle</a>
-    <a href="agent.html"><small>Install</small>The Agent</a>
+  <nav class="menu" id="menu" aria-label="Main" data-zh-aria="主导航">
+    <a href="index.html" data-zh="&lt;small&gt;开始&lt;/small&gt;首页"><small>Start</small>Home</a>
+    <a href="mira.html" data-zh="&lt;small&gt;人物&lt;/small&gt;Mira"><small>Her life</small>Mira</a>
+    <a href="stories.html" data-zh="&lt;small&gt;阅读&lt;/small&gt;故事"><small>Read</small>Stories</a>
+    <a href="world.html" data-zh="&lt;small&gt;世界&lt;/small&gt;罗维尔"><small>The world</small>Rovelle</a>
+    <a href="agent.html" data-zh="&lt;small&gt;安装&lt;/small&gt;终端 Agent"><small>Install</small>The Agent</a>
   </nav>
 
   <main id="main">
@@ -56,36 +60,36 @@
       <div class="masthead-shade" aria-hidden="true"></div>
       <div class="halftone-field" style="--size: 86vmin; right: -6vmin; top: 4%; --op: .14" aria-hidden="true"></div>
       <div class="masthead-body">
-        <p class="supertitle intro" style="--d: 0">The terminal agent · npm v1.0.0</p>
-        <h1 class="page-title champion-name misreg" id="page-title" data-text="Mira, at work" aria-label="Mira, at work"><span data-letters aria-hidden="true">Mira, at work</span></h1>
-        <p class="masthead-bio intro" style="--d: 3">Mira Voss is also a terminal agent you install from npm. Start her in a folder and she works there: she reads, edits, runs commands and shows you what she has done, within her configuration and the permissions you give her.</p>
+        <p class="supertitle intro" style="--d: 0" data-zh="终端 Agent · npm v1.0.0">The terminal agent · npm v1.0.0</p>
+        <h1 class="page-title champion-name misreg" id="page-title" data-text="Mira, at work" aria-label="Mira, at work" data-zh-aria="工作中的 Mira" data-zh-misreg="工作中的 Mira"><span data-letters aria-hidden="true" data-zh="工作中的 Mira">Mira, at work</span></h1>
+        <p class="masthead-bio intro" style="--d: 3" data-zh="Mira Voss 也是一个通过 npm 安装的终端 Agent。在某个文件夹里启动她，她就在那里工作：读文件、改文件、运行命令，并把做过的事交代给你——一切都在她的配置和你给的权限之内。">Mira Voss is also a terminal agent you install from npm. Start her in a folder and she works there: she reads, edits, runs commands and shows you what she has done, within her configuration and the permissions you give her.</p>
         <div class="install-command intro" style="--d: 4">
           <code id="npm-command">npm install -g mira-voss</code>
           <button class="copy-button" type="button" data-copy="#npm-command"><span data-copy-label>Copy</span></button>
         </div>
         <div class="btn-row intro" style="--d: 5">
-          <a class="btn btn-gold" href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/install.md">Installation guide <svg aria-hidden="true"><use href="#i-out" /></svg></a>
-          <a class="btn" href="https://www.npmjs.com/package/mira-voss">View on npm <svg aria-hidden="true"><use href="#i-out" /></svg></a>
+          <a class="btn btn-gold" href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/install.md" data-zh="安装指南 &lt;svg aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#i-out&quot; /&gt;&lt;/svg&gt;">Installation guide <svg aria-hidden="true"><use href="#i-out" /></svg></a>
+          <a class="btn" href="https://www.npmjs.com/package/mira-voss" data-zh="在 npm 查看 &lt;svg aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#i-out&quot; /&gt;&lt;/svg&gt;">View on npm <svg aria-hidden="true"><use href="#i-out" /></svg></a>
         </div>
       </div>
     </section>
 
-    <section class="blade" id="abilities" data-nav="Abilities" aria-labelledby="abilities-title">
+    <section class="blade" id="abilities" data-nav="Abilities" aria-labelledby="abilities-title" data-zh-nav="技能">
       <div class="atmos atmos-ember" aria-hidden="true"></div>
       <div class="blade-inner abilities" data-tabs data-abilities data-autoplay>
         <div class="abilities-main">
-          <p class="supertitle reveal">In your project</p>
-          <h2 class="blade-title misreg" id="abilities-title" data-text="Abilities">Abilities</h2>
-          <p class="lede reveal">Start her in a folder and these are the things she does there, within her configuration and the permissions you give her.</p>
-          <div class="ability-keys reveal" role="tablist" aria-label="Abilities">
-            <button class="ability-key" role="tab" id="key-p" aria-controls="ability-panel" aria-selected="true" data-key="p" data-glyph="#i-ask" data-slot="Passive" data-name="Asks before she changes things"><span class="key-icon"><svg aria-hidden="true"><use href="#i-ask" /></svg><span class="key-letter">P</span></span><span class="key-name">Asks first</span></button>
-            <button class="ability-key" role="tab" id="key-q" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="q" data-glyph="#i-read" data-slot="Q" data-name="Reads the project"><span class="key-icon"><svg aria-hidden="true"><use href="#i-read" /></svg><span class="key-letter">Q</span></span><span class="key-name">Reads</span></button>
-            <button class="ability-key" role="tab" id="key-w" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="w" data-glyph="#i-edit" data-slot="W" data-name="Edits files"><span class="key-icon"><svg aria-hidden="true"><use href="#i-edit" /></svg><span class="key-letter">W</span></span><span class="key-name">Edits</span></button>
-            <button class="ability-key" role="tab" id="key-e" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="e" data-glyph="#i-run" data-slot="E" data-name="Runs commands"><span class="key-icon"><svg aria-hidden="true"><use href="#i-run" /></svg><span class="key-letter">E</span></span><span class="key-name">Runs</span></button>
-            <button class="ability-key" role="tab" id="key-r" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="r" data-glyph="#i-report" data-slot="Ultimate" data-name="Shows her work"><span class="key-icon"><svg aria-hidden="true"><use href="#i-report" /></svg><span class="key-letter">R</span></span><span class="key-name">Shows her work</span></button>
+          <p class="supertitle reveal" data-zh="在你的项目里">In your project</p>
+          <h2 class="blade-title misreg" id="abilities-title" data-text="Abilities" data-zh="技能" data-zh-misreg="技能">Abilities</h2>
+          <p class="lede reveal" data-zh="在某个文件夹里启动她，这些就是她在那里做的事，都在她的配置和你给的权限之内。">Start her in a folder and these are the things she does there, within her configuration and the permissions you give her.</p>
+          <div class="ability-keys" data-cascade role="tablist" aria-label="Abilities" data-zh-aria="技能">
+            <button class="ability-key" role="tab" id="key-p" aria-controls="ability-panel" aria-selected="true" data-key="p" data-glyph="#i-ask" data-slot="Passive" data-name="Asks before she changes things" data-zh-name="改动之前先问你" data-zh-slot="被动"><span class="key-icon"><svg aria-hidden="true"><use href="#i-ask" /></svg><span class="key-letter">P</span></span><span class="key-name" data-zh="先问你">Asks first</span></button>
+            <button class="ability-key" role="tab" id="key-q" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="q" data-glyph="#i-read" data-slot="Q" data-name="Reads the project" data-zh-name="读取项目"><span class="key-icon"><svg aria-hidden="true"><use href="#i-read" /></svg><span class="key-letter">Q</span></span><span class="key-name" data-zh="读取">Reads</span></button>
+            <button class="ability-key" role="tab" id="key-w" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="w" data-glyph="#i-edit" data-slot="W" data-name="Edits files" data-zh-name="编辑文件"><span class="key-icon"><svg aria-hidden="true"><use href="#i-edit" /></svg><span class="key-letter">W</span></span><span class="key-name" data-zh="编辑">Edits</span></button>
+            <button class="ability-key" role="tab" id="key-e" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="e" data-glyph="#i-run" data-slot="E" data-name="Runs commands" data-zh-name="运行命令"><span class="key-icon"><svg aria-hidden="true"><use href="#i-run" /></svg><span class="key-letter">E</span></span><span class="key-name" data-zh="运行">Runs</span></button>
+            <button class="ability-key" role="tab" id="key-r" aria-controls="ability-panel" aria-selected="false" tabindex="-1" data-key="r" data-glyph="#i-report" data-slot="Ultimate" data-name="Shows her work" data-zh-name="交代她做了什么" data-zh-slot="终极技能"><span class="key-icon"><svg aria-hidden="true"><use href="#i-report" /></svg><span class="key-letter">R</span></span><span class="key-name" data-zh="交代所做">Shows her work</span></button>
           </div>
         </div>
-        <div class="ability-media reveal" id="ability-panel" role="tabpanel" aria-labelledby="key-p" data-ability-panel>
+        <div class="ability-media" data-reveal="from-right" id="ability-panel" role="tabpanel" aria-labelledby="key-p" data-ability-panel>
           <div class="ability-frame frame">
             <div class="frame-inner ability-plate">
               <div class="halftone-field" style="--size: 120%; left: -10%; top: -10%; --op: .16" aria-hidden="true"></div>
@@ -94,9 +98,9 @@
             </div>
           </div>
           <div class="ability-info">
-            <h3 data-name>Asks before she changes things</h3>
-            <span class="label" data-slot>Passive</span>
-            <p data-text>In the default mode, Mira asks for your approval before she makes changes to your project. You read each request and decide.</p>
+            <h3 data-name data-zh="改动之前先问你">Asks before she changes things</h3>
+            <span class="label" data-slot data-zh="被动">Passive</span>
+            <p data-text data-zh="在默认模式下，Mira 改动你的项目之前会先请你批准。每一条请求你都可以看过再决定。">In the default mode, Mira asks for your approval before she makes changes to your project. You read each request and decide.</p>
           </div>
         </div>
         <template data-for="p">In the default mode, Mira asks for your approval before she makes changes to your project. You read each request and decide.</template>
@@ -107,56 +111,64 @@
       </div>
     </section>
 
-    <section class="blade blade-dark" id="first-launch" data-nav="First launch" aria-labelledby="start-title">
+    <section class="blade blade-dark" id="first-launch" data-nav="First launch" aria-labelledby="start-title" data-zh-nav="首次启动">
       <div class="atmos atmos-lights" aria-hidden="true"></div>
       <div class="blade-inner">
         <div class="blade-head">
-          <p class="supertitle reveal">First launch</p>
-          <h2 class="blade-title misreg" id="start-title" data-text="Getting started">Getting started</h2>
+          <p class="supertitle reveal" data-zh="首次启动">First launch</p>
+          <h2 class="blade-title misreg" id="start-title" data-text="Getting started" data-zh="开始使用" data-zh-misreg="开始使用">Getting started</h2>
         </div>
-        <ol class="steps" data-stagger>
-          <li class="reveal"><h3>Install</h3><p>Use Node.js 22 or newer, then run <code>npm install -g mira-voss</code>.</p></li>
-          <li class="reveal"><h3>Start her</h3><p>Open a terminal in the folder you want to work in and run <code>mira</code>. <code>mobius</code> works too.</p></li>
-          <li class="reveal"><h3>Sign in</h3><p>Follow the prompts. The <a class="text-link" href="https://www.npmjs.com/package/mira-voss">npm page</a> lists the current account and API-key options.</p></li>
-          <li class="reveal"><h3>Start small</h3><p>Give her a bounded task first. In the default mode, read each permission request before you accept it.</p></li>
-          <li class="reveal"><h3>If something fails</h3><p>Run <code>mira doctor</code>. Remove private paths and keys before you report a problem.</p></li>
+        <ol class="steps" data-cascade>
+          <li><h3>Install</h3><p data-zh="使用 Node.js 22 或更高版本，然后运行 &lt;code&gt;npm install -g mira-voss&lt;/code&gt;。">Use Node.js 22 or newer, then run <code>npm install -g mira-voss</code>.</p></li>
+          <li><h3 data-zh="启动她">Start her</h3><p data-zh="在你想工作的文件夹里打开终端，运行 &lt;code&gt;mira&lt;/code&gt;。&lt;code&gt;mobius&lt;/code&gt; 也可以。">Open a terminal in the folder you want to work in and run <code>mira</code>. <code>mobius</code> works too.</p></li>
+          <li><h3 data-zh="登录">Sign in</h3><p data-zh="按提示操作。&lt;a class=&quot;text-link&quot; href=&quot;https://www.npmjs.com/package/mira-voss&quot;&gt;npm 页面&lt;/a&gt;列出了当前的账号与 API key 选项。">Follow the prompts. The <a class="text-link" href="https://www.npmjs.com/package/mira-voss">npm page</a> lists the current account and API-key options.</p></li>
+          <li><h3 data-zh="从小事开始">Start small</h3><p data-zh="先给她一个范围明确的任务。在默认模式下，每一条权限请求都看清楚再同意。">Give her a bounded task first. In the default mode, read each permission request before you accept it.</p></li>
+          <li><h3 data-zh="出了问题">If something fails</h3><p data-zh="运行 &lt;code&gt;mira doctor&lt;/code&gt;。报告问题之前，删掉私人路径和密钥。">Run <code>mira doctor</code>. Remove private paths and keys before you report a problem.</p></li>
         </ol>
       </div>
     </section>
 
-    <section class="blade blade-light" id="faq" data-nav="FAQ" aria-labelledby="faq-title">
+    <section class="blade blade-light" id="faq" data-nav="FAQ" aria-labelledby="faq-title" data-zh-nav="常见问题">
       <div class="blade-inner faq-grid">
         <div>
-          <p class="supertitle reveal">Questions</p>
-          <h2 class="blade-title misreg" id="faq-title" data-text="FAQ">FAQ</h2>
-          <aside class="spec-note reveal" aria-labelledby="fiction-title">
-            <span class="label">Product and fiction</span>
-            <h3 id="fiction-title">The story is not the spec</h3>
-            <p>The stories give Mira a face and a voice. They do not describe the software. No line of fiction grants a permission, bypasses a review, guarantees a result, or tells you which model is running. What the CLI does is defined by its code, its model and provider, your configuration and the permissions you set.</p>
-            <a class="text-link" href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/product-vs-fiction.md">Product vs. fiction <svg aria-hidden="true"><use href="#i-out" /></svg></a>
+          <p class="supertitle reveal" data-zh="问题">Questions</p>
+          <h2 class="blade-title misreg" id="faq-title" data-text="FAQ" data-zh="常见问题" data-zh-misreg="常见问题">FAQ</h2>
+          <aside class="spec-note" data-reveal="flip" aria-labelledby="fiction-title">
+            <span class="label" data-zh="产品与虚构">Product and fiction</span>
+            <h3 id="fiction-title" data-zh="故事不是说明书">The story is not the spec</h3>
+            <p data-zh="故事给了 Mira 一张脸和一种声音，但它们不描述软件。任何一句虚构都不会授予权限、绕过审核、保证结果，也不会告诉你正在运行的是哪个模型。CLI 实际做什么，由它的代码、模型与服务商、你的配置以及你设定的权限决定。">The stories give Mira a face and a voice. They do not describe the software. No line of fiction grants a permission, bypasses a review, guarantees a result, or tells you which model is running. What the CLI does is defined by its code, its model and provider, your configuration and the permissions you set.</p>
+            <a class="text-link" href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/product-vs-fiction.md" data-zh="产品与虚构 &lt;svg aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#i-out&quot; /&gt;&lt;/svg&gt;">Product vs. fiction <svg aria-hidden="true"><use href="#i-out" /></svg></a>
           </aside>
         </div>
-        <div class="faq reveal">
-          <details><summary>Is Mira open source?</summary><div class="answer"><p>No. The CLI runtime is proprietary. The public GitHub repository hosts documentation, the stories, her visual identity and this website, not the CLI's implementation.</p></div></details>
-          <details><summary>How do I install or update her?</summary><div class="answer"><p><code>npm install -g mira-voss</code> installs her, and <code>npm install -g mira-voss@latest</code> updates. If <code>mira</code> is not found afterwards, check that npm's global directory is on your <code>PATH</code>. See the <a href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/install.md">installation guide</a>.</p></div></details>
-          <details><summary>Which platforms are supported?</summary><div class="answer"><p>The optional prebuilt kernel used for ChatGPT plan sign-in ships for macOS on Apple silicon in this release. The <a href="https://www.npmjs.com/package/mira-voss">npm package page</a> describes the other sign-in options and current platform details.</p></div></details>
-          <details><summary>Why does a terminal agent have a backstory?</summary><div class="answer"><p>The character gives the product its visual and narrative identity. She is not a claim about the software's consciousness, autonomy, capabilities or security.</p></div></details>
-          <details><summary>Is MØBIUS a city?</summary><div class="answer"><p>No. Rovelle is Mira's hometown. MØBIUS is the research station in the north where she works after the first book. Earlier drafts that used MØBIUS as a city are not canon.</p></div></details>
-          <details><summary>Where do I report a problem?</summary><div class="answer"><p>Use the <a href="https://github.com/mangiapanejohn-dev/mira-voss/issues/new/choose">issue templates</a> on GitHub. Include your OS, Node.js and Mira versions, and redact credentials and private paths. Security issues go through <a href="https://github.com/mangiapanejohn-dev/mira-voss/security/advisories/new">private vulnerability reporting</a>.</p></div></details>
-          <details><summary>May I reuse the art or the stories?</summary><div class="answer"><p>Not automatically. Public visibility does not grant permission to republish or commercially reuse them. See the <a href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/NOTICE.md">notice</a>.</p></div></details>
+        <div class="faq" data-cascade>
+          <details><summary data-zh="Mira 开源吗？">Is Mira open source?</summary><div class="answer"><p data-zh="不开源。CLI 运行时是专有软件。公开的 GitHub 仓库存放文档、故事、视觉设定和这个网站，不包含 CLI 的实现。">No. The CLI runtime is proprietary. The public GitHub repository hosts documentation, the stories, her visual identity and this website, not the CLI's implementation.</p></div></details>
+          <details><summary data-zh="如何安装或更新？">How do I install or update her?</summary><div class="answer"><p data-zh="&lt;code&gt;npm install -g mira-voss&lt;/code&gt; 安装，&lt;code&gt;npm install -g mira-voss@latest&lt;/code&gt; 更新。如果之后找不到 &lt;code&gt;mira&lt;/code&gt;，请检查 npm 的全局目录是否在你的 &lt;code&gt;PATH&lt;/code&gt; 里。详见&lt;a href=&quot;https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/install.md&quot;&gt;安装指南&lt;/a&gt;。"><code>npm install -g mira-voss</code> installs her, and <code>npm install -g mira-voss@latest</code> updates. If <code>mira</code> is not found afterwards, check that npm's global directory is on your <code>PATH</code>. See the <a href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/docs/install.md">installation guide</a>.</p></div></details>
+          <details><summary data-zh="支持哪些平台？">Which platforms are supported?</summary><div class="answer"><p data-zh="用于 ChatGPT 套餐登录的可选预编译内核，在本版本中只提供 Apple 芯片的 macOS 版。其他登录方式和当前平台说明见 &lt;a href=&quot;https://www.npmjs.com/package/mira-voss&quot;&gt;npm 包页面&lt;/a&gt;。">The optional prebuilt kernel used for ChatGPT plan sign-in ships for macOS on Apple silicon in this release. The <a href="https://www.npmjs.com/package/mira-voss">npm package page</a> describes the other sign-in options and current platform details.</p></div></details>
+          <details><summary data-zh="一个终端 Agent 为什么要有背景故事？">Why does a terminal agent have a backstory?</summary><div class="answer"><p data-zh="这个人物给了产品视觉与叙事上的身份。她不代表软件具有意识、自主性、某种能力或安全性。">The character gives the product its visual and narrative identity. She is not a claim about the software's consciousness, autonomy, capabilities or security.</p></div></details>
+          <details><summary data-zh="MØBIUS 是一座城市吗？">Is MØBIUS a city?</summary><div class="answer"><p data-zh="不是。罗维尔是 Mira 的故乡。MØBIUS 是她在第一部之后工作的北方研究站。把 MØBIUS 写成城市的早期草稿不属于正史。">No. Rovelle is Mira's hometown. MØBIUS is the research station in the north where she works after the first book. Earlier drafts that used MØBIUS as a city are not canon.</p></div></details>
+          <details><summary data-zh="在哪里报告问题？">Where do I report a problem?</summary><div class="answer"><p data-zh="在 GitHub 上使用&lt;a href=&quot;https://github.com/mangiapanejohn-dev/mira-voss/issues/new/choose&quot;&gt;问题模板&lt;/a&gt;。请写明操作系统、Node.js 和 Mira 的版本，并隐去凭据和私人路径。安全问题请走&lt;a href=&quot;https://github.com/mangiapanejohn-dev/mira-voss/security/advisories/new&quot;&gt;私密漏洞报告&lt;/a&gt;。">Use the <a href="https://github.com/mangiapanejohn-dev/mira-voss/issues/new/choose">issue templates</a> on GitHub. Include your OS, Node.js and Mira versions, and redact credentials and private paths. Security issues go through <a href="https://github.com/mangiapanejohn-dev/mira-voss/security/advisories/new">private vulnerability reporting</a>.</p></div></details>
+          <details><summary data-zh="可以转载原画或故事吗？">May I reuse the art or the stories?</summary><div class="answer"><p data-zh="不能直接转载。公开可见不等于允许再发布或商用。见&lt;a href=&quot;https://github.com/mangiapanejohn-dev/mira-voss/blob/main/NOTICE.md&quot;&gt;权利声明&lt;/a&gt;。">Not automatically. Public visibility does not grant permission to republish or commercially reuse them. See the <a href="https://github.com/mangiapanejohn-dev/mira-voss/blob/main/NOTICE.md">notice</a>.</p></div></details>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a><a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
+    <nav class="footer-nav" aria-label="Footer" data-zh-aria="页脚">
+      <a href="mira.html">Mira</a><a href="stories.html" data-zh="故事">Stories</a><a href="world.html" data-zh="罗维尔">Rovelle</a><a href="agent.html" data-zh="Agent">The Agent</a><a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
     </nav>
     <div class="footer-inner">
       <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="56" height="47" loading="lazy" /><span>Mira Voss</span></a>
-      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime. © 2026 Mira Voss project. All rights reserved.</p>
+      <p class="footer-legal" data-zh="Mira Voss、罗维尔与 MØBIUS 研究站均为虚构。Mira Voss CLI 是闭源软件；本站及其仓库公开的是故事、美术与文档，不包含运行时代码。© 2026 Mira Voss project 保留所有权利。">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime. © 2026 Mira Voss project. All rights reserved.</p>
     </div>
   </footer>
+
+  <div class="consent" role="region" aria-label="Privacy" data-zh-aria="隐私" data-consent hidden>
+    <p data-zh="本站不使用任何追踪或广告 Cookie。它只在你的浏览器里记住语言、阅读进度和显示设置，这些信息不会离开你的设备。">This site uses no tracking or advertising cookies. It only remembers your language, reading position and display settings in your browser, and none of it leaves your device.</p>
+    <div class="consent-actions">
+      <button class="btn btn-small btn-gold" type="button" data-consent-ok data-zh="好的">OK</button>
+      <button class="btn btn-small" type="button" data-consent-forget data-zh="不要记住">Don't remember</button>
+    </div>
+  </div>
 </body>
 </html>

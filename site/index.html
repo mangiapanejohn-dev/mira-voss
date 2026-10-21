@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#010a13" />
-  <title>Mira Voss — The Cartographer of Rovelle</title>
-  <meta name="description" content="Mira Voss, the cartographer of Rovelle. Read her stories, walk her harbor city, and install the Mira Voss terminal agent." />
+  <title data-zh="Mira Voss — 罗维尔的制图师">Mira Voss — The Cartographer of Rovelle</title>
+  <meta name="description" content="Mira Voss, the cartographer of Rovelle. Read her stories, walk her harbor city, and install the Mira Voss terminal agent."  data-zh-content="Mira Voss，罗维尔的制图师。阅读她的故事，走进她的港城，安装 Mira Voss 终端 Agent。"/>
   <link rel="canonical" href="https://mangiapanejohn-dev.github.io/mira-voss/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Mira Voss — The Cartographer of Rovelle" />
@@ -18,12 +18,12 @@
   <link rel="preload" as="image" href="assets/mira-rovell-splash-v2.webp" />
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="pages.css" />
-  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}}catch(e){}})(document.documentElement)</script>
+  <script>(function(d){d.classList.replace('no-js','js');try{if(sessionStorage.getItem('mira-tide')){d.classList.add('tide-in');sessionStorage.removeItem('mira-tide')}var q=new URLSearchParams(location.search).get('lang'),g=localStorage.getItem('mira-lang'),l=q||(g&&JSON.parse(g))||((navigator.language||'').toLowerCase().indexOf('zh')===0?'zh':'en');d.dataset.lang=l==='zh'?'zh':'en';if(l==='zh'){d.lang='zh-Hans';d.classList.add('i18n-pending')}}catch(e){}})(document.documentElement)</script>
   <script src="data/library.js" defer></script>
   <script src="site.js" defer></script>
 </head>
-<body data-subbar="Home">
-  <a class="skip-link" href="#main">Skip to content</a>
+<body data-subbar="Home" data-zh-subbar="首页">
+  <a class="skip-link" href="#main" data-zh="跳到正文">Skip to content</a>
   <svg class="sprite" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
     <symbol id="i-compass" viewBox="0 0 32 32"><path d="M16 2l3.2 10.8L30 16l-10.8 3.2L16 30l-3.2-10.8L2 16l10.8-3.2z" fill="currentColor"/><circle cx="16" cy="16" r="2.4" fill="#0a1428"/></symbol>
@@ -32,22 +32,26 @@
   </svg>
 
   <header class="topbar">
-    <a class="brand" href="index.html" aria-label="Mira Voss, home"><img src="assets/mira-logo-cutout.webp" alt="" width="42" height="35" /><span>Mira Voss</span></a>
-    <nav class="topnav" aria-label="Main">
+    <a class="brand" href="index.html" aria-label="Mira Voss, home" data-zh-aria="Mira Voss 首页"><img src="assets/mira-logo-cutout.webp" alt="" width="42" height="35" /><span>Mira Voss</span></a>
+    <nav class="topnav" aria-label="Main" data-zh-aria="主导航">
       <a href="mira.html">Mira</a>
-      <a href="stories.html">Stories</a>
-      <a href="world.html">Rovelle</a>
-      <a href="agent.html">The Agent</a>
+      <a href="stories.html" data-zh="故事">Stories</a>
+      <a href="world.html" data-zh="罗维尔">Rovelle</a>
+      <a href="agent.html" data-zh="Agent">The Agent</a>
     </nav>
-    <a class="btn btn-small" href="stories.html">Read the stories</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span><span></span></button>
+    <div class="lang-switch" role="group" aria-label="Language · 语言">
+      <button type="button" data-set-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-set-lang="zh" aria-pressed="false" lang="zh-Hans">中</button>
+    </div>
+    <a class="btn btn-small" href="stories.html" data-zh="阅读故事">Read the stories</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu" data-zh-aria="菜单"><span></span><span></span></button>
   </header>
-  <nav class="menu" id="menu" aria-label="Main">
-    <a href="index.html"><small>Start</small>Home</a>
-    <a href="mira.html"><small>Her life</small>Mira</a>
-    <a href="stories.html"><small>Read</small>Stories</a>
-    <a href="world.html"><small>The world</small>Rovelle</a>
-    <a href="agent.html"><small>Install</small>The Agent</a>
+  <nav class="menu" id="menu" aria-label="Main" data-zh-aria="主导航">
+    <a href="index.html" data-zh="&lt;small&gt;开始&lt;/small&gt;首页"><small>Start</small>Home</a>
+    <a href="mira.html" data-zh="&lt;small&gt;人物&lt;/small&gt;Mira"><small>Her life</small>Mira</a>
+    <a href="stories.html" data-zh="&lt;small&gt;阅读&lt;/small&gt;故事"><small>Read</small>Stories</a>
+    <a href="world.html" data-zh="&lt;small&gt;世界&lt;/small&gt;罗维尔"><small data-zh="世界">The world</small>Rovelle</a>
+    <a href="agent.html" data-zh="&lt;small&gt;安装&lt;/small&gt;终端 Agent"><small>Install</small>The Agent</a>
   </nav>
 
   <main id="main">
@@ -57,37 +61,37 @@
       </div>
       <div class="masthead-shade" aria-hidden="true"></div>
       <div class="masthead-body">
-        <p class="supertitle intro" style="--d: 0">The Cartographer of Rovelle</p>
+        <p class="supertitle intro" style="--d: 0" data-zh="罗维尔的制图师">The Cartographer of Rovelle</p>
         <h1 class="champion-name misreg" id="mira-name" data-text="Mira Voss" aria-label="Mira Voss"><span data-letters aria-hidden="true">Mira Voss</span></h1>
-        <p class="masthead-bio intro" style="--d: 3">A seventeen-year-old tidal researcher from a harbor city that trusts its charts a little too early. She can read the deep sea from scraps of evidence. Letting anyone else into the work is taking her longer.</p>
-        <ul class="meta-row" aria-label="About Mira">
-          <li class="meta-box frame intro" style="--d: 4"><div class="frame-inner"><svg aria-hidden="true"><use href="#i-compass" /></svg><span class="meta-title">Role</span><span class="meta-value">Tidal cartographer</span></div></li>
-          <li class="meta-box frame intro" style="--d: 4.6"><div class="frame-inner"><svg aria-hidden="true"><use href="#i-harbor" /></svg><span class="meta-title">Hometown</span><span class="meta-value">Rovelle</span></div></li>
-          <li class="meta-box frame intro" style="--d: 5.2"><div class="frame-inner"><svg aria-hidden="true"><use href="#i-north" /></svg><span class="meta-title">Now</span><span class="meta-value">MØBIUS Station</span></div></li>
+        <p class="masthead-bio intro" style="--d: 3" data-zh="一个十七岁的潮汐研究者，来自一座总是过早相信海图的港城。她能从零碎的证据里读出深海；学会让别人也参与进来，她还需要更久。">A seventeen-year-old tidal researcher from a harbor city that trusts its charts a little too early. She can read the deep sea from scraps of evidence. Letting anyone else into the work is taking her longer.</p>
+        <ul class="meta-row" aria-label="About Mira" data-zh-aria="关于 Mira">
+          <li class="meta-box frame intro" style="--d: 4"><div class="frame-inner"><svg aria-hidden="true"><use href="#i-compass" /></svg><span class="meta-title" data-zh="身份">Role</span><span class="meta-value" data-zh="潮汐制图师">Tidal cartographer</span></div></li>
+          <li class="meta-box frame intro" style="--d: 4.6"><div class="frame-inner"><svg aria-hidden="true"><use href="#i-harbor" /></svg><span class="meta-title" data-zh="故乡">Hometown</span><span class="meta-value" data-zh="罗维尔">Rovelle</span></div></li>
+          <li class="meta-box frame intro" style="--d: 5.2"><div class="frame-inner"><svg aria-hidden="true"><use href="#i-north" /></svg><span class="meta-title" data-zh="现在">Now</span><span class="meta-value" data-zh="MØBIUS 研究站">MØBIUS Station</span></div></li>
         </ul>
         <div class="btn-row intro" style="--d: 6">
-          <a class="btn btn-gold" href="read.html?work=unfinished-chart">Read her story <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
-          <a class="btn" href="mira.html">Meet Mira</a>
+          <a class="btn btn-gold" href="read.html?work=unfinished-chart" data-zh="阅读她的故事 &lt;svg aria-hidden=&quot;true&quot;&gt;&lt;use href=&quot;#i-arrow&quot; /&gt;&lt;/svg&gt;">Read her story <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+          <a class="btn" href="mira.html" data-zh="认识 Mira">Meet Mira</a>
         </div>
       </div>
-      <a class="scroll-cue intro" style="--d: 8" href="#latest" aria-label="Scroll to the latest story"><span></span></a>
+      <a class="scroll-cue intro" style="--d: 8" href="#latest" aria-label="Scroll to the latest story" data-zh-aria="滚动到最新故事"><span></span></a>
     </section>
 
     <!-- latest:start -->
-    <section class="blade blade-dark feature" id="latest" data-nav="Newest story" aria-labelledby="feature-title">
+    <section class="blade blade-dark feature" id="latest" data-nav="Newest story" data-zh-nav="最新故事" aria-labelledby="feature-title">
       <div class="atmos" style="--atmos-img: url(assets/bg/ice.webp); --atmos-op: .8" aria-hidden="true"></div>
       <div class="beam" style="--beam-x: 6%; --beam-y: 12%" aria-hidden="true"></div>
       <div class="blade-inner feature-grid">
-        <a class="feature-cover frame" href="read.html?work=only-one-side" tabindex="-1" aria-hidden="true"><span class="frame-inner halftone" style="background: url(assets/bg/ice.webp) center / cover"><img src="assets/art/mobius-loop.svg" alt="" loading="lazy" /></span></a>
+        <a class="feature-cover frame" data-reveal="unfold" href="read.html?work=only-one-side" tabindex="-1" aria-hidden="true"><span class="frame-inner halftone" style="background: url(assets/bg/ice.webp) center / cover"><img src="assets/art/mobius-loop.svg" alt="" loading="lazy" /></span></a>
         <div class="feature-copy" data-stagger>
-          <p class="supertitle reveal">Newest story · MØBIUS · Short story</p>
-          <h2 class="blade-title misreg" id="feature-title" data-text="Only One Side">Only One Side</h2>
-          <p class="zh-title reveal" lang="zh-Hans">MØBIUS：只有一面</p>
-          <p class="lede reveal">Three days north of Ailan, a station without a name keeps its deep-water record on a paper loop twisted half a turn. For nineteen winters, part of the sea in it was written off as ink bleeding through the paper.</p>
-          <blockquote class="pull-quote reveal"><p lang="zh-Hans">她只是沿着同一面，往前走了很远。</p><footer>She had only gone a long way along the same side.</footer></blockquote>
-          <div class="btn-row reveal">
-            <a class="btn btn-gold" href="read.html?work=only-one-side">Read · 12 min <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
-            <a class="btn" href="stories.html">All stories</a>
+          <p class="supertitle" data-reveal="from-right" data-zh="最新故事 · MØBIUS · 短篇">Newest story · MØBIUS · Short story</p>
+          <h2 class="blade-title misreg" data-reveal="mask" id="feature-title" data-text="Only One Side" data-zh-misreg="MØBIUS：只有一面" data-zh="MØBIUS：只有一面">Only One Side</h2>
+          <p class="zh-title" data-reveal="from-right" data-zh="Only One Side">MØBIUS：只有一面</p>
+          <p class="lede" data-reveal="from-right" data-zh="艾兰以北三天的航程，一座还没有名字的研究站，把深水记录写在一条扭了半圈的纸带上。十九个冬天里，有一部分海，被写成了「透印，不计」。">Three days north of Ailan, a station without a name keeps its deep-water record on a paper loop twisted half a turn. For nineteen winters, part of the sea in it was written off as ink bleeding through the paper.</p>
+          <blockquote class="pull-quote" data-reveal="wipe"><p lang="zh-Hans">她只是沿着同一面，往前走了很远。</p><footer>She had only gone a long way along the same side.</footer></blockquote>
+          <div class="btn-row" data-reveal="from-right">
+            <a class="btn btn-gold" href="read.html?work=only-one-side" data-zh="阅读 · 12 分钟 &lt;svg aria-hidden=&quot;true&quot;>&lt;use href=&quot;#i-arrow&quot; />&lt;/svg>">Read · 12 min <svg aria-hidden="true"><use href="#i-arrow" /></svg></a>
+            <a class="btn" href="stories.html" data-zh="全部故事">All stories</a>
           </div>
         </div>
       </div>
@@ -99,54 +103,64 @@
     
     
     
+    
+    
     <!-- latest:end -->
 
-    <section class="blade explore" id="explore" data-nav="Explore" aria-labelledby="explore-title">
+    <section class="blade explore" id="explore" data-nav="Explore" aria-labelledby="explore-title" data-zh-nav="探索">
       <div class="atmos atmos-storm" aria-hidden="true"></div>
       <div class="blade-inner">
         <div class="blade-head">
-          <p class="supertitle reveal">The world of Mira Voss</p>
-          <h2 class="blade-title misreg" id="explore-title" data-text="Explore">Explore</h2>
+          <p class="supertitle reveal" data-zh="Mira Voss 的世界">The world of Mira Voss</p>
+          <h2 class="blade-title misreg" data-reveal="mask" id="explore-title" data-text="Explore" data-zh="探索" data-zh-misreg="探索">Explore</h2>
         </div>
         <div class="explore-grid" data-stagger>
-          <a class="explore-card reveal" href="mira.html">
+          <a class="explore-card" data-reveal="focus" data-tilt="7" style="--rd: 0s" href="mira.html">
             <span class="explore-art halftone"><img src="assets/art/mira-portrait.webp" alt="" loading="lazy" /></span>
-            <span class="explore-body"><span class="label">The cartographer</span><span class="explore-title">Mira</span><span class="explore-text">Her life so far, the people around her, and her art.</span></span>
+            <span class="explore-body"><span class="label" data-zh="制图师">The cartographer</span><span class="explore-title">Mira</span><span class="explore-text" data-zh="她走过的路、身边的人，以及她的原画。">Her life so far, the people around her, and her art.</span></span>
           </a>
-          <a class="explore-card reveal" href="stories.html">
+          <a class="explore-card" data-reveal="focus" data-tilt="7" style="--rd: .1s" href="stories.html">
             <span class="explore-art halftone"><img src="assets/art/cover-rovelle.webp" alt="" loading="lazy" /></span>
-            <span class="explore-body"><span class="label">Read in Chinese</span><span class="explore-title">Stories</span><span class="explore-text">The Unfinished Chart, and what came after.</span></span>
+            <span class="explore-body"><span class="label" data-zh="中文原著">Read in Chinese</span><span class="explore-title" data-zh="故事">Stories</span><span class="explore-text" data-zh="《未完成的海图》，以及之后的故事。">The Unfinished Chart, and what came after.</span></span>
           </a>
-          <a class="explore-card reveal" href="world.html">
+          <a class="explore-card" data-reveal="focus" data-tilt="7" style="--rd: .2s" href="world.html">
             <span class="explore-art halftone"><img src="assets/art/rovelle-harbor.webp" alt="" loading="lazy" /></span>
-            <span class="explore-body"><span class="label">The world</span><span class="explore-title">Rovelle</span><span class="explore-text">A chart of her harbor city, and the station in the north.</span></span>
+            <span class="explore-body"><span class="label">The world</span><span class="explore-title" data-zh="罗维尔">Rovelle</span><span class="explore-text" data-zh="她故乡港城的海图，以及北方的研究站。">A chart of her harbor city, and the station in the north.</span></span>
           </a>
-          <a class="explore-card explore-card-agent reveal" href="agent.html">
+          <a class="explore-card explore-card-agent" data-reveal="focus" data-tilt="7" style="--rd: .3s" href="agent.html">
             <span class="explore-art halftone"><img src="assets/mira-logo-cutout.webp" alt="" loading="lazy" /></span>
-            <span class="explore-body"><span class="label">npm install -g mira-voss</span><span class="explore-title">The Agent</span><span class="explore-text">Mira in your terminal: what she does, and how to start.</span></span>
+            <span class="explore-body"><span class="label">npm install -g mira-voss</span><span class="explore-title" data-zh="终端 Agent">The Agent</span><span class="explore-text" data-zh="终端里的 Mira：她做什么，以及怎样开始。">Mira in your terminal: what she does, and how to start.</span></span>
           </a>
         </div>
       </div>
     </section>
 
-    <section class="blade blade-dark quote-band" id="line" data-nav="A line" aria-label="A line from The Unfinished Chart">
+    <section class="blade blade-dark quote-band" id="line" data-nav="A line" aria-label="A line from The Unfinished Chart" data-zh-nav="一句话" data-zh-aria="《未完成的海图》中的一句话">
       <div class="atmos atmos-dusk" aria-hidden="true"></div>
       <div class="isobaths-bg" data-isobaths="assets/chart-lines.svg" aria-hidden="true"></div>
-      <figure class="blade-inner quote reveal">
-        <blockquote><p lang="zh-Hans">有些地方，<br />只能等人到了以后，再慢慢画出来。</p></blockquote>
-        <figcaption><span class="quote-en">“Some places can only be charted after someone arrives.”</span><span class="label">The Unfinished Chart · Chapter VII</span></figcaption>
+      <figure class="blade-inner quote">
+        <blockquote><p lang="zh-Hans" data-ink>有些地方，<br />只能等人到了以后，再慢慢画出来。</p></blockquote>
+        <figcaption><span class="quote-en">“Some places can only be charted after someone arrives.”</span><span class="label" data-zh="《未完成的海图》· 第七章">The Unfinished Chart · Chapter VII</span></figcaption>
       </figure>
     </section>
   </main>
 
   <footer class="site-footer">
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="mira.html">Mira</a><a href="stories.html">Stories</a><a href="world.html">Rovelle</a><a href="agent.html">The Agent</a><a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
+    <nav class="footer-nav" aria-label="Footer" data-zh-aria="页脚">
+      <a href="mira.html">Mira</a><a href="stories.html" data-zh="故事">Stories</a><a href="world.html" data-zh="罗维尔">Rovelle</a><a href="agent.html" data-zh="Agent">The Agent</a><a href="https://github.com/mangiapanejohn-dev/mira-voss">GitHub</a><a href="https://www.npmjs.com/package/mira-voss">npm</a>
     </nav>
     <div class="footer-inner">
       <a class="footer-brand" href="index.html"><img src="assets/mira-logo-cutout.webp" alt="" width="56" height="47" loading="lazy" /><span>Mira Voss</span></a>
-      <p class="footer-legal">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime. © 2026 Mira Voss project. All rights reserved.</p>
+      <p class="footer-legal" data-zh="Mira Voss、罗维尔与 MØBIUS 研究站均为虚构。Mira Voss CLI 是闭源软件；本站及其仓库公开的是故事、美术与文档，不包含运行时代码。© 2026 Mira Voss project 保留所有权利。">Mira Voss, Rovelle and MØBIUS Station are fiction. The Mira Voss CLI is closed-source software; this site and its repository publish the stories, art and documentation, not the runtime. © 2026 Mira Voss project. All rights reserved.</p>
     </div>
   </footer>
+
+  <div class="consent" role="region" aria-label="Privacy" data-zh-aria="隐私" data-consent hidden>
+    <p data-zh="本站不使用任何追踪或广告 Cookie。它只在你的浏览器里记住语言、阅读进度和显示设置，这些信息不会离开你的设备。">This site uses no tracking or advertising cookies. It only remembers your language, reading position and display settings in your browser, and none of it leaves your device.</p>
+    <div class="consent-actions">
+      <button class="btn btn-small btn-gold" type="button" data-consent-ok data-zh="好的">OK</button>
+      <button class="btn btn-small" type="button" data-consent-forget data-zh="不要记住">Don't remember</button>
+    </div>
+  </div>
 </body>
 </html>

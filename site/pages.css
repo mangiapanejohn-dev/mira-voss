@@ -115,7 +115,7 @@
 .people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .person { position: relative; display: flex; flex-direction: column; min-height: 330px; padding: 34px 32px 30px; background: linear-gradient(170deg, var(--navy-raised), var(--navy) 70%); border: 1px solid var(--navy-line); transition: border-color .3s ease-in-out, transform .3s ease-in-out; }
 .person::before { content: '「'; position: absolute; top: 10px; right: 22px; color: var(--gold-deep); font: 900 84px/1 var(--serif-zh); opacity: .5; transition: color .5s, opacity .5s; }
-.person:hover { border-color: var(--gold-deep); transform: translateY(-4px); }
+.person:hover { border-color: var(--gold-deep); }
 .person:hover::before { color: var(--ember); opacity: .7; }
 .person blockquote { margin: 0 0 auto; padding-right: 30px; color: #fff; font: 600 19px/1.75 var(--serif-zh); }
 .person .person-en { margin: 12px 0 0; color: var(--muted); font: italic 600 15.5px/1.5 var(--display); }
@@ -203,6 +203,9 @@
 .chart-frame { position: relative; padding: 10px; border: 1px solid var(--gold-line); background: var(--navy); }
 .chart-frame::after { content: 'A reader’s chart, drawn from the story. Not to scale.'; position: absolute; left: 22px; bottom: 16px; color: var(--muted); font: italic 600 13px/1 var(--display); }
 .rovelle-chart { width: 100%; height: auto; }
+html[data-lang='zh'] .chart-frame::after { content: '读者依故事绘制的海图，不按比例。'; font-family: var(--serif-zh); font-style: normal; }
+html[data-lang='zh'] .rovelle-chart text { letter-spacing: .2em; font-size: 13px; }
+html[data-lang='zh'] .rovelle-chart .sea-name { font-family: var(--serif-zh); font-style: normal; letter-spacing: .3em; }
 .rovelle-chart .land { fill: var(--navy-raised); }
 .rovelle-chart .river-water { stroke: var(--navy); }
 .rovelle-chart text { fill: var(--gold-pale); font: 700 11.5px var(--sans); letter-spacing: .14em; text-transform: uppercase; paint-order: stroke; stroke: var(--navy); stroke-width: 4px; stroke-linejoin: round; transition: fill .3s; }
@@ -333,6 +336,24 @@
 .faq .answer a { color: var(--gold); border-bottom: 1px solid var(--gold-line); }
 
 
+
+/* ===== Interactions chosen per section ===== */
+/* The chart leans toward the chosen place */
+.chart-frame { overflow: hidden; }
+.rovelle-chart { transform-origin: 50% 50%; transition: transform 1.1s cubic-bezier(.65, 0, .35, 1); }
+.rovelle-chart.is-focused { transform: translate(var(--zx, 0), var(--zy, 0)) scale(1.14); }
+/* A bell's sound spreads in rings */
+.bell { position: relative; overflow: visible; }
+.bell-ring { position: absolute; left: 50%; top: 40px; width: 56px; height: 56px; margin: -28px 0 0 -28px; border: 1px solid var(--ember); border-radius: 50%; pointer-events: none; opacity: 0; animation: bell-ring 1.6s cubic-bezier(.22, 1, .36, 1) forwards; }
+@keyframes bell-ring { 0% { opacity: .8; transform: scale(.6); } 100% { opacity: 0; transform: scale(3.2); } }
+/* The steps of first launch are joined by a line that draws across them */
+.steps { position: relative; }
+.steps::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--gold); transform-origin: left; transform: scaleX(0); transition: transform 1.6s cubic-bezier(.65, 0, .35, 1) .1s; }
+.steps.is-in::before { transform: scaleX(1); }
+.steps li { border-top-color: rgba(200, 170, 110, .25); }
+/* Explore cards and people tilt; their art drifts against the tilt */
+.explore-card[data-tilt] .explore-art { transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(1.06); transition: transform .5s cubic-bezier(.22, 1, .36, 1); }
+.mobius-art svg { transition: transform .2s linear; }
 
 /* ===== Universe pages: centred upright titles over a notched rule ===== */
 .u-hero { min-height: clamp(560px, 82vh, 820px); justify-content: center; text-align: center; }
