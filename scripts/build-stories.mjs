@@ -133,7 +133,8 @@ const z = text => ` data-zh="${attr(text)}"`;
 const arrow = '<svg aria-hidden="true"><use href="#i-arrow" /></svg>';
 
 const libraryHTML = library.map((work, i) => `
-        <article class="work" data-reveal="${i % 2 ? 'from-right' : 'from-left'}" id="${work.id}" style="--work-bg: url(${work.bg})">
+        <article class="work" data-reveal="${i % 2 ? 'from-right' : 'from-left'}" id="${work.id}" style="--work-bg: url(${work.bg})">${work.view ? `
+          <span class="work-view" data-inline-svg="assets/art/${work.view}.svg" aria-hidden="true"></span>` : ''}
           <a class="work-cover frame" href="${read(work.id)}" tabindex="-1" aria-hidden="true"><span class="frame-inner halftone"${work.cover_bg ? ` style="background: url(${work.cover_bg}) center / cover"` : ''}><img src="${work.cover}" alt="" loading="lazy" /></span></a>
           <div class="work-body">
             <ul class="work-meta diamonds"><li${z(work.series_zh)}>${attr(work.series)}</li><li${z(partsLabel(work, true))}>${attr(partsLabel(work))}</li><li${z(`${work.minutes} 分钟`)}>${work.minutes_en} min</li><li>${attr(work.version)} · ${work.date}</li></ul>

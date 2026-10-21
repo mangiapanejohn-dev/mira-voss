@@ -95,6 +95,7 @@
         }
       ],
       "bg": "assets/bg/dusk.webp",
+      "view": "rovelle-view",
       "theme": "dusk",
       "series_zh": "罗维尔 · 第一部",
       "setting_zh": "罗维尔 · 她十七岁的冬天"
@@ -152,6 +153,7 @@
         }
       ],
       "bg": "assets/bg/ice.webp",
+      "view": "vard-near",
       "theme": "ice",
       "light": "beam",
       "cover_bg": "assets/bg/ice.webp",

@@ -168,7 +168,11 @@ html:not([data-lang='zh']) .person blockquote { font: italic 700 19px/1.55 var(-
 /* ===== Stories page ===== */
 .library { display: grid; gap: clamp(28px, 4vw, 48px); }
 .work { position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(32px, 5vw, 80px); padding: clamp(28px, 3vw, 44px); background: linear-gradient(160deg, var(--navy-raised), var(--navy) 65%); border: 1px solid var(--navy-line); scroll-margin-top: calc(var(--bar) + 24px); }
-.work::before { content: ''; position: absolute; z-index: -1; inset: -12%; background: var(--work-bg) center / cover; opacity: .85; filter: blur(14px) saturate(1.2); transform: scale(1.05); transition: transform 2.4s var(--ease-out), opacity 1s; }
+.work::before { content: ''; position: absolute; z-index: -1; inset: 0; background: var(--work-bg) center / cover; opacity: .7; transform: scale(1.05); transition: transform 2.4s var(--ease-out), opacity 1s; }
+/* The work's coast along the foot of its card, as its chapters open in the reader */
+.work-view { position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: clamp(150px, 18vw, 260px); opacity: .6; pointer-events: none; }
+.work-view svg { display: block; width: 100%; height: 100%; }
+.work-view .vard-label { display: none; }
 .work::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(100deg, rgba(5, 7, 10, 0) 0%, rgba(5, 7, 10, .5) 40%, rgba(5, 7, 10, .82) 100%); }
 .work:hover::before { transform: scale(1.12); opacity: 1; }
 .work-cover { display: block; align-self: start; aspect-ratio: 4 / 5; }
@@ -378,7 +382,7 @@ html[data-lang='zh'] .rovelle-chart .sea-name { font-family: var(--serif-zh); fo
 .u-hero .masthead-bio { max-width: 40em !important; margin-top: 26px; color: #d6d2c8; }
 .u-hero .masthead-shade { background: linear-gradient(0deg, var(--navy) 0%, rgba(4, 6, 10, .55) 34%, rgba(4, 6, 10, .25) 70%, rgba(4, 6, 10, .55) 100%); }
 .u-hero .u-rule { width: min(1080px, 88vw); }
-[data-mode='universe'] .blade-title { font-style: normal; font-weight: 700; letter-spacing: .1em; background: linear-gradient(180deg, #f1dfae 0%, #c8aa6e 55%, #9a7639 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+[data-mode='universe'] .blade-title { font-style: normal; font-weight: 700; letter-spacing: .1em; color: #f0e6d2; }
 [data-mode='universe'] .blade-title.misreg::before { display: none; }
 [data-mode='universe'] .blade-light .blade-title { background: none; -webkit-text-fill-color: #0a1428; color: #0a1428; }
 [data-mode='universe'] .supertitle { font-style: normal; letter-spacing: .16em; font-size: 15px; font-family: var(--sans); font-weight: 700; }

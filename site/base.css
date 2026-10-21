@@ -144,7 +144,7 @@ p { margin: 0 0 1.1em; }
 
 /* ---------- Universe headings ----------
    Upright capitals in a gold gradient, widely tracked, over a rule that dips into a V. */
-.u-title { margin: 0; font: 700 clamp(48px, 5.4vw + 12px, 112px)/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); background: linear-gradient(180deg, #f1dfae 0%, #c8aa6e 52%, #8f6c33 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-wrap: balance; }
+.u-title { margin: 0; font: 700 clamp(48px, 5.4vw + 12px, 112px)/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: #f0e6d2; text-wrap: balance; }
 .u-rule { position: relative; height: 1px; margin: 22px auto 0; width: min(1180px, 92%); }
 .u-rule::before, .u-rule::after { content: ''; }
 .u-rule.notch::before { top: 0; }
