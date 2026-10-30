@@ -12,6 +12,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm 版本" src="https://img.shields.io/npm/v/mira-voss?style=flat-square&label=npm&color=c8aa6e&labelColor=0a1428" /></a>
+  <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm 每周下载量" src="https://img.shields.io/npm/dw/mira-voss?style=flat-square&label=downloads&color=c8aa6e&labelColor=0a1428" /></a>
   <img alt="Apple 芯片的 macOS" src="https://img.shields.io/badge/macOS-Apple%20silicon-c8aa6e?style=flat-square&labelColor=0a1428" />
   <img alt="Node.js 22 或更新" src="https://img.shields.io/badge/node-22%2B-c8aa6e?style=flat-square&labelColor=0a1428" />
   <img alt="专有软件" src="https://img.shields.io/badge/licence-proprietary-a09b8c?style=flat-square&labelColor=0a1428" />
@@ -46,6 +47,8 @@
 ```bash
 npm install -g mira-voss
 ```
+
+她在 npm 上的主页：[npmjs.com/package/mira-voss](https://www.npmjs.com/package/mira-voss)
 
 然后在要工作的目录里：
 

@@ -12,6 +12,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm version" src="https://img.shields.io/npm/v/mira-voss?style=flat-square&label=npm&color=c8aa6e&labelColor=0a1428" /></a>
+  <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm downloads a week" src="https://img.shields.io/npm/dw/mira-voss?style=flat-square&label=downloads&color=c8aa6e&labelColor=0a1428" /></a>
   <img alt="macOS on Apple silicon" src="https://img.shields.io/badge/macOS-Apple%20silicon-c8aa6e?style=flat-square&labelColor=0a1428" />
   <img alt="Node.js 22 or newer" src="https://img.shields.io/badge/node-22%2B-c8aa6e?style=flat-square&labelColor=0a1428" />
   <img alt="Proprietary" src="https://img.shields.io/badge/licence-proprietary-a09b8c?style=flat-square&labelColor=0a1428" />
@@ -46,6 +47,8 @@
 ```bash
 npm install -g mira-voss
 ```
+
+Her page on npm: [npmjs.com/package/mira-voss](https://www.npmjs.com/package/mira-voss)
 
 Then, in the folder you want to work in:
 
