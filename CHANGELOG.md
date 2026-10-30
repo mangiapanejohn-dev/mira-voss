@@ -2,6 +2,12 @@
 
 This changelog records public-home releases separately from internal CLI development. It is not a substitute for the package's own release notes.
 
+## 2026-10-30 — The agent's pages brought up to date
+
+- What she runs on, everywhere it is said (README, installation guide, the website's agent page): macOS on Apple silicon, Windows 10/11 (x64) and Linux (x64 or arm64, glibc or musl), as `mira-voss` has since 1.0.5 (Windows since 1.0.4) — not macOS alone, as 1.0.0 was.
+- The ChatGPT plan's sign-in: the kernel comes with her on every system, and where no browser can finish it she signs in by a code typed on another device.
+- `/copy` in the README's keys; her npm page linked under Install, with a badge of her weekly downloads; no version number left to go stale (the agent page's heading says only *on npm*; the npm page shows the current version; the bug report asks for `mira -v`).
+
 ## 2026-10-21 — Stories, world and a new website
 
 - *The Unfinished Chart* rewritten as **v3.0**: the same events, characters and dialogue, told in scenes instead of summary, with small added details (the answer to the two clocks in the prologue; what the three bells mean). Two continuity slips fixed (chalk on a whiteboard in Chapter II; Nell's exam date in Chapter III). The v2.0 text is archived unchanged in `lore/archive/unfinished-chart-v2.0/`.

@@ -13,7 +13,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm 版本" src="https://img.shields.io/npm/v/mira-voss?style=flat-square&label=npm&color=c8aa6e&labelColor=0a1428" /></a>
   <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm 每周下载量" src="https://img.shields.io/npm/dw/mira-voss?style=flat-square&label=downloads&color=c8aa6e&labelColor=0a1428" /></a>
-  <img alt="Apple 芯片的 macOS" src="https://img.shields.io/badge/macOS-Apple%20silicon-c8aa6e?style=flat-square&labelColor=0a1428" />
+  <img alt="macOS、Windows 和 Linux" src="https://img.shields.io/badge/runs%20on-macOS%20%C2%B7%20Windows%20%C2%B7%20Linux-c8aa6e?style=flat-square&labelColor=0a1428" />
   <img alt="Node.js 22 或更新" src="https://img.shields.io/badge/node-22%2B-c8aa6e?style=flat-square&labelColor=0a1428" />
   <img alt="专有软件" src="https://img.shields.io/badge/licence-proprietary-a09b8c?style=flat-square&labelColor=0a1428" />
 </p>
@@ -58,7 +58,7 @@ mira
 
 输入 `mobius` 也能启动她。需要：
 
-- **Apple 芯片的 macOS**。1.0.0 只为这个系统构建；在其他系统上能装上，但运行时会提示「还不支持这个系统」。
+- **macOS**（Apple 芯片）、**Windows 10/11**（x64），或 **Linux**（x64 或 arm64，glibc 和 musl 都可以）。npm 会自动装上适合你系统的包。
 - **Node.js 22 或更新**，以及 npm。
 - **一个可用的模型**：你已经付费的 Claude 或 ChatGPT 套餐，或者一个 API 密钥，见[登录](#登录)。
 
@@ -85,7 +85,7 @@ npm uninstall -g mira-voss         # 卸载
 | 套餐或密钥 | 登录方式 | |
 | :-- | :-- | :-- |
 | **Claude 套餐** <br /><sub>Pro · Max</sub> | 走 Claude Code 自己的登录 | 需要本机已安装 Claude Code 并在 `PATH` 中。这个套餐上的每一轮都通过它、在你的账号下运行；Mira 不经手、不保存登录信息。 |
-| **ChatGPT 套餐** <br /><sub>Plus · Pro · Business</sub> | 在浏览器里，通过 MØBIUS 内核登录 | 内核随包提供给 Apple 芯片的 macOS。 |
+| **ChatGPT 套餐** <br /><sub>Plus · Pro · Business</sub> | 在浏览器里，通过 MØBIUS 内核登录 | 上面每个系统都随包带内核。没有浏览器能完成登录时（SSH 里、没有图形界面），改用设备码：在任意一台设备上输入她给的码。 |
 | **API 密钥** | 按提示粘贴 | Anthropic、OpenAI、Google Gemini、OpenRouter；DeepSeek、Kimi、GLM、通义千问、MiniMax、豆包（国内地址）；xAI、Mistral、Groq，或任何兼容 OpenAI 的地址。密钥存在 `~/.mobius`，只有你能读。 |
 
 <a id="使用"></a>
@@ -115,6 +115,7 @@ npm uninstall -g mira-voss         # 卸载
 | `ctrl+g` | 在你的编辑器里写 |
 | 连按两次 `esc`、`/rewind` | 回到某一轮之前：代码、对话，或两者 |
 | `/model` | 选择模型和推理强度 |
+| `/copy`、`/copy 2` | 复制她上一条回答；`/copy 2` 复制其中第二个代码块 |
 | `?`、`/` | 全部按键、全部命令 |
 
 `/vim` 开启 vim 按键，`/theme` 换配色。

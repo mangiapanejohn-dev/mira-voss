@@ -13,7 +13,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm version" src="https://img.shields.io/npm/v/mira-voss?style=flat-square&label=npm&color=c8aa6e&labelColor=0a1428" /></a>
   <a href="https://www.npmjs.com/package/mira-voss"><img alt="npm downloads a week" src="https://img.shields.io/npm/dw/mira-voss?style=flat-square&label=downloads&color=c8aa6e&labelColor=0a1428" /></a>
-  <img alt="macOS on Apple silicon" src="https://img.shields.io/badge/macOS-Apple%20silicon-c8aa6e?style=flat-square&labelColor=0a1428" />
+  <img alt="macOS, Windows and Linux" src="https://img.shields.io/badge/runs%20on-macOS%20%C2%B7%20Windows%20%C2%B7%20Linux-c8aa6e?style=flat-square&labelColor=0a1428" />
   <img alt="Node.js 22 or newer" src="https://img.shields.io/badge/node-22%2B-c8aa6e?style=flat-square&labelColor=0a1428" />
   <img alt="Proprietary" src="https://img.shields.io/badge/licence-proprietary-a09b8c?style=flat-square&labelColor=0a1428" />
 </p>
@@ -58,7 +58,7 @@ mira
 
 `mobius` starts her too. You need:
 
-- **macOS on Apple silicon.** Version 1.0.0 is built for this system only; on others the package installs but says it is not made for that system yet.
+- **macOS** on Apple silicon, **Windows 10/11** (x64), or **Linux** (x64 or arm64, glibc or musl). npm installs the package for your system by itself.
 - **Node.js 22 or newer**, with npm.
 - **A model to work through**: a Claude or ChatGPT plan you already pay for, or an API key. See [Sign in](#sign-in).
 
@@ -85,7 +85,7 @@ The first time, she asks how to reach a model. You can be signed in to several a
 | Plan or key | How you sign in | |
 | :-- | :-- | :-- |
 | **Claude plan** <br /><sub>Pro · Max</sub> | Claude Code's own sign-in | Claude Code must be installed and on your `PATH`. Her turns on this plan run through it, under your account; Mira never sees or keeps the sign-in. |
-| **ChatGPT plan** <br /><sub>Plus · Pro · Business</sub> | In your browser, through the MØBIUS kernel | The kernel comes with her on macOS on Apple silicon. |
+| **ChatGPT plan** <br /><sub>Plus · Pro · Business</sub> | In your browser, through the MØBIUS kernel | The kernel comes with her on every system above. Where no browser can finish it, over SSH or with no display, she signs in by a code you type on any other device. |
 | **API key** | Paste it when asked | Anthropic, OpenAI, Google Gemini, OpenRouter; DeepSeek, Kimi, GLM, Qwen, MiniMax and Doubao on their China addresses; xAI, Mistral, Groq, or any OpenAI-compatible address. A key is kept in `~/.mobius`, readable only by you. |
 
 <a id="working-with-mira"></a>
@@ -115,6 +115,7 @@ The first time, she asks how to reach a model. You can be signed in to several a
 | `ctrl+g` | Write in your editor |
 | `esc` `esc`, `/rewind` | Back to before a turn: the code, the conversation, or both |
 | `/model` | Choose the model and how hard it reasons |
+| `/copy`, `/copy 2` | Her last answer to the clipboard; `/copy 2`, its second block of code |
 | `?`, `/` | Every key, every command |
 
 `/vim` turns on vim's keys and `/theme` changes the colours.

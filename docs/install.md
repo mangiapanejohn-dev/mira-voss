@@ -1,12 +1,12 @@
 # Install Mira Voss
 
-The CLI is distributed as [`mira-voss` on npm](https://www.npmjs.com/package/mira-voss). The current published version is **1.0.0**.
+The CLI is distributed as [`mira-voss` on npm](https://www.npmjs.com/package/mira-voss); the npm page shows the current version.
 
 ## Requirements
 
-- **macOS on Apple silicon.** Version 1.0.0 is built for this system only: its one platform package is `mira-voss-darwin-arm64`. On any other system npm installs the package, but `mira` stops with a message that it is not made for that system yet.
+- **macOS** on Apple silicon, **Windows 10/11** (x64), or **Linux** (x64 or arm64, glibc or musl). npm installs the package for your system by itself: `mira-voss-darwin-arm64`, `mira-voss-windows-x64`, `mira-voss-linux-x64` or `mira-voss-linux-arm64`, and on musl systems such as Alpine `mira-voss-linux-x64-musl` or `mira-voss-linux-arm64-musl`.
 - **Node.js 22 or newer**, as the package README asks (its npm `engines` field says `>=18`), and npm for the commands below.
-- **A model to work through**: a Claude plan (Pro, Max; Claude Code must be installed), a ChatGPT plan (Plus, Pro, Business; signed in through the MØBIUS kernel, which comes with the package), or an API key.
+- **A model to work through**: a Claude plan (Pro, Max; Claude Code must be installed), a ChatGPT plan (Plus, Pro, Business; signed in through the MØBIUS kernel, which comes with the package on every system above, and by a code typed on another device where no browser can finish it), or an API key.
 
 ## Install and start
 
